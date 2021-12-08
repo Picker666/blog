@@ -9,10 +9,10 @@ module.exports = {
     logo: '/images/dog.jpeg',
     searchMaxSuggestions: 10,
     smoothScroll: true,
-    lastUpdated: 'Last Updated',
+    lastUpdated: '更新时间',
     nav: [
       { text: '基础梳理', link: '/fontEndBase/' },
-      { text: '手写基础方法', link: '/newFunction/' },
+      { text: '手写', link: '/newFunction/' },
       { text: '源码分析', link: '/sourceAnalysis/' },
       {
         text: '脚手架', link: '/falsework/', items: [
@@ -26,7 +26,7 @@ module.exports = {
           { text: 'hooks 组件', link: '/react/hooksComponent/' }
         ]
       },
-      { text: 'github', link: 'https://google.com' },
+      { text: 'github', link: 'https://github.com/Picker666/blog' },
     ],
     sidebar: {
       '/fontEndBase/': [
@@ -39,7 +39,12 @@ module.exports = {
         'useModal',
         'reselect',
         'useState'
+      ],
+      '/newFunction/': [
+        '',
+        'newDeepCopy'
       ]
+      
     }
   },
   // configureWebpack: {

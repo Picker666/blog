@@ -1,8 +1,4 @@
----
-sidebar: auto
----
-
-# 手写方法实现
+# call, apply and bind
 
 ## call()
 
