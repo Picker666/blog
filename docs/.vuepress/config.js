@@ -41,7 +41,7 @@ module.exports = {
       ],
       "/react/": [
         '',
-        'lifeCycle',
+        'lifeCycleNew',
         'hoc',
         'middleware',
         'hooksApi',
