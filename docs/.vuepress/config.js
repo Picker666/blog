@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Picker Ready Go',
   description: 'a blog from Picker',
-  base: '/blog/',
+  base: '/',
   markdown: {
     lineNumbers: true
   },
