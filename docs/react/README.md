@@ -12,7 +12,7 @@
 
 react v16.0前生命周期的更新图:
 
-![react v16.0前生命周期的更新图](/images/react/1.jpg)
+![react v16.0前生命周期的更新图](/blog/images/react/1.jpg)
 
 ## 一、组件初始化
 

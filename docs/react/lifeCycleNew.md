@@ -2,7 +2,7 @@
 
 react 生命周期(新)的更新图:
 
-![react 生命周期(新)的更新图](/images/react/2.png)
+![react 生命周期(新)的更新图](/blog/images/react/2.png)
 
 react16.4后使用了新的生命周期，使用 `getDerivedStateFromProps`代替了旧的 `componentWillReceiveProps` 及 `componentWillMount` 。使用 `getSnapshotBeforeUpdate` 代替了旧的 `componentWillUpdate` 。
 

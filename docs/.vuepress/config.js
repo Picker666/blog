@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Picker Ready Go',
   description: 'a blog from Picker',
-  base: '/',
+  base: '/blog/',
   markdown: {
     lineNumbers: true
   },
@@ -14,14 +14,14 @@ module.exports = {
       { text: '基础梳理', link: '/fontEndBase/' },
       { text: '手写', link: '/newFunction/' },
       { text: '源码分析', link: '/sourceAnalysis/' },
-      { text: 'react', link: '/react/' },
+      { text: 'React', link: '/react/' },
       {
         text: '脚手架', link: '/falsework/', items: [
-          { text: 'webpack', link: '/falsework/webpack/' },
-          { text: 'vite', link: '/falsework/vite/' }
+          { text: 'Webpack', link: '/falsework/webpack/' },
+          { text: 'Vite', link: '/falsework/vite/' }
         ]
       },
-      { text: 'github', link: 'https://github.com/Picker666/blog' },
+      { text: 'Github', link: 'https://github.com/Picker666/blog' },
     ],
     sidebar: {
       '/fontEndBase/': [
@@ -45,15 +45,19 @@ module.exports = {
         'hoc',
         'middleware',
         'hooksApi',
+        'useState',
+        'useEffect',
+        'useMemo',
+        'useCallback',
       ]
       
     }
   },
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //       '@alias': 'docs'
-  //     }
-  //   }
-  // }
+  configureWebpack: {
+    resolve: {
+      alias: {
+        '@image': 'blog'
+      }
+    }
+  }
 }
