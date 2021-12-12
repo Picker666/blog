@@ -44,7 +44,6 @@ module.exports = {
         'lifeCycleNew',
         'hoc',
         'middleware',
-        'hooksApi',
         'useState',
         'useEffect',
         'useMemo',
