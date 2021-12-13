@@ -37,7 +37,8 @@ module.exports = {
       ],
       '/newFunction/': [
         '',
-        'newDeepCopy'
+        'newDeepCopy',
+        'newClass'
       ],
       "/react/": [
         '',
@@ -49,7 +50,7 @@ module.exports = {
         'useMemo',
         'useCallback',
       ]
-      
+
     }
   },
   configureWebpack: {
