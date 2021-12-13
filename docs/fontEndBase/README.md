@@ -1,3 +1,7 @@
+---
+sidebarDepth: 2
+---
+
 # JavaScript 基础
 
 ## 原始类型
@@ -66,4 +70,88 @@ console.log(p2.age) // 输出18
 3. `testPerson`函数又返回了一个新的对象，这个对象此时和参数`person`没有任何关系，因为它分配了一个新的内存地址
 4. 以上分析可以用如下图表示
 
-![对象当做函数参数图片](/images/fontEndBase/1.png)
+![对象当做函数参数图片](/blog/images/fontEndBase/1.png)
+
+## 类型判断
+
+### typeof
+
+::: tip
+`typeof`能准确判断除`null`以外的原始类型的值，对于对象类型，除了函数会判断成`function`，其他对象类型一律返回`object`
+:::
+
+```js
+typeof 1          // number
+typeof '1'        // string
+typeof true       // boolean
+typeof undefined  // undefined
+typeof Symbol()   // symbol
+typeof []         // object
+typeof {}         // object
+typeof console.log// function
+```
+
+### instanceof
+
+::: tip
+`instanceof`通过原型链可以判断出对象的类型，但并不是百分百准确
+:::
+```js
+function Person(name) {
+  this.name = name;
+}
+var p1 = new Person();
+console.log(p1 instanceof Person) // true
+var str = new String('abc');
+console.log(str instanceof String)// true
+```
+
+### Object.prototype.toString.call
+
+```js
+console.log(Object.prototype.toString.call("jerry"));//[object String]
+console.log(Object.prototype.toString.call(12));//[object Number]
+console.log(Object.prototype.toString.call(true));//[object Boolean]
+console.log(Object.prototype.toString.call(undefined));//[object Undefined]
+console.log(Object.prototype.toString.call(null));//[object Null]
+console.log(Object.prototype.toString.call({name: "jerry"}));//[object Object]
+console.log(Object.prototype.toString.call(function(){}));//[object Function]
+console.log(Object.prototype.toString.call([]));//[object Array]
+console.log(Object.prototype.toString.call(new Date));//[object Date]
+console.log(Object.prototype.toString.call(/\d/));//[object RegExp]
+function Person(){};
+console.log(Object.prototype.toString.call(new Person));//[object Object]
+```
+
+::: warning
+无法区分自定义对象类型，自定义类型可以采用instanceof区分
+:::
+
+为什么这样就能区分呢？于是我去看了一下toString方法的用法：toString方法返回反映这个对象的字符串。
+
+```js
+console.log("jerry".toString());//jerry
+console.log((1).toString());//1
+console.log([1,2].toString());//1,2
+console.log(new Date().toString());//Wed Dec 21 2016 20:35:48 GMT+0800 (中国标准时间)
+console.log(function(){}.toString());//function (){}
+console.log(null.toString());//error
+console.log(undefined.toString());//error
+```
+
+同样是检测对象obj调用toString方法（关于toString()方法的用法的可以参考toString的详解），obj.toString()的结果和Object.prototype.toString.call(obj)的结果不一样，这是为什么？
+
+这是因为toString为Object的原型方法，而Array 、Function等类型作为Object的实例，都重写了toString方法。不同的对象类型调用toString方法时，根据原型链的知识，调用的是对应的重写之后的toString方法（Function类型返回内容为函数体的字符串，Array类型返回元素组成的字符串.....），而不会去调用Object上原型toString方法（返回对象的具体类型），所以采用obj.toString()不能得到其对象类型，只能将obj转换为字符串类型；因此，在想要得到对象的具体类型时，应该调用Object上原型toString方法。
+
+我们可以验证一下，将数组的toString方法删除，看看会是什么结果：
+
+```js
+var arr=[1,2,3];
+console.log(Array.prototype.hasOwnProperty("toString"));//true
+console.log(arr.toString());//1,2,3
+delete Array.prototype.toString;//delete操作符可以删除实例属性
+console.log(Array.prototype.hasOwnProperty("toString"));//false
+console.log(arr.toString());//"[object Array]"
+```
+
+删除了Array的toString方法后，同样再采用arr.toString()方法调用时，不再有屏蔽Object原型方法的实例方法，因此沿着原型链，arr最后调用了Object的toString方法，返回了和Object.prototype.toString.call(arr)相同的结果。
