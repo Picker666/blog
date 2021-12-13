@@ -72,6 +72,8 @@ console.log(p2.age) // 输出18
 
 ![对象当做函数参数图片](/blog/images/fontEndBase/1.png)
 
+---
+
 ## 类型判断
 
 ### typeof
@@ -124,10 +126,10 @@ console.log(Object.prototype.toString.call(new Person));//[object Object]
 ```
 
 ::: warning
-无法区分自定义对象类型，自定义类型可以采用instanceof区分
+无法区分自定义对象类型，自定义类型可以采用 `instanceof` 区分
 :::
 
-为什么这样就能区分呢？于是我去看了一下toString方法的用法：toString方法返回反映这个对象的字符串。
+为什么这样就能区分呢？于是我去看了一下 `toString` 方法的用法：`toString` 方法返回反映这个对象的字符串。
 
 ```js
 console.log("jerry".toString());//jerry
@@ -139,11 +141,11 @@ console.log(null.toString());//error
 console.log(undefined.toString());//error
 ```
 
-同样是检测对象obj调用toString方法（关于toString()方法的用法的可以参考toString的详解），obj.toString()的结果和Object.prototype.toString.call(obj)的结果不一样，这是为什么？
+同样是检测对象obj调用 `toString` 方法（关于 `toString()` 方法的用法的可以参考 [toString的详解](/blog/fontEndBase/toString.md) ，`obj.toString()` 的结果和 `Object.prototype.toString.call(obj)` 的结果不一样，这是为什么？
 
-这是因为toString为Object的原型方法，而Array 、Function等类型作为Object的实例，都重写了toString方法。不同的对象类型调用toString方法时，根据原型链的知识，调用的是对应的重写之后的toString方法（Function类型返回内容为函数体的字符串，Array类型返回元素组成的字符串.....），而不会去调用Object上原型toString方法（返回对象的具体类型），所以采用obj.toString()不能得到其对象类型，只能将obj转换为字符串类型；因此，在想要得到对象的具体类型时，应该调用Object上原型toString方法。
+这是因为 `toString` 为 `Object` 的原型方法，而 `Array` 、`Function` 等类型作为 `Object` 的实例，都重写了 `toString` 方法。不同的对象类型调用 `toString` 方法时，根据原型链的知识，调用的是对应的重写之后的 `toString` 方法（ `Function` 类型返回内容为函数体的字符串，`Array` 类型返回元素组成的字符串.....），而不会去调用 `Object` 上原型 `toString` 方法（返回对象的具体类型），所以采用 `obj.toString()` 不能得到其对象类型，只能将 obj 转换为字符串类型；因此，在想要得到对象的具体类型时，应该调用 `Object` 上原型 `toString` 方法。
 
-我们可以验证一下，将数组的toString方法删除，看看会是什么结果：
+我们可以验证一下，将数组的 `toString` 方法删除，看看会是什么结果：
 
 ```js
 var arr=[1,2,3];
@@ -154,4 +156,4 @@ console.log(Array.prototype.hasOwnProperty("toString"));//false
 console.log(arr.toString());//"[object Array]"
 ```
 
-删除了Array的toString方法后，同样再采用arr.toString()方法调用时，不再有屏蔽Object原型方法的实例方法，因此沿着原型链，arr最后调用了Object的toString方法，返回了和Object.prototype.toString.call(arr)相同的结果。
+删除了 `Array` 的 `toString` 方法后，同样再采用 `arr.toString()` 方法调用时，不再有屏蔽 `Object` 原型方法的实例方法，因此沿着原型链，`arr` 最后调用了 `Object` 的 `toString` 方法，返回了和 `Object.prototype.toString.call(arr)` 相同的结果。
