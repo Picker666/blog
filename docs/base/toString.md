@@ -2,7 +2,7 @@
 
 在类型转换中，经常用到方法 [valueOf()](/base/valueOf) 和 `toString()` 。 `toSting()`方法返回返回对象的字符串表现。
 
-## 1、基本包装类型——Boolean型
+## 1、基本包装类型 - `Boolean`
 
 ```js
 var obj = new Boolean(true);
@@ -20,7 +20,7 @@ console.log(typeof a.toString());//string
 【1】基本类型不是对象，不拥有任何方法
 :::
 
-## 2、基本包装类型——String型
+## 2、基本包装类型 - `String`
 
 ```js
 var obj = new String("hello");
@@ -34,7 +34,7 @@ console.log(typeof a.toString());//string
 
 同 1 ，String基本包装类型和基本类型调用 `toString()` 方法都返回对应的字符串。
 
-## 3、基本包装类型——Number型
+## 3、基本包装类型 - `Number`
 
 ```js
 var obj = new Number("123");
@@ -74,7 +74,9 @@ console.log(n.toString(37));//Uncaught RangeError: toString() radix argument mus
 
 :::
 
-## 4、数组Array类型（返回数组内容组成的字符串）
+## 4、数组 `Array`
+
+返回数组内容组成的字符串.
 
 ```js
 var a = [1,2,3,4];
@@ -82,7 +84,9 @@ console.log(a.toString());//"1,2,3,4"
 console.log(typeof a.toString());//string
 ```
 
-## 5、函数Function类型（返回函数代码字符串）
+## 5、函数 `Function`
+
+返回函数代码字符串.
 
 ```js
 var a = function(){};
@@ -90,7 +94,9 @@ console.log(a.toString());//"function(){};"
 console.log(typeof a.toString());//string
 ```
 
-## 6、正则RegExp类型（返回原正则表达式的字符串表示）
+## 6、正则 `RegExp`
+
+返回原正则表达式的字符串表示.
 
 ```js
 var a = /a/g;
@@ -98,7 +104,9 @@ console.log(a.toString());///"a/g"
 console.log(typeof a.toString());//string
 ```
 
-## 7、Date类型（返回表示当前时间的字符串）
+## 7、日期 `Date`
+
+返回表示当前时间的字符串.
 
 ```js
 var obj = new Date();
@@ -108,7 +116,9 @@ console.log(obj.toString());//"Wed May 10 2017 18:20:05 GMT+0800 (中国标准�
 console.log(typeof obj.toString());//string
 ```
 
-## 8、对象Object类型及自定义对象类型（返回[object Object]）
+## 8、对象 `Object` 及自定义对象
+
+返回[object Object]。
 
 ```js
 var obj = {a:1};
@@ -120,21 +130,23 @@ console.log(foo.toString());//"[object Object]"
 console.log(typeof foo.toString());//string
 ```
 
+::: tip
 在判断对象的类型时，用 `Object.prototype.toString()` 返回字符串 `"[object 对象类型]"` ，但无法判断自定义对象的类型（可使用 `instanceof` 判断）。
+:::
 
 ## Summary
 
-* 1、`undefined` 和 `null` 没有此方法（基本类型肯定没有方法，`String` 、 `Number` 和 `Boolean` 是因为有对应的基本包装类型，才可以调用方法）；
+* 1、`undefined` 和 `null` 没有此方法（基本类型肯定没有方法，`String` 、 `Number` 和 `Boolean` 只是因为有对应的基本包装类型，才可以调用方法）；
 * 2、`Date` 类型返回表示时间的字符串；
 * 3、`Object` 类型返回字符串 `“[object Object]”`。
 
 ## 与 `valueOf()` 对比
 
 * 1、 `toString()`  和 `valueOf()` 的主要不同点在于 ，`toString()` 返回的是字符串，而 `valueOf()` 返回的是原对象;
-* 2、由于 `undefined` 和 `null` 不是对象，所以它 们 `toString()` 和 `valueOf()` 两个方法都没有;
+* 2、由于 `undefined` 和 `null` 不是对象，所以它们 `toString()` 和 `valueOf()` 两个方法都没有;
 * 3、数值 `Number` 类型的 `toString()`  方法可以接收转换基数，返回不同进制的字符串形式的数值；而 `valueOf()` 方法无法接受转换基数;
 * 4、时间 `Date` 类型的 `toString()` 方法返回的表示时间的字符串表示；而 `valueOf()` 方法返回的是现在到1970年1月1日00:00:00的数值类型的毫秒数;
-* 5、包装对象的 `valueOf()` 方法返回该包装对象对应的原始值.
+* 5、包装对象的 `valueOf()` 方法返回该包装对象对应的原始值。
 
 ## 与转型函数 `String()` 函数的对比
 
@@ -145,4 +157,4 @@ onsole.log(String(null));//"null"
 console.log(String(undefined));//"undefined"
 ```
 
-* 2、`String()`不能接受数值基数作为参数.
+* 2、`String()`不能接受数值基数作为参数。
