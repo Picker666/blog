@@ -26,7 +26,8 @@ module.exports = {
     sidebar: {
       '/fontEndBase/': [
         '',
-        'copy'
+        'copy',
+        'toString'
       ],
       '/sourceAnalysis/': [
         '',
