@@ -27,9 +27,9 @@ module.exports = {
     sidebar: {
       '/base/': [
         '',
-        'copy',
         'toString',
-        'valueOf'
+        'valueOf',
+        'copy',
       ],
       '/sourceAnalysis/': [
         '',

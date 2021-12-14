@@ -2,6 +2,39 @@
 
 在类型转换中，经常用到方法 [valueOf()](/base/valueOf) 和 `toString()` 。 `toSting()`方法返回返回对象的字符串表现。
 
+## toString 和 Object.prototype.toString
+
+`toString` 方法的用法：`toString` 方法返回反映这个对象的字符串。
+
+```js
+console.log("Picker".toString());//Picker
+console.log((1).toString());//1
+console.log([1,2].toString());//1,2
+console.log(new Date().toString());//Wed Dec 21 2016 20:35:48 GMT+0800 (中国标准时间)
+console.log(function(){}.toString());//function (){}
+console.log(null.toString());//error
+console.log(undefined.toString());//error
+```
+
+同样是检测对象obj调用 `toString` 方法 ，`obj.toString()` 的结果和 `Object.prototype.toString.call(obj)` 的结果不一样，这是为什么？
+
+::: tip
+这是因为 `toString` 为 `Object` 的原型方法，而 `Array` 、`Function` 等类型作为 `Object` 的实例，都重写了 `toString` 方法。不同的对象类型调用 `toString` 方法时，根据原型链的知识，调用的是对应的重写之后的 `toString` 方法（ `Function` 类型返回内容为函数体的字符串，`Array` 类型返回元素组成的字符串.....），而不会去调用 `Object` 上原型 `toString` 方法（返回对象的具体类型），所以采用 `obj.toString()` 不能得到其对象类型，只能将 obj 转换为字符串类型；因此，在想要得到对象的具体类型时，应该调用 `Object` 上原型 `toString` 方法。
+:::
+
+我们可以验证一下，将数组的 `toString` 方法删除，看看会是什么结果：
+
+```js
+var arr=[1,2,3];
+console.log(Array.prototype.hasOwnProperty("toString"));//true
+console.log(arr.toString());//1,2,3
+delete Array.prototype.toString;//delete操作符可以删除实例属性
+console.log(Array.prototype.hasOwnProperty("toString"));//false
+console.log(arr.toString());//"[object Array]"
+```
+
+删除了 `Array` 的 `toString` 方法后，同样再采用 `arr.toString()` 方法调用时，不再有屏蔽 `Object` 原型方法的实例方法，因此沿着原型链，`arr` 最后调用了 `Object` 的 `toString` 方法，返回了和 `Object.prototype.toString.call(arr)` 相同的结果。
+
 ## 1、基本包装类型 - `Boolean`
 
 ```js
