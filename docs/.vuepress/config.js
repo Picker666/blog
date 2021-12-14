@@ -15,6 +15,7 @@ module.exports = {
       { text: '手写', link: '/newFunction/' },
       { text: '源码分析', link: '/sourceAnalysis/' },
       { text: 'React', link: '/react/' },
+      { text: 'Git', link: '/git/' },
       {
         text: '脚手架', link: '/falsework/', items: [
           { text: 'Webpack', link: '/falsework/webpack/' },
