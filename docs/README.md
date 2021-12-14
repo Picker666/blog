@@ -4,7 +4,7 @@ heroImage: /images/dog.jpeg
 heroText: Picker - 前端技术博客
 tagline: 一个专注前端技术的程序猿👨🏻‍💻
 actionText: Ready Go →
-actionLink: /fontEndBase/
+actionLink: /base/
 features:
 - title: 简洁至上
   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
