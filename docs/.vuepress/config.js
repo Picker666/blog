@@ -28,7 +28,8 @@ module.exports = {
       '/base/': [
         '',
         'copy',
-        'toString'
+        'toString',
+        'valueOf'
       ],
       '/sourceAnalysis/': [
         '',
