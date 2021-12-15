@@ -29,6 +29,7 @@ module.exports = {
         '',
         'toString',
         'valueOf',
+        'equal',
         'copy',
       ],
       '/sourceAnalysis/': [
