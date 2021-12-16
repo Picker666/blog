@@ -12,18 +12,18 @@
 
 我们希望组件加载以后，网页标题`document.title`会随之改变。那么，改变网页标题这个操作，就是组件的副效应，必须通过`useEffect()`来实现。
 
-### React hook两大守則
+### React hook两大守则
 
 * 只能在外层`scope`使用
 * 只能在 `function component` 或 `custom hook` 中使用。
 
 ### useEffect基本語法
 
-useEffect接收两个参数，第一个是一个函式，定义 `componentDidMount` 或 `componentDidUpdate` 要做什么事，此函式的回傳值也要是一个函式，表示 `componentWillUnmount` 要做什么事。第二个是一个 `array`，裡面是定義當哪些變數被改變時，這个`useEffect`要重新被觸發。有點像是過去我們在`componentDidUpdate`寫`prevState!=this.state`這種感覺。
+useEffect接收两个参数，第一个是一个函式，定义 `componentDidMount` 或 `componentDidUpdate` 要做什么事，此函式的返回值要是一个函式，表示 `componentWillUnmount` 或者 `componentWillUpdate` 要做什么事。第二个是一个 `array`，数组对应的变量被修改是，`useEffect` 要重新被触发。这个类组件的`componentDidUpdate`和`prevState!=this.state`类似。
 
 ## `useEffect` 第二个参数为 `[]` 空数组
 
-第二个参数为 `[]` 空数组(不是省省略)，代表除了第一次以外，接下來每次re-render，都不会执行useEffect，所以就等同於componentDidMount。
+第二个参数为 `[]` 空数组(不是省略)，代表除了第一次以外，接下来每次re-render，都不会执行useEffect，所以就等同于componentDidMount。
 
 此时，第一个参数的 `return` 方法，
 会在组件销毁的时候执行，相当于类组件的 `componentWillUnmount`。
@@ -83,3 +83,11 @@ useEffect(() => {
 ## useEffect的其他
 
 可以有多個 `useEffect`存在同一`function component`和`custom hook`中，所以我們可以針對不同的變數去寫不同的`useEffect`。
+
+## 表格总结
+
+| `useEffect` 第二个参数 | `useEffect`第一个参数 | `useEffect`第一个参数的`return`参数 |
+| -------------------- | :------------------: | :------------------------------: |
+|         `[]`         |  `componentDidMount` |      `componentWillUnmount`      |
+|   `[dependencies]`   | `dependencies` 触发的 `componentDidUpdate`  | `dependencies` 触发的 `componentWillUpdate` 和 `componentWillUnmount`|
+|     `undefined`      | 所有更新触发的 `componentDidUpdate`  | 所有更新触发的 `componentWillUpdate` 和 `componentWillUnmount`|
