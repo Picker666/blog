@@ -53,6 +53,7 @@ module.exports = {
         'useEffect',
         'useMemo',
         'useCallback',
+        'useRef'
       ]
 
     }
