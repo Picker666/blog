@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /images/dog.jpeg
+heroImage: /images/dog.png
 heroText: Picker - 前端技术博客
 tagline: 一个专注前端技术的程序猿👨🏻‍💻
 actionText: Ready Go →
