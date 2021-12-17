@@ -42,7 +42,8 @@ module.exports = {
       '/newFunction/': [
         '',
         'newDeepCopy',
-        'newClass'
+        'newClass',
+        'promise'
       ],
       "/react/": [
         '',
