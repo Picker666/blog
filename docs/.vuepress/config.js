@@ -43,7 +43,9 @@ module.exports = {
         '',
         'newDeepCopy',
         'newClass',
-        'promise'
+        'promise',
+        'debounce',
+        'throttle'
       ],
       "/react/": [
         '',
