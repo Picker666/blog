@@ -43,6 +43,7 @@ module.exports = {
         '',
         'newDeepCopy',
         'newClass',
+        'newPromise',
         'promise',
         'debounce',
         'throttle'

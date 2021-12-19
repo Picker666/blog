@@ -1,4 +1,4 @@
-# promise 手写
+# promise 手写 Base on Promise
 
 ## promise.all
 
