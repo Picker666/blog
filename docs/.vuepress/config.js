@@ -31,6 +31,8 @@ module.exports = {
         'valueOf',
         'equal',
         'copy',
+        'promiseAll',
+        'allSettled'
       ],
       '/sourceAnalysis/': [
         '',
