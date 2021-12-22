@@ -53,7 +53,7 @@ module.exports = {
         'forEach',
         'reduce',
         'map',
-
+        'filter'
       ],
       "/react/": [
         '',
