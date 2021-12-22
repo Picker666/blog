@@ -32,7 +32,8 @@ module.exports = {
         'equal',
         'copy',
         'promiseAll',
-        'allSettled'
+        'allSettled',
+        'arrayDeDuplication'
       ],
       '/sourceAnalysis/': [
         '',
