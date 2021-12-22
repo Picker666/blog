@@ -49,7 +49,11 @@ module.exports = {
         'newPromise',
         'promise',
         'debounce',
-        'throttle'
+        'throttle',
+        'forEach',
+        'reduce',
+        'map',
+
       ],
       "/react/": [
         '',
