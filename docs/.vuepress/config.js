@@ -66,6 +66,10 @@ module.exports = {
         'useMemo',
         'useCallback',
         'useRef'
+      ],
+      "/git/": [
+        '',
+        'catchUp'
       ]
 
     }
