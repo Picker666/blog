@@ -13,7 +13,7 @@ remote: PermissionDenied: Permission Deny: You are not allowed to push this bran
 ### 解决方式
 
 ```js
-git config --system --unset credential.helper // 清除已经设置的密码
+git config --global --unset credential.helper // 清除已经设置的密码
 git push // 需要输入正确的账号和密码即可  每次push 都需要输入
 ```
 
