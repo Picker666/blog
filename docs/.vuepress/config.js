@@ -33,7 +33,10 @@ module.exports = {
         'copy',
         'promiseAll',
         'allSettled',
-        'arrayDeDuplication'
+        'arrayDeDuplication',
+
+        'storage',
+        'xss'
       ],
       '/sourceAnalysis/': [
         '',
