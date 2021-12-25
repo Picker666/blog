@@ -53,11 +53,7 @@ module.exports = {
         'promise',
         'debounce',
         'throttle',
-        'forEach',
-        'reduce',
-        'map',
-        'filter',
-        'every'
+        'newBaseFunction',
       ],
       "/react/": [
         '',
