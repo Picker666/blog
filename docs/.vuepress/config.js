@@ -54,7 +54,8 @@ module.exports = {
         'debounce',
         'throttle',
         'newBaseFunction',
-        'deepCopy'
+        'deepCopy',
+        'Set'
       ],
       "/react/": [
         '',
