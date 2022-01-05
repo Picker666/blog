@@ -1,4 +1,4 @@
-# map
+# 实现Map
 
 ```js
 function defaultToString(key) {
