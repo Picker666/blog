@@ -73,7 +73,6 @@ module.exports = {
         '',
         'catchUp'
       ]
-
     }
   },
   configureWebpack: {
