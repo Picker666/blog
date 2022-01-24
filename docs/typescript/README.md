@@ -11,7 +11,7 @@
 
 ### `typescript` 和 `javascript` 的区别
 
-* `TypeScript`是一个应用程序级的`JavaScript`开发语言。（这也表示`TypeScript`比较牛逼，可以开发大型应用，或者说更适合开发大型应用）
+* `TypeScript`是一个应用程序级的`JavaScript`开发语言。（这也表示`TypeScript`比较牛掰，可以开发大型应用，或者说更适合开发大型应用）
 * `TypeScript`是`JavaScript`的超集，可以编译成纯`JavaScript`。这个和我们`CSS`中的`Less`或者Sass`是很像的，
 * 我们用更好的代码编写方式来进行编写，最后还是有好生成原生的`JavaScript`语言。
 * `TypeScript`跨浏览器、跨操作系统、跨主机、且开源。由于最后他编译成了`JavaScript`所以只要能运行JS的地方，都可以运行我们写的程序，设置在`node.js`里。

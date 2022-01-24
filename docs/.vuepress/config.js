@@ -40,7 +40,8 @@ module.exports = {
         'xss'
       ],
       '/typescript/': [
-        ''
+        '',
+        'tsBase'
       ],
       '/sourceAnalysis/': [
         '',
