@@ -61,7 +61,7 @@ module.exports = {
         'newBaseFunction',
         'deepCopy',
         'Set',
-        'Map'
+        'map'
       ],
       "/react/": [
         '',
