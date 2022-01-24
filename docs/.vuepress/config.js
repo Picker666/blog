@@ -12,6 +12,7 @@ module.exports = {
     lastUpdated: '更新时间',
     nav: [
       { text: '基础梳理', link: '/base/' },
+      { text: 'Typescript', link: '/typescript/' },
       { text: '手写', link: '/newFunction/' },
       { text: '源码分析', link: '/sourceAnalysis/' },
       { text: 'React', link: '/react/' },
@@ -37,6 +38,9 @@ module.exports = {
 
         'storage',
         'xss'
+      ],
+      '/typescript/': [
+        ''
       ],
       '/sourceAnalysis/': [
         '',
