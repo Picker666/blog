@@ -132,3 +132,14 @@ function add(): undefined {
     console.log('hello')
 }
 ```
+
+## any
+
+在 `TypeScript` 中，任何类型都可以被归为 `any` 类型。这让 `any` 类型成为了类型系统的顶级类型.
+
+如果是一个 `number` 类型，在赋值过程中改变类型是不被允许的：
+
+```ts
+let tsNumber: number = 123
+tsNumber = '123'
+```
