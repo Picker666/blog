@@ -143,3 +143,25 @@ function add(): undefined {
 let tsNumber: number = 123
 tsNumber = '123'
 ```
+
+但如果是 `any` 类型，则允许被赋值为任意类型。
+
+```ts
+let a: any = 666;
+a = "Semlinker";
+a = false;
+a = 66
+a = undefined
+a = null
+a = []
+a = {}
+```
+
+如果我们定义了一个变量，没有指定其类型，也没有初始化，那么它默认为`any`类型：
+
+```ts
+// 以下代码是正确的，编译成功
+let value
+value = 520
+value = '520'
+```
