@@ -357,3 +357,51 @@ let objArray: Array<ObjArray> = [
   { name: 'AAA', age: 23 }
 ]
 ```
+
+## Tuple(元组)
+
+众所周知，数组一般由同种类型的值组成，但有时我们需要在单个变量中存储不同类型的值，这时候我们就可以使用**元组**。在 JavaScript 中是没有元组的，元组是 `TypeScript` 中特有的类型，其工作方式类似于数组。
+
+元组最重要的特性是可以限制 数组元素的个数和类型 ，它特别适合用来实现多值返回。
+
+元组用于保存**定长定数据类型**的数据
+
+```ts
+let x: [string, number]; 
+// 类型必须匹配且个数必须为2
+
+x = ['hello', 10]; // OK 
+x = ['hello', 10,10]; // Error 
+x = [10, 'hello']; // Error
+```
+
+::: warning
+元组类型只能表示一个已知元素数量和类型的数组，长度已指定，越界访问会提示错误。如果一个数组中可能有多种类型，数量和类型都不确定，那就直接`any[]`。
+:::
+
+### 元组类型的解构赋值
+
+我们可以通过下标的方式来访问元组中的元素，当元组中的元素较多时，这种方式并不是那么便捷。其实元组也是支持解构赋值的：
+
+```ts
+let tupleArr: [number, string] = [666, "Picker"];
+let [id, username] = tupleArr;
+console.log(id); //666
+console.log(username); //Picker
+
+let tupleArr: [number, string] = [666, "Picker"];
+let [id, username, age] = tupleArr; //Error
+```
+
+::: warning
+在解构赋值时，如果解构数组元素的个数超过元组中元素的个数，会报错。
+:::
+
+### 元组类型的可选元素
+
+```ts
+let tupleArr: [string, boolean?];
+tupleArr = ['hi', true]
+tupleArr = ['hi']
+```
+
