@@ -165,3 +165,70 @@ let value
 value = 520
 value = '520'
 ```
+
+## never
+
+### `never` 类型表示的是那些永不存在的值的类型
+
+值会永不存在的两种情况：
+
+* 如果一个函数执行时抛出了异常，那么这个函数永远不存在返回值（因为抛出异常会直接中断程序运行，这使得程序运行不到返回值那一步，即，具有不可达的终点，也就永不存在返回了）；
+* 函数中执行无限循环的代码（死循环），使得程序永远无法运行到函数返回值那一步，永不存在返回。
+
+```ts
+function err(msg: string): never { // OK
+  throw new Error(msg); 
+  let run = '永远执行不到'
+}
+
+// 死循环
+function loopForever(): never { // OK
+  while (true) {
+  };
+  let run = '永远执行不到'
+} 
+```
+
+### `never` 类型不是任何类型的子类型，也不能赋值给任何类型
+
+在 `TypeScript` 中，可以利用 `never` 类型的特性来实现全面性检查，具体示例如下：
+
+```ts
+type Foo = string | number;
+
+function controlFlowAnalysisWithNever(foo: Foo) {
+  if (typeof foo === "string") {
+    // 这里 foo 被收窄为 string 类型
+  } else if (typeof foo === "number") {
+    // 这里 foo 被收窄为 number 类型
+  } else {
+    // foo 在这里是 never
+    const check: never = foo;
+  }
+}
+```
+
+::: tip
+注意在 `else` 分支里面，我们把收窄为 `never` 的 `foo` 赋值给一个显示声明的 `never` 变量。如果一切逻辑正确，那么这里应该能够编译通过。
+:::
+
+但是假如后来有一天修改了 `Foo` 的类型：
+
+```ts
+type Foo = string | number | boolean;
+```
+
+然而忘记同时修改 `controlFlowAnalysisWithNever` 方法中的控制流程，这时候 `else` 分支的 `foo` 类型会被收窄为 `boolean` 类型，导致无法赋值给 `never` 类型，这时就会产生一个编译错误。
+
+::: tip 我们可以得出一个结论：
+使用 `never` 避免出现新增了联合类型没有对应的实现，目的就是写出类型绝对安全的代码。
+:::
+
+::: warning 注意
+如果一个联合类型中存在`never`，那么实际的联合类型并不会包含`never`。
+:::
+
+```ts
+// 'name' | 'age'
+type test = 'name' | 'age' | never
+```
