@@ -232,3 +232,60 @@ type Foo = string | number | boolean;
 // 'name' | 'age'
 type test = 'name' | 'age' | never
 ```
+
+## unknown
+
+就像所有类型都可以被归为 `any`，所有类型也都可以被归为 `unknown`。这使得 `unknown` 成为 `TypeScript` 类型系统的另一种顶级类型（另一种是 `any`）。
+
+::: tip unknown与any的最大区别是：
+任何类型的值可以赋值给`any`，同时`any`类型的值也可以赋值给任何类型。
+
+任何类型的值都可以赋值给`unknown` ，但`unknown` 只能赋值给`unknown`和`any`。
+:::
+
+```ts
+let notSure: unknown = 4
+let unk: unknown = true
+let sure: any = 'hh'
+sure = notSure
+notSure = sure
+notSure = unk
+notSure = 'heel'
+notSure = Symbol()
+notSure = {}
+notSure = []
+let num: void
+num = notSure //Type 'unknown' is not assignable to type 'void'.(2322)
+```
+
+如果不缩小类型，就无法对`unknown`类型执行任何操作：
+
+```ts
+function getDog() {
+ return '123'
+}
+ 
+const dog: unknown = {hello: getDog};
+dog.hello(); // Object is of type 'unknown'.(2571)
+```
+
+这是 `unknown` 类型的主要价值主张：`TypeScript` 不允许我们对类型为 `unknown` 的值执行任意操作。相反，我们必须首先执行某种类型检查以缩小我们正在使用的值的类型范围。
+
+这种机制起到了很强的预防性，更安全，这就要求我们必须缩小类型，我们可以使用`typeof`、`instanceof`、类型断言等方式来缩小未知范围：
+
+```ts
+function getDogName() {
+ let x: unknown;
+ return x;
+};
+const dogName = getDogName();
+// 直接使用
+const upName = dogName.toLowerCase(); // Error
+// typeof
+if (typeof dogName === 'string') {
+  const upName = dogName.toLowerCase(); // OK
+}
+// 类型断言 
+const upName = (dogName as string).toLowerCase(); // OK
+```
+
