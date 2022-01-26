@@ -289,3 +289,71 @@ if (typeof dogName === 'string') {
 const upName = (dogName as string).toLowerCase(); // OK
 ```
 
+## Array
+
+对数组的定义有两种：
+
+* 类型＋[]
+
+```ts
+let arr:string[] = ['hello', 'world']
+```
+
+* 泛型
+
+```ts
+let arr2: Array<string> = ['hello','world']
+```
+
+---
+
+定义联合类型的数组
+
+```ts
+let arr: (number | string)[];
+arr = [0,'hi', 1, 'world']
+```
+在数组中不仅可以存储基础数据类型，还可以存储对象类型，如果需要存储对象类型，可以用如下方式进行定义：
+
+```ts
+// 只允许存储对象仅有name和age，且name为string类型，age为number类型的对象
+let objArray: ({ name: string, age: number })[] = [
+  { name: 'AAA', age: 23 }
+]
+```
+
+对象类型可以使用`interface`定义
+
+```ts
+interface ObjArray {
+  name: string;
+  age: number
+}
+
+// 对象+[]的写法
+let objArray: ObjArray[] = [
+  { name: 'AAA', age: 23 }
+]
+// 泛型的写法
+let objArray: Array<ObjArray> = [
+  { name: 'AAA', age: 23 }
+]
+```
+
+为了更加方便的撰写代码，我们可以使用类型别名的方式来管理以上类型：
+
+```ts
+type ObjArray = {
+  name: string;
+  age: number
+}
+
+// 对象+[]的写法
+let objArray: ObjArray[] = [
+  { name: 'AAA', age: 23 }
+]
+// 泛型的写法
+let objArray: Array<ObjArray> = [
+  { name: 'AAA', age: 23 }
+]
+```
