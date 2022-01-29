@@ -404,4 +404,3 @@ let tupleArr: [string, boolean?];
 tupleArr = ['hi', true]
 tupleArr = ['hi']
 ```
-
