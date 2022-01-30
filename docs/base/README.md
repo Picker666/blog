@@ -422,7 +422,7 @@ function Person(){};
 console.log(Object.prototype.toString.call(new Person));//[object Object]
 ```
 
-得到结果之后, 你可以通过：`xxx.slice(8, \-1).toLowerCase()`，就可拿来正常使用咯；
+得到结果之后, 你可以通过：`xxx.slice(8, -1).toLowerCase()`，就可拿来正常使用咯；
 
 我们看下继承之后是否能检测出来:
 
