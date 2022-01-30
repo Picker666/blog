@@ -62,7 +62,8 @@ module.exports = {
         'deepCopy',
         'Set',
         'map',
-        'instanceof'
+        'instanceof',
+        'thousands'
       ],
       "/react/": [
         '',
