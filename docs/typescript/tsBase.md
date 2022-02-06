@@ -591,7 +591,7 @@ function add(a: number, b: string): string;
 
 //函数实现
 function add(a: Combinable, b: Combinable) {
-  if (typeof a === 'string' || typeof b === 'string') {
+  if (typeof a === 'number' || typeof b === 'number') {
     return a.toString() + b.toString();
   }
   return a + b;
