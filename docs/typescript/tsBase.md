@@ -603,3 +603,18 @@ console.log(result.split(' ')) //["Semlinker", "Kakuqo"]
 ::: tip
 在有函数重载时，会优先从第一个进行逐一匹配，因此如果重载函数有包含关系，应该将最精准的函数定义写在最前面。
 :::
+
+## Number、String、Boolean、Symbol
+
+首先，我们来回顾一下初学 `TypeScript` 时，很容易和原始类型 `number、string、boolean、symbol` 混淆的首字母大写的 `Number、String、Boolean、Symbol` 类型，后者是相应原始类型的**`包装对象`**，姑且把它们称之为对象类型。
+
+从类型兼容性上看，原始类型兼容对应的对象类型，反过来对象类型不兼容对应的原始类型。
+
+```ts
+let num: number = 3;
+let Num: Number = Number(4);
+Num = num; // ok
+num = Num; // ts(2322)报错
+```
+
+在示例中的第 3 行，我们可以把 `number` 赋给类型 `Number`，但在第 4 行把 `Number` 赋给 `number` 就会提示 ts(2322) 错误。
