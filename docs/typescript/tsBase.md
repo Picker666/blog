@@ -618,3 +618,54 @@ num = Num; // ts(2322)报错
 ```
 
 在示例中的第 3 行，我们可以把 `number` 赋给类型 `Number`，但在第 4 行把 `Number` 赋给 `number` 就会提示 ts(2322) 错误。
+
+::: warning 注意
+需要铭记不要使用对象类型来注解值的类型，因为这没有任何意义。
+:::
+
+## object、Object 和 {}
+
+`object` 代表的是引用类型，也就是说我们不能把 `number、string、boolean、symbol` 等 原始类型赋值给 `object`。
+
+**在严格模式下，`null` 和 `undefined` 类型也不能赋给 `object`。**
+
+```ts
+let lowerCaseObject: object;
+lowerCaseObject = 1; // ts(2322)
+lowerCaseObject = 'a'; // ts(2322)
+lowerCaseObject = true; // ts(2322)
+lowerCaseObject = null; // ts(2322)
+lowerCaseObject = undefined; // ts(2322)
+lowerCaseObject = {}; // ok
+```
+
+`Object` 代表所有拥有 `toString、hasOwnProperty` 方法的类型，所以所有原始类型、引用类型都可以赋给 `Object`。
+
+**在严格模式下`，null` 和 `undefined` 类型也不能赋给 `Object`。**
+
+```ts
+let upperCaseObject: Object;
+upperCaseObject = 1; // ok
+upperCaseObject = 'a'; // ok
+upperCaseObject = true; // ok
+upperCaseObject = null; // ts(2322)
+upperCaseObject = undefined; // ts(2322)
+upperCaseObject = {}; // ok
+```
+
+`{}` 空对象类型和大 `Object` 一样，也是表示原始类型和引用类型的集合，并且在严格模式下，`null` 和 `undefined` 也不能赋给 `{}` ，如下示例：
+
+```ts
+let ObjectLiteral: {};
+ObjectLiteral = 1; // ok
+ObjectLiteral = 'a'; // ok
+ObjectLiteral = true; // ok
+ObjectLiteral = null; // ts(2322)
+ObjectLiteral = undefined; // ts(2322)
+ObjectLiteral = {}; // ok
+```
+
+### 综上结论
+
+* {}、Object 是比 object 更宽泛的类型（least specific），{} 和 Object 可以互相代替，用来表示原始类型（null、undefined 除外）和引用类型；
+* 而 object 则表示引用类型。
