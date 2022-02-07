@@ -584,7 +584,7 @@ Property 'split' does not exist on type 'number'.
 ```ts
 type Combinable = string | number;
 // 函数声明
-function add(a: number,b: number):number;
+function add(a: number,b: number): string;
 function add(a: string, b: string): string;
 function add(a: string, b: number): string;
 function add(a: number, b: string): string;
