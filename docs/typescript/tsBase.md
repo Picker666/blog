@@ -405,3 +405,267 @@ tupleArr = ['hi', true]
 tupleArr = ['hi']
 ```
 
+## 函数
+
+在JavaScript中，定义函数有三种表现形式：
+
+* 函数声明
+* 函数表达式
+* 箭头函数
+
+```js
+// 函数声明
+function func1 () {
+  console.log('Hello, Picker')
+}
+// 函数表达式
+const func2 = function () {
+  console.log('Hello, Picker')
+}
+// 箭头函数
+const func3 = () => {
+  console.log('Hello, Picker')
+}
+```
+
+如果函数有参数，则必须在 `TypeScript` 中为其定义具体的类型：
+
+```ts
+function sum(a: number, b:number): number {
+  return a + b
+}
+console.log(sum(1, 2))    // 输出3
+console.log(sum(1, '2'))  // 报错
+```ts
+
+### 用接口定义函数类型
+
+```ts
+interface SumType {
+  (x: number, y: number): number
+}
+const sum: SumType = function (x: number, y: number): number {
+  return x + y
+}
+console.log(sum(1, 2))    // 输出3
+```ts
+
+采用函数表达式接口定义函数的方式时，对等号左侧进行类型限制，可以保证以后对函数名赋值时保证参数的个数、参数类型、返回值类型不变。
+
+```ts
+sum = function (a: number, b: number): number {
+  return a + b
+}
+```
+
+### 可选参数
+
+```ts
+function familyName(firstName: string, lastName?: string) {
+  if (lastName) {
+    return firstName + ' ' + lastName;
+  } else {
+    return firstName;
+  }
+}
+
+console.log(familyName('Picker', 'R')) //Picker R
+console.log(familyName('Picker')) //Picker
+```
+
+::: tip
+可选参数必须放在最后一个位置，否则会报错。
+:::
+
+```ts
+// 编辑报错 
+function buildName(firstName: string, lastName?: string, _abc: number) {
+  if (lastName) {
+    return firstName + ' ' + lastName;
+  } else {
+    return firstName;
+  }
+}
+```
+
+在 `JavaScript` 中，函数允许我们给参数设置默认值，因此另外一种处理可选参数的方式是: 为参数提供一个默认值，此时 `TypeScript` 将会把该参数识别为可选参数：
+
+```ts
+function getArea (a: number, b: number = 1): number {
+  return  a * b
+}
+console.log(getArea(4))     // 4
+console.log(getArea(4, 5))  // 20
+```
+
+::: tip
+给一个参数设置了默认值后，就不再受 `TypeScript` 可选参数必须在最后一个位置的限制了。
+:::
+
+```ts
+function getArea (b: number = 1, a: number): number {
+  return  a * b
+}
+// 此时必须显示的传递一个undefined进行占位
+console.log(getArea(undefined,4)) // 4
+console.log(getArea(4, 5))        // 20
+```
+
+### 剩余参数
+
+```ts
+function push(array: Array<number>, ...items: any[]) {
+    items.forEach(function(item) {
+        array.push(item);
+    });
+}
+let arr = [0];
+push(arr, 1, 2, 3);
+console.log(arr) //[0, 1, 2, 3] 
+```
+
+### 函数重载
+
+函数重载或方法重载是使用相同名称和不同参数数量或类型创建多个方法的一种能力。
+
+由于 `JavaScript` 是一个动态语言，我们通常会使用不同类型的参数来调用同一个函数，该函数会根据不同的参数而返回不同的类型的调用结果：
+
+```ts
+function add(x, y) {
+ return x + y;
+}
+add(1, 2); // 3
+add("1", "2"); //"12"
+```
+
+由于 `TypeScript` 是 `JavaScript` 的超集，因此以上的代码可以直接在 `TypeScript` 中使用，但当 `tsconfig.json` 中指定 `"noImplicitAny": true` 的配时，以上代码会提示以下错误信息：
+
+```ts
+Parameter 'x' implicitly has an 'any' type.
+Parameter 'y' implicitly has an 'any' type.
+```
+
+该信息告诉我们参数 `x` 和参数 `y` 隐式具有 `any` 类型。为了解决这个问题，我们可以为参数设置一个类型。因为我们希望 `add` 函数同时支持 `string` 和 `number` 类型，因此我们可以定义一个 `string` | `number` 联合类型，同时我们为该联合类型取个别名：
+
+```ts
+type Combinable = string | number;
+```
+
+在定义完 `Combinable` 联合类型后，我们来更新一下 `add` 函数：
+
+```ts
+type Combinable = string | number;
+function add(x:Combinable, y: Combinable): Combinable {
+  if(typeof x === 'number' && typeof y === "number") {
+    return x + y;
+  }
+  return String(x) + String(y)
+
+}
+console.log(add(1, 2)) // 3
+console.log(add("1", "2")) //"12"
+```
+
+为 `add` 函数的参数显式设置类型之后，之前错误的提示消息就消失了。那么此时的 `add` 函数就完美了么，我们来实际测试一下：
+
+```ts
+const result = add('Semlinker', ' Kakuqo');
+result.split(' ');
+```
+
+在上面代码中，我们分别使用 `Semlinker` 和 `Kakuqo` 这两个字符串作为参数调用 `add` 函数，并把调用结果保存到一个名为 `result` 的变量上，这时候我们想当然的认为此时 `result` 的变量的类型为 `string`，所以我们就可以正常调用字符串对象上的 `split` 方法。但这时 `TypeScript` 编译器又出现以下错误信息了：
+
+```ts
+Property 'split' does not exist on type 'number'.
+```
+
+很明显 `number` 类型的对象上并不存在 `split` 属性。问题又来了，那如何解决呢？这时我们就可以利用 `TypeScript` 提供的函数重载特性。
+
+```ts
+type Combinable = string | number;
+// 函数声明
+function add(a: number,b: number): string;
+function add(a: string, b: string): string;
+function add(a: string, b: number): string;
+function add(a: number, b: string): string;
+
+//函数实现
+function add(a: Combinable, b: Combinable) {
+  if (typeof a === 'number' || typeof b === 'number') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
+}
+const result = add('Semlinker', ' Kakuqo');
+console.log(result.split(' ')) //["Semlinker", "Kakuqo"] 
+```
+
+::: tip
+在有函数重载时，会优先从第一个进行逐一匹配，因此如果重载函数有包含关系，应该将最精准的函数定义写在最前面。
+:::
+
+## Number、String、Boolean、Symbol
+
+首先，我们来回顾一下初学 `TypeScript` 时，很容易和原始类型 `number、string、boolean、symbol` 混淆的首字母大写的 `Number、String、Boolean、Symbol` 类型，后者是相应原始类型的**`包装对象`**，姑且把它们称之为对象类型。
+
+从类型兼容性上看，原始类型兼容对应的对象类型，反过来对象类型不兼容对应的原始类型。
+
+```ts
+let num: number = 3;
+let Num: Number = Number(4);
+Num = num; // ok
+num = Num; // ts(2322)报错
+```
+
+在示例中的第 3 行，我们可以把 `number` 赋给类型 `Number`，但在第 4 行把 `Number` 赋给 `number` 就会提示 ts(2322) 错误。
+
+::: warning 注意
+需要铭记不要使用对象类型来注解值的类型，因为这没有任何意义。
+:::
+
+## object、Object 和 {}
+
+`object` 代表的是引用类型，也就是说我们不能把 `number、string、boolean、symbol` 等 原始类型赋值给 `object`。
+
+**在严格模式下，`null` 和 `undefined` 类型也不能赋给 `object`。**
+
+```ts
+let lowerCaseObject: object;
+lowerCaseObject = 1; // ts(2322)
+lowerCaseObject = 'a'; // ts(2322)
+lowerCaseObject = true; // ts(2322)
+lowerCaseObject = null; // ts(2322)
+lowerCaseObject = undefined; // ts(2322)
+lowerCaseObject = {}; // ok
+```
+
+`Object` 代表所有拥有 `toString、hasOwnProperty` 方法的类型，所以所有原始类型、引用类型都可以赋给 `Object`。
+
+**在严格模式下`，null` 和 `undefined` 类型也不能赋给 `Object`。**
+
+```ts
+let upperCaseObject: Object;
+upperCaseObject = 1; // ok
+upperCaseObject = 'a'; // ok
+upperCaseObject = true; // ok
+upperCaseObject = null; // ts(2322)
+upperCaseObject = undefined; // ts(2322)
+upperCaseObject = {}; // ok
+```
+
+`{}` 空对象类型和大 `Object` 一样，也是表示原始类型和引用类型的集合，并且在严格模式下，`null` 和 `undefined` 也不能赋给 `{}` ，如下示例：
+
+```ts
+let ObjectLiteral: {};
+ObjectLiteral = 1; // ok
+ObjectLiteral = 'a'; // ok
+ObjectLiteral = true; // ok
+ObjectLiteral = null; // ts(2322)
+ObjectLiteral = undefined; // ts(2322)
+ObjectLiteral = {}; // ok
+```
+
+### 综上结论
+
+* {}、Object 是比 object 更宽泛的类型（least specific），{} 和 Object 可以互相代替，用来表示原始类型（null、undefined 除外）和引用类型；
+* 而 object 则表示引用类型。
