@@ -653,7 +653,7 @@ upperCaseObject = undefined; // ts(2322)
 upperCaseObject = {}; // ok
 ```
 
-`{}` 空对象类型和大 `Object` 一样，也是表示原始类型和引用类型的集合，并且在严格模式下，`null` 和 `undefined` 也不能赋给 `{}` ，如下示例：
+`{}` 空对象类型和 `Object` 一样，也是表示原始类型和引用类型的集合，并且在严格模式下，`null` 和 `undefined` 也不能赋给 `{}` ，如下示例：
 
 ```ts
 let ObjectLiteral: {};
