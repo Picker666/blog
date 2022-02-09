@@ -606,7 +606,7 @@ console.log(result.split(' ')) //["Semlinker", "Kakuqo"]
 
 ## Number、String、Boolean、Symbol
 
-首先，我们来回顾一下初学 `TypeScript` 时，很容易和原始类型 `number、string、boolean、symbol` 混淆的首字母大写的 `Number、String、Boolean、Symbol` 类型，后者是相应原始类型的**`包装对象`**，姑且把它们称之为对象类型。
+首先，我们来回顾一下初学 `TypeScript` 时，很容易和原始类型 `number、string、boolean、symbol` 混淆的首字母大写的 `Number、String、Boolean、Symbol` 类型，后者是相应原始类型的 **包装对象** ，姑且把它们称之为对象类型。
 
 从类型兼容性上看，原始类型兼容对应的对象类型，反过来对象类型不兼容对应的原始类型。
 
