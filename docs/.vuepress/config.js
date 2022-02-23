@@ -75,7 +75,7 @@ module.exports = {
         "useCallback",
         "useRef",
       ],
-      "/git/": ["", "rebase", "catchUp"],
+      "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
     },
   },
   configureWebpack: {
