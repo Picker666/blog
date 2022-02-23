@@ -6,7 +6,7 @@
 git checkout -b picker origin
 ```
 
-![分支示意图](/images/git/git2.jpg)
+![分支示意图](/blog/images/git/git2.jpg)
 
 现在我们在这个分支做一些修改，然后生成两个提交(commit).
 
@@ -19,11 +19,11 @@ git commit
 
 但是与此同时，有些人也在`"origin"`分支上做了一些修改并且做了提交了. 这就意味着`"origin"`和`"picker"`这两个分支各自"前进"了，它们之间"分叉"了。
 
-![分支示意图](/images/git/git3.jpg)
+![分支示意图](/blog/images/git/git3.jpg)
 
 ## git merge GitHub
 
-![分支示意图](/images/git/git4.jpg)
+![分支示意图](/blog/images/git/git4.jpg)
 
 但是，如果你想让`"picker"`分支历史看起来像没有经过任何合并一样，你也许可以用 `git rebase`:
 
@@ -36,19 +36,19 @@ git rebase origin
 
 ## git rebase
 
-![分支示意图](/images/git/git5.jpg)
+![分支示意图](/blog/images/git/git5.jpg)
 
 当`'picker'`分支更新之后，它会指向这些新创建的提交(`commit`),而那些老的提交会被丢弃。 如果运行垃圾收集命令(`pruning garbage collection`), 这些被丢弃的提交就会删除.
 
-![分支示意图](/images/git/git6.jpg)
+![分支示意图](/blog/images/git/git6.jpg)
 
 现在我们可以看一下用合并(`merge`)和用`rebase`所产生的历史的区别：
 
 **git rebase:**
-![分支示意图](/images/git/git7.jpg)
+![分支示意图](/blog/images/git/git7.jpg)
 
 **git merge:**
-![分支示意图](/images/git/git4.jpg)
+![分支示意图](/blog/images/git/git4.jpg)
 
 在`rebase`的过程中，也许会出现冲突(`conflict`). 在这种情况，`Git`会停止`rebase`并会让你去解决 冲突；在解决完冲突后，用`"git-add"`命令去更新这些内容的索引(`index`), 然后，你无需执行 `git-commit`,只要执行:
 

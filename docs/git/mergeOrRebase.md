@@ -8,7 +8,7 @@
 
 * 1、采用`merge`和`rebase`后，`git log`的区别，`merge`命令会保留`merge`的分支的`commit`：
 
-![合并操作示意图](/images/git/git8.png)
+![合并操作示意图](/blog/images/git/git8.png)
 
 * 2、处理冲突的方式：
 
@@ -29,7 +29,7 @@
 
 如果想在没有冲突的情况下也自动生成一个commit，记录此次合并就可以用：`git merge --no-ff`命令，下面用一张图来表示两者的区别
 
-![有无--no-ff对比示意图](/images/git/git9.png)
+![有无--no-ff对比示意图](/blog/images/git/git9.png)
 
 2、如果不加 `--no-ff` 则被合并的分支之前的`commit`都会被抹去，只会保留一个解决冲突后的 `merge commit`。
 
