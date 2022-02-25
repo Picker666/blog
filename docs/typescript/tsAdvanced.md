@@ -247,3 +247,131 @@ const arr1 = [1, 2, 3];
 // Type is readonly [1, 2, 3]
 const arr2 = [1, 2, 3] as const;
 ```
+
+## 类型缩小(Type Narrowing)
+
+在 TypeScript 中，我们可以通过某些操作将变量的类型由一个较为宽泛的集合缩小到相对较小、较明确的集合，这就是 "Type Narrowing"。
+
+* 使用类型守卫（后面会讲到）将函数参数的类型从 any 缩小到明确的类型，具体示例如下：
+
+```ts
+let func = (anything: any) => {
+    if (typeof anything === 'string') {
+      return anything; // 类型是 string 
+    } else if (typeof anything === 'number') {
+      return anything; // 类型是 number
+    }
+    return null;
+  };
+```
+
+* 使用类型守卫将联合类型缩小到明确的子类型:
+
+```ts
+let func = (anything: string | number) => {
+    if (typeof anything === 'string') {
+      return anything; // 类型是 string 
+    } else {
+      return anything; // 类型是 number
+    }
+  };
+```
+
+* 通过字面量类型等值判断（===）或其他控制流语句（包括但不限于 if、三目运算符、switch 分支）将联合类型收敛为更具体的类型，如下代码所示：
+
+```ts
+type Goods = 'pen' | 'pencil' |'ruler';
+  const getPenCost = (item: 'pen') => 2;
+  const getPencilCost = (item: 'pencil') => 4;
+  const getRulerCost = (item: 'ruler') => 6;
+  const getCost = (item: Goods) =>  {
+    if (item === 'pen') {
+      return getPenCost(item); // item => 'pen'
+    } else if (item === 'pencil') {
+      return getPencilCost(item); // item => 'pencil'
+    } else {
+      return getRulerCost(item); // item => 'ruler'
+    }
+  }
+```
+
+`getCost` 函数中，接受的参数类型是字面量类型的联合类型，函数内包含了 if 语句的 3 个流程分支，其中每个流程分支调用的函数的参数都是具体独立的字面量类型。
+
+为什么类型由多个字面量组成的变量 item 可以传值给仅接收单一特定字面量类型的函数?
+
+因为在每个流程分支中，编译器知道流程分支中的 item 类型是什么。比如 `item === 'pencil'` 的分支，item 的类型就被收缩为`“pencil”`。
+
+事实上，如果我们将上面的示例去掉中间的流程分支，编译器也可以推断出收敛后的类型，如下代码所示：
+
+```ts
+const getCost = (item: Goods) =>  {
+    if (item === 'pen') {
+      item; // item => 'pen'
+    } else {
+      item; // => 'pencil' | 'ruler'
+    }
+  }
+```
+
+* 使用typeof来实现类型缩小
+
+::: warning 注意
+一般来说 `TypeScript` 非常擅长通过条件来判别类型，但在处理一些特殊值时要特别注意
+
+它可能包含你不想要的东西！
+:::
+
+例如，以下从联合类型中排除 null 的方法是错误的：
+
+```ts
+const el = document.getElementById("foo"); // Type is HTMLElement | null
+if (typeof el === "object") {
+  el; // Type is HTMLElement | null
+}
+```
+
+::: tip
+在 JavaScript 中 typeof null 的结果是 "object"
+:::
+
+falsy 的原始值也会产生类似的问题：
+
+```rs
+function foo(x?: number | string | null) {
+  if (!x) {
+    x; // Type is string | number | null | undefined
+  }
+}
+```
+
+空字符串和 0 都属于 falsy 值，所以在分支中 x 的类型可能是 string 或 number 类型
+
+* 在它们上放置一个明确的 “标签”
+
+```ts
+interface UploadEvent {
+  type: "upload";
+  filename: string;
+  contents: string;
+}
+
+interface DownloadEvent {
+  type: "download";
+  filename: string;
+}
+
+type AppEvent = UploadEvent | DownloadEvent;
+
+function handleEvent(e: AppEvent) {
+  switch (e.type) {
+    case "download":
+      e; // Type is DownloadEvent 
+      break;
+    case "upload":
+      e; // Type is UploadEvent 
+      break;
+  }
+}
+```
+
+这种模式也被称为 ”标签联合“ 或 ”可辨识联合“，它在 TypeScript 中的应用范围非常广。
