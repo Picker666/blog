@@ -376,4 +376,341 @@ function handleEvent(e: AppEvent) {
 
 这种模式也被称为 ”标签联合“ 或 ”可辨识联合“，它在 TypeScript 中的应用范围非常广。
 
-## 联合
+## 联合类型
+
+联合类型表示取值可以为多种类型中的一种，使用 | 分隔每个类型。
+
+```ts
+let myFavoriteNumber: string | number;
+myFavoriteNumber = 'seven'; // OK
+myFavoriteNumber = 7; // OK
+```
+
+联合类型通常与 null 或 undefined 一起使用：
+
+```ts
+const sayHello = (name: string | undefined) => {
+  /* ... */
+};
+```
+
+例如，这里 name 的类型是 string | undefined 意味着可以将 string 或 undefined 的值传递给sayHello 函数。
+
+```ts
+sayHello("picker"); 
+sayHello(undefined);
+```
+
+通过这个示例，你可以凭直觉知道类型 A 和类型 B 联合后的类型是同时接受 A 和 B 值的类型。此外，对于联合类型来说，你可能会遇到以下的用法：
+
+```ts
+let num: 1 | 2 = 1;
+type EventNames = 'click' | 'scroll' | 'mousemove';
+```
+
+以上示例中的 1、2 或 'click' 被称为字面量类型，用来约束取值只能是某几个值中的一个。
+
+::: warning 注意
+当我们使用联合类型的时候，因为TypeScript不确定到底是哪一个类型，所以我们只能访问此联合类型的所有类型公用的属性和方法。
+:::
+
+```ts
+// Property 'length' does not exist on type 'number'.(2339)
+function getLength (value: string | number): number {
+  return value.length
+}
+
+// ok
+function valueToStr (value: string | number): string {
+  return value.toString()
+}
+```
+
+## 类型别名
+
+类型别名用来给一个类型起个新名字。类型别名常用于**联合类型**。
+
+```ts
+type Message = string | string[];
+let greet = (message: Message) => {
+  // ...
+};
+```
+
+::: tip
+类型别名，诚如其名，即我们仅仅是给类型取了一个新的名字，并不是创建了一个新的类型
+:::
+
+## 交差类型
+
+交叉类型是将多个类型合并为一个类型。 这让我们可以把现有的多种类型叠加到一起成为一种类型，它包含了所需的所有类型的特性，使用&定义交叉类型。
+
+```ts
+type Useless = string & number;
+```
+
+很显然，如果我们仅仅把`原始类型`、`字面量类型`、`函数类型`等`原子类型`合并成交叉类型，是**没有任何用处**的，因为任何类型都不能满足同时属于多种原子类型，比如既是 string 类型又是 number 类型。
+
+因此，在上述的代码中，类型别名 `Useless` 的类型就是个 `never`。
+
+交叉类型真正的用武之地就是将多个接口类型合并成一个类型，从而实现等同接口继承的效果，也就是所谓的合并接口类型，如下代码所示：
+
+```ts
+type IntersectionType = { id: number; name: string; } & { age: number };
+const mixed: IntersectionType = {
+  id: 1,
+  name: 'name',
+  age: 18
+}
+```
+
+要交差的多个类型具有相同的属性？
+
+* 如果同名属性的类型不兼容，比如上面示例中两个接口类型同名的 name 属性类型一个是 number，另一个是 string，合并后，name 属性的类型就是 number 和 string 两个原子类型的交叉类型，即 never，如下代码所示：
+
+```ts
+type IntersectionTypeConfict = { id: number; name: string; } 
+  & { age: number; name: number; };
+  const mixedConflict: IntersectionTypeConfict = {
+    id: 1,
+    name: 2, // ts(2322) 错误，'number' 类型不能赋给 'never' 类型
+    age: 2
+  };
+```
+
+* 如果同名属性的类型兼容，比如一个是 number，另一个是 number 的子类型、数字字面量类型，合并后 name 属性的类型就是两者中的子类型。
+
+如下所示示例中 name 属性的类型就是数字字面量类型 2，因此，我们不能把任何非 2 之外的值赋予 name 属性。
+
+```ts
+type IntersectionTypeConfict = { id: number; name: 2; } 
+  & { age: number; name: number; };
+
+  let mixedConflict: IntersectionTypeConfict = {
+    id: 1,
+    name: 2, // ok
+    age: 2
+  };
+  mixedConflict = {
+    id: 1,
+    name: 22, // '22' 类型不能赋给 '2' 类型
+    age: 2
+  };
+```
+
+* 同名属性是非基本数据类型的话
+
+```ts
+interface A {
+  x:{d:true},
+}
+interface B {
+  x:{e:string},
+}
+interface C {
+  x:{f:number},
+}
+type ABC = A & B & C
+let abc:ABC = {
+  x:{
+    d:true,
+    e:'',
+    f:666
+  }
+}
+```
+
+以上代码成功运行
+
+由上可知，**在混入多个类型时，若存在相同的成员，且成员类型为非基本数据类型，那么是可以成功合并**。
+
+## 接口（Interfaces）
+
+**接口：**在面向对象语言中，接口（Interfaces）是一个很重要的概念，它是对行为的抽象，而具体如何行动需要由类（classes）去实现（implement）。
+
+TypeScript 中的接口是一个非常灵活的概念，除了可用于 对类的一部分行为进行抽象 以外，也常用于对「对象的形状（Shape）」进行描述。
+
+### 例子
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+}
+let picker: Person = {
+    name: 'Tom',
+    age: 25
+};
+```
+
+上面的例子中，我们定义了一个接口 Person，接着定义了一个变量 picker，它的类型是 Person。这样，我们就约束了 picker 的形状必须和接口 Person 一致。
+
+::: tip
+接口一般首字母大写。
+:::
+
+* 定义的变量比接口少了一些属性是不允许的：
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+}
+let tom: Person = {
+    name: 'Picker'
+};
+
+// index.ts(6,5): error TS2322: Type '{ name: string; }' is not assignable to type 'Person'.
+//   Property 'age' is missing in type '{ name: string; }'.
+```
+
+* 多一些属性也是不允许的：
+
+```ts
+interface Person {
+    name: string;
+    age: number;
+}
+
+let tom: Person = {
+    name: 'Picker',
+    age: 25,
+    gender: 'male'
+};
+
+// index.ts(9,5): error TS2322: Type '{ name: string; age: number; gender: string; }' is not assignable to type 'Person'.
+//   Object literal may only specify known properties, and 'gender' does not exist in type 'Person'.
+```
+
+::: warning
+赋值的时候，变量的形状必须和接口的形状保持一致
+:::
+
+### 可选 和 只读属性
+
+```ts
+interface Person {
+  readonly name: string;
+  age?: number;
+}
+```
+
+只读属性用于限制只能在对象刚刚创建的时候修改其值。此外 TypeScript 还提供了 ReadonlyArray<T> 类型，它与 Array<T> 相似，只是把所有可变方法去掉了，因此可以确保数组创建后再也不能被修改。
+
+```ts
+let a: number[] = [1, 2, 3, 4];
+let ro: ReadonlyArray<number> = a;
+ro[0] = 12; // error! 类型“readonly number[]”中的索引签名仅允许读取。
+ro.push(5); // error! 类型“readonly number[]”上不存在属性“push”。
+ro.length = 100; // error! 无法分配到 "length" ，因为它是只读属性。ts(2540)
+a = ro; // error! 类型 "readonly number[]" 为 "readonly"，不能分配给可变类型 "number[]"。ts(4104)
+
+let a1: number[] = [1, 2, 3, 4];
+let ro1: Array<number> = a1;
+ro1[0] = 12;
+ro1.push(5);
+ro1.length = 100;
+a1 = ro1;
+```
+
+### 任意属性
+
+有时候我们希望一个接口中除了包含必选和可选属性之外，还允许有其他的任意属性，这时我们可以使用 `索引签名` 的形式来满足上述要求
+
+```ts
+interface Person {
+    name: string;
+    age?: number;
+    [propName: string]: any;
+}
+
+let tom: Person = {
+    name: 'Tom',
+    gender: 'male'
+};
+```
+
+::: warning 注意
+一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集。
+:::
+
+```ts
+interface Person {
+    name: string;
+    age?: number;
+    [propName: string]: string; // string | number | undefined
+}
+
+let tom: Person = {
+    name: 'Picker',
+    age: 25,
+    gender: 'male'
+};
+// index.ts(3,5): error TS2411: Property 'age' of type 'number' is not assignable to string index type 'string'.
+// index.ts(7,5): error TS2322: Type '{ [x: string]: string | number | undefined ; name: string; age: number; gender: string; }' is not assignable to type 'Person'.
+//   Index signatures are incompatible.
+//     Type 'string | number' is not assignable to type 'string'.
+//       Type 'number' is not assignable to type 'string'.
+```
+
+上例中，任意属性的值允许是 string，但是可选属性 age 的值却是 number，number 不是 string 的子属性，所以报错了。
+
+另外，在报错信息中可以看出，此时 { name: 'Picker', age: 25, gender: 'male' } 的类型被推断成了 { [x: string]: string | number | undefined ; name: string; age: number; gender: string; }，这是联合类型和接口的结合
+
+### 绕开额外属性检查的方式
+
+#### 鸭式辨型法
+
+```ts
+interface LabeledValue {
+  label: string;
+}
+function printLabel(labeledObj: LabeledValue) {
+  console.log(labeledObj.label);
+}
+let myObj = { size: 10, label: "Size 10 Object" };
+printLabel(myObj); // OK
+
+printLabel({ size: 10, label: "Size 10 Object" }); // Error
+```
+
+在参数里写对象就相当于是直接给labeledObj赋值，这个对象有严格的类型定义，所以不能多参或少参。
+
+而当你在外面将该对象用另一个变量myObj接收，myObj不会经过额外属性检查，但会根据类型推论为let myObj: { size: number; label: string } = { size: 10, label: "Size 10 Object" };，然后将这个myObj再赋值给labeledObj，此时根据类型的兼容性，两种类型对象，参照鸭式辨型法，因为都具有label属性，所以被认定为两个相同，故而可以用此法来绕开多余的类型检查。
+
+#### 类型断言
+
+类型断言的意义就等同于你在告诉程序，你很清楚自己在做什么，此时程序自然就不会再进行额外的属性检查了。
+
+```ts
+interface Props { 
+  name: string; 
+  age: number; 
+  money?: number;
+}
+
+let p: Props = {
+  name: "Picker",
+  age: 25,
+  money: -100000,
+  girl: false
+} as Props; // OK
+```
+
+#### 索引签名
+
+```ts
+interface Props { 
+  name: string; 
+  age: number; 
+  money?: number;
+  [key: string]: any;
+}
+
+let p: Props = {
+  name: "picker",
+  age: 25,
+  money: -100000,
+  girl: false
+}; // OK
+```
