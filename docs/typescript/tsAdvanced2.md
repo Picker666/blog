@@ -306,3 +306,67 @@ type Point = PointX & {
 ```
 
 ## 泛型
+
+假如让你实现一个函数 identity，函数的参数可以是任何值，返回值就是将参数原样返回，并且其只能接受一个参数，你会怎么做？
+
+```ts
+const identity = (arg) => arg;
+```
+
+由于其可以接受任意值，也就是说你的函数的入参和返回值都应该可以是任意类型。 现在让我们给代码增加类型声明：
+
+```ts
+type idBoolean = (arg: boolean) => boolean;
+type idNumber = (arg: number) => number;
+type idString = (arg: string) => string;
+...
+```
+
+虽然实现了，但是，上面的代码是不可以被优秀程序员接受的；
+
+还有一种方式是使用 any 这种“万能语法”。缺点是什么呢？我举个例子：
+
+```ts
+identity("string").length; // ok
+identity("string").toFixed(2); // ok
+identity(null).toString(); // ok
+...
+```
+
+很显然，这么实现不符合我们的预期。
+
+为了解决上面的这些问题，我们使用泛型对上面的代码进行重构。和我们的定义不同，这里用了一个 类型 `T`，这个 `T` 是一个抽象类型，只有在调用的时候才确定它的值，这就不用我们复制粘贴无数份代码了。
+
+```ts
+function identity<T>(arg: T): T {
+  return arg;
+}
+```
+
+其中 `T` 代表 `Type`，在定义泛型时通常用作第一个类型变量名称。但实际上 T 可以用任何有效名称代替。除了 `T`之外，以下是常见泛型变量代表的意思：
+
+* K（Key）：表示对象中的键类型；
+* V（Value）：表示对象中的值类型；
+* E（Element）：表示元素类型。
+
+其实并不是只能定义一个类型变量，我们可以引入希望定义的任何数量的类型变量。比如我们引入一个新的类型变量 `U`，用于扩展我们定义的 `identity` 函数：
+
+```ts
+function identity <T, U>(value: T, message: U) : T {
+  console.log(message);
+  return value;
+}
+console.log(identity<Number, string>(68, "Semlinker"));
+```
+
+除了为类型变量显式设定值之外，一种更常见的做法是使编译器自动选择这些类型，从而使代码更简洁。我们可以完全省略尖括号，比如：
+
+```ts
+function identity <T, U>(value: T, message: U) : T {
+  console.log(message);
+  return value;
+}
+console.log(identity(68, "Semlinker"));
+```
+
+对于上述代码，编译器足够聪明，能够知道我们的参数类型，并将它们赋值给 T 和 U，而不需要开发人员显式指定它们。
