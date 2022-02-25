@@ -41,7 +41,7 @@ module.exports = {
         "storage",
         "xss",
       ],
-      "/typescript/": ["", "tsBase", "tsAdvanced"],
+      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2"],
       "/sourceAnalysis/": [
         "",
         "reduxThunk",
