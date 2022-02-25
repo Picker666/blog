@@ -248,7 +248,7 @@ const arr1 = [1, 2, 3];
 const arr2 = [1, 2, 3] as const;
 ```
 
-## 类型缩小(Type Narrowing)
+## 类型缩小（Type Narrowing）
 
 在 TypeScript 中，我们可以通过某些操作将变量的类型由一个较为宽泛的集合缩小到相对较小、较明确的集合，这就是 "Type Narrowing"。
 
@@ -375,3 +375,5 @@ function handleEvent(e: AppEvent) {
 ```
 
 这种模式也被称为 ”标签联合“ 或 ”可辨识联合“，它在 TypeScript 中的应用范围非常广。
+
+## 联合
