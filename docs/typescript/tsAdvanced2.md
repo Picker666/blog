@@ -370,3 +370,120 @@ console.log(identity(68, "Semlinker"));
 ```
 
 对于上述代码，编译器足够聪明，能够知道我们的参数类型，并将它们赋值给 T 和 U，而不需要开发人员显式指定它们。
+
+## 泛型约束 or 扩展
+
+假如我想打印出参数的 size 属性呢？如果完全不进行约束 TS 是会报错的：
+
+```ts
+function trace<T>(arg: T): T {
+  console.log(arg.size); // Error: Property 'size doesn't exist on type 'T'
+  return arg;
+}
+
+function traceAny(arg: any): any {
+  console.log(arg.size);
+  return arg;
+}
+```
+
+报错的原因在于 T 理论上是可以是任何类型的，
+
+不同于 any，你不管使用它的什么属性或者方法都会报错（除非这个属性和方法是所有集合共有的）。那么直观的想法是限定传给 trace 函数的参数类型应该有 size 类型，这样就不会报错了。
+
+如何去表达这个类型约束的点呢？
+
+实现这个需求的关键在于使用类型约束。 使用 `extends` 关键字可以做到这一点。简单来说就是你定义一个类型，然后让 T 实现这个接口即可。
+
+```ts
+interface Sizeable {
+  size: number;
+}
+function trace<T extends Sizeable>(arg: T): T {
+  console.log(arg.size);
+  return arg;
+}
+```
+
+有的人可能说我直接将 Trace 的参数限定为 Sizeable 类型可以么？如果你这么做，会有类型丢失的风险。
+
+---
+
+假设想要拿到一组数据中，age最大的
+
+```ts
+function getOldest(items: Array<{ age: number }>) {
+  return items.sort((a, b) => b.age - a.age)[0];
+}
+
+// 我们吧{age: number} 抽离出来
+type HasAge = { age: number };
+function getOldest(items: HasAge[]): HasAge {
+  return items.sort((a, b) => b.age - a.age)[0];
+}
+
+
+const things = [{ age: 10 }, { age: 20 }, { age: 15 }];
+const oldestThing = getOldest(things);
+
+console.log(oldestThing.age); // 20 ✅
+```
+
+但是，如果所有筛选的数据具有更多属性？
+
+```ts
+type Person = { name: string, age: number};
+
+const people: Person[] = [
+  { name: 'Amir', age: 10 }, 
+  { name: 'Betty', age: 20 }, 
+  { name: 'Cecile', age: 15 }
+ ];
+
+const oldestPerson = getOldest(people); // 🙂 no type errors
+
+console.log(oldestPerson.name); // ❌ type error: Property 'name' does not exist on type 'HasAge'.
+```
+
+当然，可以使用断言来实现
+
+```ts
+const oldestPerson = getOldest(people) as Person; // 🚩
+console.log(oldestPerson.name); // no type error
+```
+
+如果使用`泛型`去解决呢？
+
+```ts
+function getOldest<T extends HasAge>(items: T[]): T {
+  return items.sort((a, b) => b.age - a.age)[0];
+}
+
+const oldestPerson = getOldest(people); // ✅ type Person
+```
+
+Typescript 会推断 `oldestPerson` 的类型是 `Person`，所以可以拿到 `.name`;
+
+再看一个例子
+
+```ts
+type Person = {name: string, age: number};
+const people: Person[] = [
+  { name: 'Picker', age: 10 }, 
+  { name: 'Picker6', age: 20 }, 
+  { name: 'Picker666', age: 15 }
+ ];
+
+type Bridge = {name: string, length: number, age: number};
+const bridges = [
+{ name: 'London Bridge', length: 269, age: 48 },
+{ name: 'Tower Bridge', length: 244, age: 125 },
+{ name: 'Westminster Bridge', length: 250, age: 269 }
+]
+
+const oldestPerson = getOldest(people); // type Person
+const oldestBridge = getOldest(bridges); // type Bridge
+
+console.log(oldestPerson.name); // 'Picker6' ✅
+console.log(oldestBridge.length); // '250' ✅
+```
