@@ -371,7 +371,7 @@ console.log(identity(68, "Semlinker"));
 
 对于上述代码，编译器足够聪明，能够知道我们的参数类型，并将它们赋值给 T 和 U，而不需要开发人员显式指定它们。
 
-## 泛型约束 or 扩展
+## 泛型约束
 
 假如我想打印出参数的 size 属性呢？如果完全不进行约束 TS 是会报错的：
 
@@ -486,4 +486,205 @@ const oldestBridge = getOldest(bridges); // type Bridge
 
 console.log(oldestPerson.name); // 'Picker6' ✅
 console.log(oldestBridge.length); // '250' ✅
+```
+
+## 泛型工具类型
+
+为了方便开发者 TypeScript 内置了一些常用的工具类型，比如 Partial、Required、Readonly、Record 和 ReturnType 等。不过先看一下其它的工具类型。
+
+### 1.typeof
+
+typeof 的主要用途是在类型上下文中获取变量或者属性的类型，
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+const sem: Person = { name: "semlinker", age: 30 };
+type Sem = typeof sem; // type Sem = Person
+```
+
+在上面代码中，我们通过 typeof 操作符获取 sem 变量的类型并赋值给 Sem 类型变量，之后我们就可以使用 Sem 类型：
+
+```ts
+const lolo: Sem = { name: "lolo", age: 5 }
+```
+
+你也可以对嵌套对象执行相同的操作
+
+```ts
+const Message = {
+    name: "jimmy",
+    age: 18,
+    address: {
+      province: '四川',
+      city: '成都'   
+    }
+}
+type message = typeof Message;
+/*
+ type message = {
+    name: string;
+    age: number;
+    address: {
+        province: string;
+        city: string;
+    };
+}
+*/
+```
+
+此外，`typeof` 操作符除了可以获取对象的结构类型之外，它也可以用来获取函数对象的类型，比如：
+
+```ts
+function toArray(x: number): Array<number> {
+  return [x];
+}
+type Func = typeof toArray; // -> (x: number) => number[]
+```
+
+### 2、keyof
+
+`keyof` 操作符是在 `TypeScript` 2.1 版本引入的，该操作符可以用于获取某种类型的所有键，其返回类型是联合类型。
+
+```ts
+interface Person {
+  name: string;
+  age: number;
+}
+
+type K1 = keyof Person; // "name" | "age"
+type K2 = keyof Person[]; // "length" | "toString" | "pop" | "push" | "concat" | "join" 
+type K3 = keyof { [x: string]: Person };  // string | number
+```
+
+在 TypeScript 中支持两种索引签名，`数字索引`和`字符串索引`：
+
+```ts
+interface StringArray {
+  // 字符串索引 -> keyof StringArray => string | number
+  [index: string]: string; 
+}
+
+interface StringArray1 {
+  // 数字索引 -> keyof StringArray1 => number
+  [index: number]: string;
+}
+```
+
+为了同时支持两种索引类型，就得要求数字索引的返回值必须是字符串索引返回值的子类。
+
+其中的原因就是；当使用数值索引时，JavaScript 在执行索引操作时，会先把数值索引先转换为字符串索引。
+
+所以 keyof { [x: string]: Person } 的结果会返回 string | number。
+
+keyof也支持基本数据类型：
+
+```ts
+let K1: keyof boolean; // let K1: "valueOf"
+let K2: keyof number; // let K2: "toString" | "toFixed" | "toExponential" | ...
+let K3: keyof symbol; // let K1: "valueOf"
+```
+
+#### keyof 的作用
+
+JavaScript 是一种高度动态的语言。有时在静态类型系统中捕获某些操作的语义可能会很棘手。以一个简单的prop 函数为例：
+
+```ts
+function prop(obj: object, key: string) {
+  return obj[key]; // error  元素隐式具有 "any" 类型，因为类型为 "string" 的表达式不能用于索引类型 "{}"。在类型 "{}" 上找不到具有类型为 "string" 的参数的索引签名。
+}
+```
+
+当然可以使用暴力方式处理
+
+```ts
+function prop(obj: object, key: string) {
+  return (obj as any)[key];
+}
+```
+
+很明显该方案并不是一个好的方案，我们来回顾一下 prop 函数的作用，该函数用于获取某个对象中指定属性的属性值。因此我们期望用户输入的属性是对象上已存在的属性，那么如何限制属性名的范围呢？这时我们可以利用本文的主角 keyof 操作符：
+
+```ts
+function prop<T extends object, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+```
+
+* 首先定义了 T 类型并使用 extends 关键字约束该类型必须是 object 类型的子类型，
+* 然后使用 keyof 操作符获取 T 类型的所有键，其返回类型是联合类型，
+* 最后利用 extends 关键字约束 K 类型必须为 keyof T 联合类型的子类型。
+
+```ts
+type Todo = {
+  id: number;
+  text: string;
+  done: boolean;
+}
+
+const todo: Todo = {
+  id: 1,
+  text: "Learn TypeScript keyof",
+  done: false
+}
+
+function prop<T extends object, K extends keyof T>(obj: T, key: K) {
+  return obj[key];
+}
+
+const id = prop(todo, "id"); // const id: number
+const text = prop(todo, "text"); // const text: string
+const done = prop(todo, "done"); // const done: boolean
+const date = prop(todo, "date"); // 类型“"date"”的参数不能赋给类型“keyof Todo”的参数。 ts(2345)
+```
+
+很明显使用泛型，重新定义后的 prop<T extends object, K extends keyof T>(obj: T, key: K) 函数，已经可以正确地推导出指定键对应的类型。
+
+### 3、in
+
+in 用来遍历枚举类型：
+
+type Keys = "a" | "b" | "c"
+
+``ts
+type Obj =  {
+  [p in Keys]: any
+} // -> { a: any, b: any, c: any }
+
+```
+
+### 4、infer
+
+在条件类型语句中，可以用 infer 声明一个类型变量并且对它进行使用。
+
+```ts
+type ReturnType<T> = T extends (
+  ...args: any[]
+) => infer R ? R : any;
+```
+
+以上代码中 infer R 就是声明一个变量来承载传入函数签名的返回值类型，简单说就是用它取到函数返回值的类型方便之后使用。
+
+#### 5、extends
+
+有时候我们定义的泛型不想过于灵活或者说想继承某些类等，可以通过 extends 关键字添加泛型约束。
+
+```ts
+interface Lengthwise {
+  length: number;
+}
+
+function loggingIdentity<T extends Lengthwise>(arg: T): T {
+  console.log(arg.length);
+  return arg;
+}
+```
+
+现在这个泛型函数被定义了约束，因此它不再是适用于任意类型, 需要传入符合约束类型的值，必须包含length属性：
+
+```ts
+loggingIdentity(3);  // Error, number doesn't have a .length property
+loggingIdentity({length: 10, value: 3});
 ```
