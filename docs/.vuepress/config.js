@@ -74,6 +74,7 @@ module.exports = {
         "useMemo",
         "useCallback",
         "useRef",
+        "useLayoutEffect"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
     },
