@@ -803,4 +803,4 @@ type newTestInterface = OptionalTestInterface<TestInterface>
 // }
 ```
 
-由于生成只读属性和可选属性比较常用, 所以TS内部已经给我们提供了现成的实现 Readonly / Partial,会面内置的工具类型会介绍.
+由于生成只读属性和可选属性比较常用, 所以TS内部已经给我们提供了现成的实现 Readonly / Partial,会面内置的工具类型会介绍。
