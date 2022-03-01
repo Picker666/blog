@@ -688,3 +688,79 @@ function loggingIdentity<T extends Lengthwise>(arg: T): T {
 loggingIdentity(3);  // Error, number doesn't have a .length property
 loggingIdentity({length: 10, value: 3});
 ```
+
+## 索引类型
+
+在对象中获取一些属性的值，然后建立对应的集合
+
+```ts
+let person = {
+    name: 'musion',
+    age: 35
+}
+
+function getValues(person: any, keys: string[]) {
+    return keys.map(key => person[key])
+}
+
+console.log(getValues(person, ['name', 'age'])) // ['musion', 35]
+console.log(getValues(person, ['gender'])) // [undefined]
+```
+
+在上述例子中，可以看到getValues(persion, ['gender'])打印出来的是[undefined]，但是ts编译器并没有给出报错信息，那么如何使用ts对这种模式进行类型约束呢？
+
+```ts
+let person = {
+    name: "musion",
+    age: 35,
+  };
+
+  function getValues(person: { name: string; age: number }, keys: ('name' | 'age')[]) {
+    return keys.map((key) => person[key]);
+  }
+
+  console.log(getValues(person, ["name", "age"])); // ['musion', 35]
+  console.log(getValues(person, ["gender"])); // 不能将类型“"gender"”分配给类型“"name" | "age"”。ts(2322)
+```
+
+但是不够灵活。
+
+这里就要用到了索引类型,改造一下getValues函数，通过 `索引类型查询` 和 `索引访问` 操作符：
+
+```ts
+function getValues<T, K extends keyof T>(person: T, keys: K[]): T[K][] {
+  return keys.map(key => person[key]);
+}
+
+interface Person {
+    name: string;
+    age: number;
+}
+
+const person: Person = {
+    name: 'musion',
+    age: 35
+}
+
+getValues(person, ['name']) // ['musion']
+getValues(person, ['gender']) // 报错：
+// Argument of Type '"gender"[]' is not assignable to parameter of type '("name" | "age")[]'.
+// Type "gender" is not assignable to type "name" | "age".
+```
+
+编译器会检查传入的值是否是Person的一部分。通过下面的概念来理解上面的代码：
+
+::: tip
+T[K]表示对象T的属性K所表示的类型，在上述例子中，T[K][] 表示变量T取属性K的值的数组
+:::
+
+```ts
+// 通过[]索引类型访问操作符, 我们就能得到某个索引的类型
+class Person {
+    name:string;
+    age:number;
+ }
+ type MyType = Person['name'];  //Person中name的类型为string type MyType = string
+```
+
+介绍完概念之后，应该就可以理解上面的代码了。首先看泛型，这里有T和K两种类型，根据类型推断，第一个参数person就是person，类型会被推断为Person。而第二个数组参数的类型推断（K extends keyof T），keyof关键字可以获取T，也就是Person的所有属性名，即['name', 'age']。而extends关键字让泛型K继承了Person的所有属性名，即['name', 'age']。这三个特性组合保证了代码的动态性和准确性，也让代码提示变得更加丰富了
