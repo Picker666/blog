@@ -763,4 +763,44 @@ class Person {
  type MyType = Person['name'];  //Person中name的类型为string type MyType = string
 ```
 
-介绍完概念之后，应该就可以理解上面的代码了。首先看泛型，这里有T和K两种类型，根据类型推断，第一个参数person就是person，类型会被推断为Person。而第二个数组参数的类型推断（K extends keyof T），keyof关键字可以获取T，也就是Person的所有属性名，即['name', 'age']。而extends关键字让泛型K继承了Person的所有属性名，即['name', 'age']。这三个特性组合保证了代码的动态性和准确性，也让代码提示变得更加丰富了
+介绍完概念之后，应该就可以理解上面的代码了。首先看泛型，这里有T和K两种类型，根据类型推断，第一个参数person就是person，类型会被推断为Person。而第二个数组参数的类型推断（K extends keyof T），keyof关键字可以获取T，也就是Person的所有属性名，即['name', 'age']。而extends关键字让泛型K继承了Person的所有属性名，即['name', 'age']。这三个特性组合保证了代码的动态性和准确性，也让代码提示变得更加丰富了。
+
+## 映射类型
+
+根据旧的类型创建出新的类型, 我们称之为映射类型
+
+```ts
+interface TestInterface{
+    name:string,
+    age:number
+}
+
+// 我们把上面定义的接口里面的属性全部变成可选
+// 我们可以通过+/-来指定添加还是删除
+
+type OptionalTestInterface<T> = {
+  [p in keyof T]+?:T[p]
+}
+
+type newTestInterface = OptionalTestInterface<TestInterface>
+// type newTestInterface = {
+//    name?:string,
+//    age?:number
+// }
+```
+
+比如我们再加上只读
+
+```ts
+type OptionalTestInterface<T> = {
+ +readonly [p in keyof T]+?:T[p]
+}
+
+type newTestInterface = OptionalTestInterface<TestInterface>
+// type newTestInterface = {
+//   readonly name?:string,
+//   readonly age?:number
+// }
+```
+
+由于生成只读属性和可选属性比较常用, 所以TS内部已经给我们提供了现成的实现 Readonly / Partial,会面内置的工具类型会介绍.
