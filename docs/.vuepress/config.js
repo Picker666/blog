@@ -41,7 +41,7 @@ module.exports = {
         "storage",
         "xss",
       ],
-      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2"],
+      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2", "infer"],
       "/sourceAnalysis/": [
         "",
         "reduxThunk",
@@ -74,7 +74,7 @@ module.exports = {
         "useMemo",
         "useCallback",
         "useRef",
-        "useLayoutEffect"
+        "useLayoutEffect",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
     },
