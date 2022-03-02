@@ -82,12 +82,12 @@ useEffect(() => {
 
 ## useEffect的其他
 
-可以有多個 `useEffect`存在同一`function component`和`custom hook`中，所以我們可以針對不同的變數去寫不同的`useEffect`。
+可以有多个 `useEffect`存在同一`function component`和`custom hook`中，所以我们可以针对不同的情况去使用不同的`useEffect`。
 
 ## 表格总结
 
 | `useEffect` 第二个参数 | `useEffect`第一个参数 | `useEffect`第一个参数的`return`参数 |
 | -------------------- | :------------------: | :------------------------------: |
 |         `[]`         |  `componentDidMount` |      `componentWillUnmount`      |
-|   `[dependencies]`   | `dependencies` 触发的 `componentDidUpdate`  | `dependencies` 触发的 `componentWillUpdate` 和 `componentWillUnmount`|
-|     `undefined`      | 所有更新触发的 `componentDidUpdate`  | 所有更新触发的 `componentWillUpdate` 和 `componentWillUnmount`|
+|   `[dependencies]`   | **`componentDidMount`** 和 `dependencies` 触发的 `componentDidUpdate`  | `dependencies` 触发的 `componentWillUpdate` 和 `componentWillUnmount`|
+|     `undefined`      | **`componentDidMount`** 和 所有更新触发的 `componentDidUpdate`  | 所有更新触发的 `componentWillUpdate` 和 `componentWillUnmount`|
