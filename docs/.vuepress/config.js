@@ -78,7 +78,7 @@ module.exports = {
         "useLayoutEffect",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/umi/": [""],
+      "/falsework/umi/": ["", "NoHistory"],
     },
   },
   configureWebpack: {
