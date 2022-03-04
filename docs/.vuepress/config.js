@@ -23,6 +23,7 @@ module.exports = {
         items: [
           { text: "Webpack", link: "/falsework/webpack/" },
           { text: "Vite", link: "/falsework/vite/" },
+          { text: "Umi", link: "/falsework/umi/" },
         ],
       },
       { text: "Github", link: "https://github.com/Picker666/blog" },
@@ -77,6 +78,7 @@ module.exports = {
         "useLayoutEffect",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
+      "/umi/": [""],
     },
   },
   configureWebpack: {
