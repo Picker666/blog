@@ -1,5 +1,10 @@
 # useCallback用法汇总
 
+用来缓存函数，这个函数如果是由父组件传递给子组件，或者自定义hooks里面的函数【通常自定义hooks里面的函数，不会依赖于引用它的组件里面的数据】，这时候我们可以考虑缓存这个函数，好处：
+
+* 1，不用每次重新声明新的函数，避免释放内存、分配内存的计算资源浪费
+* 2，子组件不会因为这个函数的变动重新渲染。【和React.memo搭配使用】
+
 先看一下最基础的用法
 
 ```ts
@@ -13,7 +18,7 @@ import React, { useState, useCallback } from 'react';
  
 const set = new Set();
  
-export default function Callback() {
+function Callback() {
     const [count, setCount] = useState(1);
     const [val, setVal] = useState('');
  
@@ -33,6 +38,8 @@ export default function Callback() {
         </div>
     </div>;
 }
+
+export default React.memo(Callback);
 ```
 
 我们可以看到，每次修改count，set.size就会+1，这说明useCallback依赖变量count，count变更时会返回新的函数；而val变更时，set.size不会变，说明返回的是缓存的旧版本函数。
