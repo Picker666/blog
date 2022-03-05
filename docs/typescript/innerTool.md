@@ -47,3 +47,37 @@ type MyPartial<T> = {
 
 type PartialResult = MyRequired<Person> // { name: string; age: number }
 ```
+
+## Readonly
+
+`Readonly<T>` 表示将某个类型中的所有属性变为只读属性，也就意味着这些属性不能被重新赋值。
+
+用法：
+
+```ts
+interface Todo {
+  title: string
+  description: string
+}
+
+const todo: Readonly<Todo> = {
+  title: "Hey",
+  description: "foobar"
+}
+```
+
+代码实现：
+
+```ts
+type MyReadonly<T> = {
+  readonly [P in keyof T]: T[P]
+}
+
+const todo: MyReadonly<Todo> = {
+  title: "Hey",
+  description: "foobar"
+}
+
+todo.title = '改名' // Cannot assign to 'title' because it is a read-only property.(2540)
+todo.description = '改不了嘿嘿' // Cannot assign to 'description' because it is a read-only property.(2540)
+```
