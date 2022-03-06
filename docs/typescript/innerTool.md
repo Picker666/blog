@@ -117,3 +117,29 @@ type TodoPreview = MyPick<Todo, 'title' | 'completed'>
 // Type '"phone"' is not assignable to type 'keyof Todo'.(2344)
 type AAA = Pick<Todo, 'title' | 'phone'>
 ```
+
+## Record
+
+`Record<K, T>`表示迭代联合类型K，将每个属性名作为key，T作为属性值组合成一个新的类型。
+
+用法：
+
+```ts
+type Person = {
+  name: string;
+  age: number
+}
+type Student = 'tom' | 'tony'
+
+type result = Record<Student, Person> // {tom: Person, tony: Person}
+```
+
+代码实现：
+
+```ts
+type MyRecord<K extends string | number | symbol, T> = {
+  [P in K]: T
+}
+
+type result = MyRecord<Student, Person> // {tom: Person, tony: Person}
+```
