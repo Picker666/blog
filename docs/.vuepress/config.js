@@ -42,7 +42,7 @@ module.exports = {
         "storage",
         "xss",
       ],
-      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2", "infer"],
+      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2", "infer", "innerTool"],
       "/sourceAnalysis/": [
         "",
         "reduxThunk",
