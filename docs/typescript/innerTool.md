@@ -81,3 +81,39 @@ const todo: MyReadonly<Todo> = {
 todo.title = '改名' // Cannot assign to 'title' because it is a read-only property.(2540)
 todo.description = '改不了嘿嘿' // Cannot assign to 'description' because it is a read-only property.(2540)
 ```
+
+## Pick
+
+`Pick<T, K extends keyof T>` 表示从某个类型中选取一些属性出来。
+
+用法：
+
+```ts
+interface Todo {
+    title: string
+    description: string
+    completed: boolean
+}
+
+type TodoPreview = Pick<Todo, 'title' | 'completed'> // { title: string, completed: boolean }
+```
+
+代码实现：
+
+```ts
+type MyPick<T, K extends keyof T> = {
+    [P in K]: T[P]
+}
+
+type TodoPreview = MyPick<Todo, 'title' | 'completed'>
+```
+
+代码详解：
+
+`K extends keyof T`：表示 K 只能是 keyof T 的子类型，如果我们在使用 Pick 时，传递了一个不存在 T 类型的字段，会报错：
+
+```ts
+// Type '"title" | "phone"' does not satisfy the constraint 'keyof Todo'.
+// Type '"phone"' is not assignable to type 'keyof Todo'.(2344)
+type AAA = Pick<Todo, 'title' | 'phone'>
+```
