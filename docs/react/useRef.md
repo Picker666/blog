@@ -1,5 +1,10 @@
 # useRef 用法汇总
 
+::: tip
+本文例子代码：<https://github.com/Picker666/blog-example>
+
+路径： /src/component/react/ReactUseRef.tsx
+:::
 ## useRef 用法
 
 首先, 我们要实现一个需求 -- 点击 button 的时候 input 设置焦点. 
