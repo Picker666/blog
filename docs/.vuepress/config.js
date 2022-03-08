@@ -90,6 +90,7 @@ module.exports = {
         "useCallback",
         "useRef",
         "useLayoutEffect",
+        "simpleReducer",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/umi/": ["", "NoHistory"],
