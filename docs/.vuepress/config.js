@@ -11,7 +11,15 @@ module.exports = {
     smoothScroll: true,
     lastUpdated: "更新时间",
     nav: [
-      { text: "基础梳理", link: "/base/" },
+      {
+        text: "基础梳理",
+        link: "/base/",
+        items: [
+          { text: "Javascript", link: "/base/javascript/" },
+          { text: "浏览器", link: "/base/browser/" },
+          { text: "安全", link: "/base/security/" },
+        ],
+      },
       { text: "Typescript", link: "/typescript/" },
       { text: "手写", link: "/newFunction/" },
       { text: "源码分析", link: "/sourceAnalysis/" },
@@ -29,7 +37,7 @@ module.exports = {
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
-      "/base/": [
+      "/base/javascript/": [
         "",
         "toString",
         "valueOf",
@@ -38,11 +46,17 @@ module.exports = {
         "promiseAll",
         "allSettled",
         "arrayDeDuplication",
-
-        "storage",
-        "xss",
       ],
-      "/typescript/": ["", "tsBase", "tsAdvanced1", "tsAdvanced2", "infer", "innerTool"],
+      "/base/browser/": ["", "storage"],
+      "/base/security/": [""],
+      "/typescript/": [
+        "",
+        "tsBase",
+        "tsAdvanced1",
+        "tsAdvanced2",
+        "infer",
+        "innerTool",
+      ],
       "/sourceAnalysis/": [
         "",
         "reduxThunk",
