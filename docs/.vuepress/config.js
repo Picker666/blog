@@ -47,7 +47,7 @@ module.exports = {
         "allSettled",
         "arrayDeDuplication",
       ],
-      "/base/browser/": ["", "storage"],
+      "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
       "/typescript/": [
         "",
