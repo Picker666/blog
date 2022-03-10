@@ -143,3 +143,25 @@ type MyRecord<K extends string | number | symbol, T> = {
 
 type result = MyRecord<Student, Person> // {tom: Person, tony: Person}
 ```
+
+## ReturnType
+
+`ReturnType<T>` 用来获取函数返回值的类型
+
+用法： 
+
+```ts
+const fn = (v: boolean) => {
+  if (v)
+    return 1
+  else
+    return 2
+}
+type a = ReturnType<typeof fn> // 1 | 2
+```
+
+代码实现：
+
+```ts
+type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : never
+```
