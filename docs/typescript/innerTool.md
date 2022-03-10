@@ -165,3 +165,38 @@ type a = ReturnType<typeof fn> // 1 | 2
 ```ts
 type MyReturnType<T extends (...args: any) => any> = T extends (...args: any) => infer R ? R : never
 ```
+
+## Exclude
+
+`Exclude<T, U>`表示从联合类型T中排除U的类型成员，可以理解为取T中，U没有的类型。
+
+用法：
+
+```ts
+type union = 'you' | 'and' | 'me'
+// 'you' | 'and'
+type result = Exclude<union, 'me'>
+```
+
+代码实现：
+
+```ts
+type MyExclude<T, U> = T extends U ? never : T
+// 'you' | 'and'
+type result = MyExclude<union, 'me'>
+```
+
+代码详解: 
+
+`T extends U`：这段代码会从T的子类型开始分发
+
+```ts
+T extends U
+=> 'you' | 'and' | 'me' extends 'me'
+=> (
+	'you' extends 'me' ? never : 'you' | 
+	'and' extends 'me' ? never : 'and' | 
+	'me' extends 'me' ? never : 'me'
+)
+=> 'you' | 'and'
+```
