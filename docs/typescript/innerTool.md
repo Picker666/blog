@@ -200,3 +200,40 @@ T extends U
 )
 => 'you' | 'and'
 ```
+
+## Extract
+
+`Extract<T, U>`表示用来取联合类型 T 和 U 的交集。
+
+用法：
+
+```ts
+type Person = {
+  name: string;
+  age: number;
+  address: string;
+}
+// 结果：'age'|'address'
+type ExtractResult = Extract<keyof Person, 'age'|'address'|'sex'>
+```
+
+代码实现：
+
+```ts
+type MyExtract<T, U> = T extends U ? T : never
+```
+
+代码详解：
+
+`T extends U`：此代码会自动将T的子类型进行分发，例如：
+
+```ts
+T extends U
+=> 'name'|'age'|'address' extends 'age'|'address'|'sex' ? T : never
+=> (
+  'name' extends 'age'|'address'|'sex' ? 'name' : never |
+  'age' extends 'age'|'address'|'sex' ? 'age' : never |
+  'address' extends 'age'|'address'|'address' ? 'age' : never
+)
+=> 'age'|'address'
+```
