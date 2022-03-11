@@ -1,10 +1,10 @@
-# 认识typescript 及环境搭建
+# 认识 typescript 及环境搭建
 
 ## 基于 `javascript` 认识 `typescript`
 
 ### `typescript` 的特点
 
-* `ts`是`js`的超集，即你可以在`ts`中使用原生`js`语法。
+* [`ts`](https://juejin.cn/post/7018805943710253086?share_token=9c38baf9-7fe8-428b-946d-21c08e7f4206)是`js`的超集，即你可以在`ts`中使用原生`js`语法。
 * `ts`需要静态编译，它提供了强类型与更多面向对象的内容。
 * `ts`最终仍要编译为弱类型的`js`文件，基于对象的原生的`js`，再运行。故`ts`相较`java`/`C#`这样天生面向对象语言是有区别和局限的
 * `ts`是由微软牵头主导的，主要来自`C#`
