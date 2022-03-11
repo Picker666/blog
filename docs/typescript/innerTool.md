@@ -265,3 +265,20 @@ type MyOmit<T,K extends keyof T> = {
 代码详解：
 
 `Exclude<keyof T, K>` 取 T 类型和 K 类型的差集。
+
+## NonNullable
+
+`NonNullable<T>` 的作用是用来过滤类型中的 null 及 undefined 类型
+
+用法：
+
+```ts
+type NonNullable<T> = T extendsnull | undefined ? never : T;
+```
+
+举例说明
+
+```ts
+type T0 = NonNullable<string | number | undefined>; // string | number
+type T1 = NonNullable<string[] | null | undefined>; // string[]
+```
