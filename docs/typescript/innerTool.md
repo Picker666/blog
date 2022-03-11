@@ -237,3 +237,31 @@ T extends U
 )
 => 'age'|'address'
 ```
+
+## Omit
+
+`Omit<T, U>`表示从T类型中剔除U类型包含的字段。
+
+用法：
+
+```ts
+interface Todo {
+  title: string
+  description: string
+  completed: boolean
+}
+// { completed: boolean }
+type TodoPreview = Omit<Todo, 'description' | 'title'>
+```
+
+代码实现：
+
+```ts
+type MyOmit<T,K extends keyof T> = {
+  [P in Exclude<keyof T, K> ]: T[P]
+}
+```
+
+代码详解：
+
+`Exclude<keyof T, K>` 取 T 类型和 K 类型的差集。
