@@ -34,6 +34,7 @@ module.exports = {
           { text: "Umi", link: "/falsework/umi/" },
         ],
       },
+      { text: '设计模式', link: '/designPatterns/' },
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
@@ -94,6 +95,7 @@ module.exports = {
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/umi/": ["", "NoHistory"],
+      "/designPatterns/": ['']
     },
   },
   configureWebpack: {
