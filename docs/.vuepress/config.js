@@ -97,7 +97,12 @@ module.exports = {
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/umi/": ["", "NoHistory"],
-      "/designPatterns/": ['', "factoryPattern", "abstractFactoryPattern"]
+      "/designPatterns/": [
+        '',
+        "factoryPattern",
+        "abstractFactoryPattern",
+        "singletonPattern"
+      ]
     },
   },
   configureWebpack: {
