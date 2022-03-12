@@ -1,95 +1,74 @@
-# Loading
+# loginTimeout
 
-集中处理项目中的loading 问题。
+登录超时前，提示客户是否退出。
 
 ## 核心思想
 
-劫持request，每次调接口都会往 loadingQueue 中 push 一个当前 loading的id，每次接口调用结束，删除对应的id，如果 loadingQueue 有值 就保持loading 展示，如果 loadingQueue 为空数组，卸载loading组件。
+自客户登录接口调用成功之后，开始倒计时，到达约定的时间前，弹框提示用户，继续（调接口刷新token时间）还是退出。客户每次调接口的操作都会刷新倒计时时间，后端同步刷新token时间。
 
 ```ts
+import React from 'react';
 import ReactDOM from 'react-dom';
-import PageLoading from '@/components/PageLoading';
+import TimeOutModal from '@/components/TimeOutModal';
 
-const TIMEOUT_TIME = 1000 * 60; // 超时时间 60s
+const HandleWithLoginTimeout = () => {
+  const maxTime = 60 * 60; // 60min
+  const minValve = 60 * 2;
+  let leaveTime = maxTime;
+  let interval: any = null;
 
-const loadingMount = () => {
-  ReactDOM.render(
-    <PageLoading />,
-    document.querySelector('.fullScreenLoading'),
-  );
-};
-
-const loadingUnmount = () => {
-  ReactDOM.unmountComponentAtNode(document.querySelector('.fullScreenLoading') as Element);
-};
-
-const handleFullScreenLoading = () => {
-  let loadingQueue: any[] = [];
-  let timePlan: any = null;
-
-  const timeOutStart = () =>
-    setTimeout(() => {
-      // eslint-disable-next-line no-use-before-define
-      clearAll();
-      clearTimeout(timePlan);
-    }, TIMEOUT_TIME);
-
-  const setLoadingRootEle = () => {
+  const setRootEle = () => {
     const attr = document.createAttribute('class');
-    attr.value = 'fullScreenLoading';
+    attr.value = 'loginTimeoutRoot';
 
     const node = document.createElement('div');
     node.setAttributeNode(attr);
+
     setTimeout(() => {
-      // that umi render content component maybe replace all root children element, so append child async
       document?.querySelector('#root')?.appendChild(node);
     }, 0);
   };
 
-  const renderLoading = () => {
-    if (loadingQueue.length === 1) {
-      timePlan = timeOutStart();
-      loadingMount();// 单例模式
-    } else if (!loadingQueue.length) {
-      clearTimeout(timePlan);
-      loadingUnmount();
+  // const modalUnmount = () => {
+  //   ReactDOM.unmountComponentAtNode(
+  //     document.querySelector('.loginTimeoutRoot'),
+  //   );
+  // };
+  const cancelInterval = () => {
+    interval && clearInterval(interval);
+    interval = null;
+  };
+
+  const resetTime = (resetTokenTime: boolean) => {
+    if (resetTokenTime) {
+      leaveTime = maxTime;
+      // eslint-disable-next-line no-use-before-define
+      !interval && startInterval();
     }
   };
 
-  const showLoading = (loadingId: number | string) => {
-    loadingQueue.push({ id: loadingId });
-    renderLoading();
+  const modalMount = () => {
+    ReactDOM.render(
+      <TimeOutModal cancelInterval={cancelInterval} leaveTime={leaveTime} minValve={minValve} />,
+      document.querySelector('.loginTimeoutRoot')
+    );
   };
 
-  const closeLoading = (loadingId: number | string) => {
-    if (loadingQueue.length) {
-      loadingQueue = loadingQueue.filter((item) => item.id !== loadingId);
-    }
-
-    renderLoading();
+  const startInterval = () => {
+    interval = setInterval(() => {
+      leaveTime--;
+      modalMount();
+    }, 1000);
   };
 
-  const clearAll = () => {
-    loadingQueue = [];
-    renderLoading();
-  };
 
-  setLoadingRootEle();
+  // start
+  setRootEle();
 
-  return (loadingId: number | string) => {
-    if (loadingId) {
-      showLoading(loadingId);
-    }
-    return {
-      renderLoading,
-      showLoading,
-      closeLoading,
-      clearAll,
-    };
-  };
+  return resetTime;
 };
 
-export default handleFullScreenLoading();
+export default HandleWithLoginTimeout;
 ```
 
 ## 应用

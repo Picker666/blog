@@ -79,7 +79,8 @@ module.exports = {
         "map",
         "instanceof",
         "thousands",
-        "loading"
+        "loading",
+        "loginTimeout"
       ],
       "/react/": [
         "",
