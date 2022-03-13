@@ -47,6 +47,7 @@ module.exports = {
         "promiseAll",
         "allSettled",
         "arrayDeDuplication",
+        "newConstructor"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
