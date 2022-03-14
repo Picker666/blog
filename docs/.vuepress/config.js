@@ -35,6 +35,7 @@ module.exports = {
         ],
       },
       { text: '设计模式', link: '/designPatterns/' },
+      { text: '算法', link: '/algorithm/'},
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
@@ -136,6 +137,10 @@ module.exports = {
         // "interceptingFilterPattern",
         // "serviceLocatorPattern",
         // "transferObjectPattern",
+      ],
+      '/algorithm/': [
+        '',
+        'linkedList'
       ]
     },
   },
