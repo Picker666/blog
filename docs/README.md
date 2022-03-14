@@ -6,11 +6,17 @@ tagline: 一个专注前端技术的程序猿👨🏻‍💻
 actionText: Ready Go →
 actionLink: /base/javascript/
 features:
-- title: 简洁至上
-  details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
-- title: Vue驱动
-  details: 享受 Vue + webpack 的开发体验，在 Markdown 中使用 Vue 组件，同时可以使用 Vue 来开发自定义主题。
-- title: 高性能
-  details: VuePress 为每个页面预渲染生成静态的 HTML，同时在页面被加载的时候，将作为 SPA 运行。
-footer: MIT Licensed | Copyright © 2018-present Evan You
+- title: 启程
+  details: 只要启程，在路上，就没有到达不了的明天。
+- title: 积累
+  details: 不积跬步，无以至千里；不积小流，无以成江海。
+- title: 融会贯通
+  details: 疑渐渐释，以至 融会贯通 ，都无所疑，方始是学。
+- title: ......
+  details: 
+- title: ......
+  details: 温故而知新。
+- title: ......
+  details: 
+footer: Picker | Ready Go, Going...
 ---
