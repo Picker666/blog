@@ -129,11 +129,100 @@
 
 工厂方法模式关键核心代码就是工厂里面的判断this是否属于工厂，也就是做了分支判断，这个工厂只做我能生产的产品，如果你的产品我目前做不了，请找其他工厂代加工；
 
+### 抽象工厂模式：
+
+如果说上面的简单工厂和工厂方法模式的工作是生产产品，那么抽象工厂模式的工作就是生产工厂的；
+
+举个例子：代理商找工厂进行合作，但是工厂没有实际加工能力来进行代加工某产品；无奈又签署了合同，这时，工厂上面的集团公司就出面了，集团公司承认该工厂是该集团下属公司，所以集团公司就重新建造一个工厂来进行代加工某商品以达到履行合约；
+
+```js
+
+//JS设计模式之抽象工厂模式
+        let agency = function(subType, superType) {
+      //判断抽象工厂中是否有该抽象类
+      if(typeof agency[superType] === 'function') {
+        function F() {};
+        //继承父类属性和方法
+        F.prototype = new agency[superType] ();
+        console.log(F.prototype);
+        //将子类的constructor指向子类
+        subType.constructor = subType;
+        //子类原型继承父类
+        subType.prototype =  new F();
+    
+      } else {
+        throw new Error('抽象类不存在!')
+      }
+    }
+    
+    //鼠标抽象类
+    agency.mouseShop = function() {
+      this.type = '鼠标';
+    }
+    agency.mouseShop.prototype = {
+      getName: function(name) {
+        // return new Error('抽象方法不能调用');
+        return this.name;    
+      }
+    }
+    
+    //键盘抽象类
+    agency.KeyboardShop = function() {
+      this.type = '键盘';
+    }
+    agency.KeyboardShop.prototype = {
+      getName: function(name) {
+        // return new Error('抽象方法不能调用');
+        return this.name;
+      }
+    }
+    
+    
+    
+    //普通鼠标子类
+    function mouse(name) {
+      this.name = name;
+      this.item = "买我，我线长,玩游戏贼溜"
+    }
+    //抽象工厂实现鼠标类的继承
+    agency(mouse, 'mouseShop');
+    //子类中重写抽象方法
+    // mouse.prototype.getName = function() {
+    //   return this.name;
+    // }
+    
+    //普通键盘子类
+    function Keyboard(name) {
+      this.name = name;
+      this.item = "行，你买它吧,没键盘看你咋玩";
+    }
+    //抽象工厂实现键盘类的继承
+    agency(Keyboard, 'KeyboardShop');
+    //子类中重写抽象方法
+    // Keyboard.prototype.getName = function() {
+    //   return this.name;
+    // }
+    
+    
+    
+    //实例化鼠标
+    let mouseA = new mouse('联想');
+    console.log(mouseA.getName(), mouseA.type,mouseA.item); //联想 鼠标
+    
+    //实例化键盘
+    let KeyboardA = new Keyboard('联想');
+    console.log(KeyboardA.getName(), KeyboardA.type,KeyboardA.item); //联想 键盘
+```
+
+抽象工厂模式一般用于严格要求以面向对象思想进行开发的超大型项目中，我们一般常规的开发的话一般就是简单工厂和工厂方法模式会用的比较多一些；
+
 ### 总结
 
 大白话解释：简单工厂模式就是你给工厂什么，工厂就给你生产什么；
 
 工厂方法模式就是你找工厂生产产品，工厂是外包给下级分工厂来代加工，需要先评估一下能不能代加工；能做就接，不能做就找其他工厂；
+
+抽象工厂模式就是工厂接了某项产品订单但是做不了，上级集团公司新建一个工厂来专门代加工某项产品；
 
 ## 例子
 
