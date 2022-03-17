@@ -140,7 +140,8 @@ module.exports = {
       ],
       '/algorithm/': [
         '',
-        'linkedList'
+        'linkedList',
+        'sorting'
       ]
     },
   },
