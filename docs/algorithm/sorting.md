@@ -76,3 +76,28 @@ function bubbleSort(array: number[]) {
 执行的过程
 
 ![执行过程](/blog/images/algorithm/sorting3.png)
+
+## 简单选择排序
+
+基本思想：每一次从待排序的数据元素中选出最小（或最大）的一个元素，才放在序列的起始位置，直到全部待排序的数据元素排完为止！
+
+```ts
+function changeSort(array: number[]) {
+  let temp
+  for (let i = 0; i < array.length - 1; i++) {
+    for (let j = i + 1; j < array.length; j++) {
+      if (array[i] > array[j]) {
+        temp = array[i]
+        array[i] = array[j]
+        array[j] = temp
+      }
+    }
+    console.log(`选择排序======${i}=====`, array)
+  }
+  console.log(`选择排序===result===`, array)
+}
+```
+
+执行的过程
+
+![执行过程](/blog/images/algorithm/sorting4.png)
