@@ -125,3 +125,41 @@ function insertSorting(array: number[]) {
 执行的过程
 
 ![执行过程](/blog/images/algorithm/sorting5.png)
+
+## 二路归并排序
+
+基本思想：采用分治算法来对其一个数组进行划分合并，直到划分的组中只有一个数组元素为止！
+
+```ts
+function mergeSort(array: number[], left: number, right: number) {
+  if (left == right) {
+    return
+  }
+  let mid = Math.floor((left + right) / 2)
+  mergeSort(array, left, mid) //左边递归求解
+  mergeSort(array, mid + 1, right) //右边递归求解
+
+  let tempArray = new Array(array.length)
+  let i = left
+  let j = mid + 1
+  let k = left
+  while (i <= mid || j <= right) {
+    //当右区间比较完毕，或者左区间的值存在并且比右区间的值小
+    if (j > right || (i <= mid && array[i] < array[j])) {
+      tempArray[k++] = array[i++] //将左区间的值放入临时数组中
+    } else {
+      tempArray[k++] = array[j++] //右区间的值存在，且比左区间的值小，放入临时数组中
+    }
+  }
+
+  //将临时数组中的值拷贝到原来数组中
+  for (k = left; k <= right; k++) {
+    array[k] = tempArray[k]
+  }
+  console.log(`二路归并排序===result===`, array, 'tempArray', tempArray)
+}
+```
+
+执行的过程
+
+![执行过程](/blog/images/algorithm/sorting6.png)
