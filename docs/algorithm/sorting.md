@@ -101,3 +101,27 @@ function changeSort(array: number[]) {
 执行的过程
 
 ![执行过程](/blog/images/algorithm/sorting4.png)
+
+## 插入排序
+
+基本思想：每步将一个待排序的记录，按其关键码值的大小插入前面已经排好序的数组中适当位置，直到全部插入为止！
+
+```ts
+function insertSorting(array: number[]) {
+  let j, temp
+  for (let i = 1; i < array.length; i++) {
+    temp = array[i]
+    for (j = i - 1; j >= 0 && array[j] > temp; j--) {
+      array[j + 1] = array[j]
+    }
+    array[j + 1] = temp
+
+    console.log(`插入排序======${i}=====`, array)
+  }
+  console.log(`插入排序===result===`, array)
+}
+```
+
+执行的过程
+
+![执行过程](/blog/images/algorithm/sorting5.png)
