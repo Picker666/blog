@@ -82,6 +82,8 @@ function bubbleSort(array: number[]) {
 基本思想：每一次从待排序的数据元素中选出最小（或最大）的一个元素，才放在序列的起始位置，直到全部待排序的数据元素排完为止！
 
 ```ts
+const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
+
 function changeSort(array: number[]) {
   let temp
   for (let i = 0; i < array.length - 1; i++) {
@@ -107,6 +109,8 @@ function changeSort(array: number[]) {
 基本思想：每步将一个待排序的记录，按其关键码值的大小插入前面已经排好序的数组中适当位置，直到全部插入为止！
 
 ```ts
+const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
+
 function insertSorting(array: number[]) {
   let j, temp
   for (let i = 1; i < array.length; i++) {
@@ -130,7 +134,11 @@ function insertSorting(array: number[]) {
 
 基本思想：采用分治算法来对其一个数组进行划分合并，直到划分的组中只有一个数组元素为止！
 
+首先针对最小单（[2, 4]）位进行排序，然后再更大的集合([2, 4, 6, 1, 10])里，对两个小集合([2, 4, 6] 和 [1, 10]排序，以此类推，到最后，会对array 前后两部分（[2, 4, 6, 1, 10] 和 [8, 7, 3, 9, 5]）进行排序。
+
 ```ts
+const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
+
 function mergeSort(array: number[], left: number, right: number) {
   if (left == right) {
     return
@@ -169,6 +177,8 @@ function mergeSort(array: number[], left: number, right: number) {
 基本思想：采用分治算法通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另外一部分的所有数据都要小，然后再按此方法对这部分数据进行快速排序，整个排序过程可以递归进行，依此达到整个数据编程有序序列！
 
 ```ts
+const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
+
 function quickSort(array: number[], left: number, right: number) {
   if (left >= right) {
     //如果left >= right就说明已经整理完一个组
