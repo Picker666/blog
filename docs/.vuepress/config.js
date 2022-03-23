@@ -48,7 +48,8 @@ module.exports = {
         "promiseAll",
         "allSettled",
         "arrayDeDuplication",
-        "newConstructor"
+        "newConstructor",
+        "setMap"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
