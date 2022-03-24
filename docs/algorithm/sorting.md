@@ -204,7 +204,6 @@ function quickSort(array: number[], left: number, right: number) {
   quickSort(array, left, i) //左边递归
   quickSort(array, i + 1, right) //右边递归
 }
-
 ```
 
 执行的过程
