@@ -197,3 +197,227 @@ ws.has(window); // false
 
 ## Map (字典)
 
+### Set 和 Map 的区别
+
+* 共同点：集合、字典 可以储存不重复的值
+* 不同点：集合 是以 [value, value]的形式储存元素，字典 是以 [key, value] 的形式储存
+
+```ts
+const m = new Map()
+const o = {p: 'picker'}
+m.set(o, 'content');
+m.get(o); // content
+
+m.has(o); // true
+m.delete(o); // true
+m.has(o); // false
+```
+
+### 与Object的区别
+
+* 一个 Object 的键只能是字符串或者 Symbols，但一个 Map 的键可以是任意值。
+* Map 中的键值是有序的（FIFO 原则），而添加到对象中的键则不是。
+* Map 的键值对个数可以从 size 属性获取，而 Object 的键值对个数只能手动计算。
+* Object 都有自己的原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突，而map健不可重复，如果键名冲突则会覆盖对应的值。
+
+```ts
+let map = new Map();
+    let s = {
+        name:'cc',
+        job:'programmer'
+    }
+    let m ={
+        dd:'cdcdcd',
+        do:function(str){
+            console.log(str)
+        }
+    }
+    map.set(s,m);
+    map.set(m,s);
+    map.set(0,s);
+    map.set(0,m);
+    console.log(map)
+```
+
+![执行结果](/blog/images/base/setMap4.png)
+
+### Map 的属性及方法
+
+#### 属性
+
+* constructor：构造函数
+* size：返回字典中所包含的元素个数
+
+```ts
+const map = new Map([
+  ['name', 'An'],
+  ['des', 'JS']
+]);
+
+map.size // 2
+```
+
+* 任何具有 Iterator 接口、且每个成员都是一个双元素的数组的数据结构都可以当作Map构造函数的参数，例如：
+如果读取一个未知的键，则返回undefined。
+
+::: warning 注意
+只有对同一个对象的引用，Map 结构才将其视为同一个键。这一点要非常小心。
+:::
+
+```ts
+const map = new Map();
+
+map.set(['a'], 555);
+const map1 = map.get(['a']); // undefined
+
+// 上面代码的set和get方法，表面是针对同一个键，但实际上这是两个值，内存地址是不一样的，因此get方法无法读取该键，返回undefined。
+
+let arr = ['aa'];
+map.set(arr, 666);
+const map2 = map.get(arr); // 666
+
+console.log(map1, '==============', map2);
+```
+
+::: tip
+由上可知，Map 的键实际上是跟内存地址绑定的，只要内存地址不一样，就视为两个键。这就解决了同名属性碰撞（clash）的问题，我们扩展别人的库的时候，如果使用对象作为键名，就不用担心自己的属性与原作者的属性同名。
+:::
+
+* 如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键
+
+  * 0和-0就是一个键;
+  * 布尔值true和字符串true则是两个不同的键;
+  * undefined和null也是两个不同的键;
+  * 虽然NaN不严格相等于自身，但 Map 将其视为同一个键
+
+```ts
+let map = new Map();
+ 
+map.set(-0, 123);
+map.get(+0) // 123
+ 
+map.set(true, 1);
+map.set('true', 2);
+map.get(true) // 1
+ 
+map.set(undefined, 3);
+map.set(null, 4);
+map.get(undefined) // 3
+ 
+map.set(NaN, 123);
+map.get(NaN) // 123
+```
+
+#### 操作方法
+
+* set(key, value)：向字典中添加新元素；
+* get(key)：通过键查找特定的数值并返回；
+* has(key)：判断字典中是否存在键key；
+* delete(key)：通过键 key 从字典中移除对应的数据；
+* clear()：将这个字典中的所有元素删除。
+
+```ts
+const map = new Map([
+            ['name', 'An'],
+            ['des', 'JS']
+        ]);
+console.log(map.entries())	// MapIterator {"name" => "An", "des" => "JS"}
+console.log(map.keys()) // MapIterator {"name", "des"}
+```
+
+Map 结构的默认遍历器接口（Symbol.iterator属性），就是entries方法。
+
+```ts
+map[Symbol.iterator] === map.entries
+```
+
+Map 结构转为数组结构，比较快速的方法是使用扩展运算符（...）。
+
+对于 forEach ，看一个例子
+
+```ts
+const reporter = {
+  report: function(key, value) {
+    console.log("Key: %s, Value: %s", key, value);
+  }
+};
+
+let map = new Map([
+    ['name', 'An'],
+    ['des', 'JS']
+])
+map.forEach(function(value, key, map) {
+  this.report(key, value);
+}, reporter);
+// Key: name, Value: An
+// Key: des, Value: JS
+```
+
+在这个例子中， forEach 方法的回调函数的 this，就指向 reporter
+
+### 与其他数据结构的相互转换
+
+#### Map 转 Array
+
+```ts
+const map = new Map([[1, 1], [2, 2], [3, 3]])
+console.log([...map])	// [[1, 1], [2, 2], [3, 3]]
+```
+
+#### Array 转 Map
+
+```ts
+const map = new Map([[1, 1], [2, 2], [3, 3]])
+console.log(map)	// Map {1 => 1, 2 => 2, 3 => 3}
+```
+
+#### Map 转 Object
+
+因为 Object 的键名都为字符串，而Map 的键名为对象，所以转换的时候会把非字符串键名转换为字符串键名。
+
+```ts
+function mapToObj(map) {
+    let obj = Object.create(null)
+    for (let [key, value] of map) {
+        obj[key] = value
+    }
+    return obj
+}
+const map = new Map().set('name', 'An').set('des', 'JS')
+mapToObj(map)  // {name: "An", des: "JS"}
+```
+
+#### Object 转 Map
+
+```ts
+function objToMap(obj) {
+    let map = new Map()
+    for (let key of Object.keys(obj)) {
+        map.set(key, obj[key])
+    }
+    return map
+}
+
+objToMap({'name': 'An', 'des': 'JS'}) // Map {"name" => "An", "des" => "JS"}
+```
+
+#### Map 转 JSON
+
+```ts
+function mapToJson(map) {
+    return JSON.stringify([...map])
+}
+
+let map = new Map().set('name', 'An').set('des', 'JS')
+mapToJson(map)	// [["name","An"],["des","JS"]]
+```
+
+#### JSON 转 Map
+
+```ts
+function jsonToStrMap(jsonStr) {
+  return objToMap(JSON.parse(jsonStr));
+}
+
+jsonToStrMap('{"name": "An", "des": "JS"}') // Map {"name" => "An", "des" => "JS"}
+```
