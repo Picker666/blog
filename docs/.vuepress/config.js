@@ -18,6 +18,7 @@ module.exports = {
           { text: "Javascript", link: "/base/javascript/" },
           { text: "浏览器", link: "/base/browser/" },
           { text: "安全", link: "/base/security/" },
+          { text: "Interview", link: "/base/interview/" },
         ],
       },
       { text: "Typescript", link: "/typescript/" },
@@ -53,6 +54,7 @@ module.exports = {
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
+      "/base/interview/": [""],
       "/typescript/": [
         "",
         "tsBase",
