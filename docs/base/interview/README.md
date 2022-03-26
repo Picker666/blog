@@ -57,4 +57,25 @@ var b = 10;
   在理解作用域链之前，先介绍一下作用域，作用域可以理解为执行上下文中申明的变量和作用的范围；包括块级作用域/函数作用域；
 * 特性：声明提前，一个声明在函数体内部是可见的，函数声明优于变量声明；
 * 在非匿名自执行函数中，函数变量为只读状态无法修改。
-  
+
+```js
+var b = 10;
+(function () {
+  var b = 20;
+  console.log(b); // 20
+  console.log(window.b); // 10
+})();
+
+(function () {
+  b = 20;
+  console.log(b); // 20
+  console.log(window.b); // 20
+})();
+
+(function () {
+  console.log(b); // 10
+  b = 20;
+  console.log(window.b); // 20
+})();
+
+```
