@@ -421,3 +421,54 @@ function jsonToStrMap(jsonStr) {
 
 jsonToStrMap('{"name": "An", "des": "JS"}') // Map {"name" => "An", "des" => "JS"}
 ```
+
+## WeakSet
+
+### WeakMap与Map的区别:
+
+WeakMap 对象是一组键值对的集合，其中的键是弱引用对象，而值可以是任意。
+
+::: warning 注意
+WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。
+:::
+
+WeakMap 中，每个键对自己所引用对象的引用都是弱引用，在没有其他引用和该键引用同一对象，这个对象将会被垃圾回收（相应的key则变成无效的），所以，WeakMap 的 key 是不可枚举的。
+
+### 用WeakMap来实现私有属性
+
+```ts
+let Person = (function () {
+let privateData = new WeakMap();
+
+function Person(name, age) {
+  privateData.set(this, { name: name, age: age });
+}
+
+Person.prototype.getName = function () {
+  return privateData.get(this).name;
+};
+Person.prototype.getAge = function () {
+  return privateData.get(this).age;
+};
+Person.prototype.setName = function (name) {
+  let obj = privateData.get(this);
+  obj.name = name;
+};
+Person.prototype.setAge = function (age) {
+  let obj = privateData.get(this);
+  obj.age = age;
+};
+
+return Person;
+})();
+
+let ssf = new Person('picker', 19);
+console.log(ssf.getName());
+console.log(ssf.getAge());
+ssf.setName('ren');
+ssf.setAge(18);
+console.log(ssf.getName());
+console.log(ssf.getAge());
+```
+
+![执行结果](/blog/images/base/setMap5.png)
