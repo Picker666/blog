@@ -7,7 +7,7 @@ sidebarDepth: 4
 [本文代码例子链接](https://github.com/Picker666/blog-example/tree/main/src/component/Base/SetMap.tsx)
 :::
 
-## Set
+## Set （集合）
 
 ### set定义及特征
 
@@ -148,3 +148,52 @@ let newArrayD_D = arrayB.filter(x=>!setC.has(x));
 let newArrayCD = [...newArrayD_C,...newArrayD_D];
 console.log(newArrayCD); //[2,7,8]
 ```
+
+## WeakSet
+
+WeakSet 对象允许将`弱引用对象`存储在一个集合中
+
+### WeakSet 和 Set 的区别
+
+* WeakSet 只能存储对象引用，不能存放值，而 Set 对象都可以；
+* WeakSet 对象中储存的对象值都是被弱引的，即垃圾回收机制不考虑 WeakSet 对该对象的应用，如果没有其他的变量或者属性引用这个对象值，则这个对象会被垃圾回收掉（不考虑该对象还存在于 WeakSet 中），所以， WeakSet 对象有多少个成员元素，取决于垃圾回收机制有没有运行，运行前后成员个数有可能不一致，遍历结果之后，有的成员可能取不到（被垃圾回收了），WeakSet 对象是无法被遍历的（ES6 规定 WeakSet 不可遍历），也没办法拿到它包含的所有元素。
+
+### 属性
+
+constructor: 构造函数，任何一个具有Iterable 接口的对象，都可以作为参数
+
+```ts
+const arr = [
+  [1, 2],
+  [3, 4],
+];
+const weakSet = new WeakSet(arr);
+console.log(weakSet);
+```
+
+![执行结果](/blog/images/base/setMap3.png)
+
+### 方法
+
+* add(value)：在 WeakSet 对象中添加一个元素 value;
+* has(value)：判断 WeakSet 对象中是否 包含value;
+* delete(value)：删除元素 value;
+* clear()：清空所有元素，（该方法已废弃）
+
+```ts
+let ws = new WeakSet();
+const obj = {};
+const foo = {};
+
+ws.add(window);
+ws.add(obj);
+
+ws.has(window); // true
+ws.has(obj); // false
+
+ws.delete(window); // true
+ws.has(window); // false
+```
+
+## Map (字典)
+
