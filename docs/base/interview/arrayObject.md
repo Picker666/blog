@@ -77,3 +77,48 @@ console.log(a, '====', b)
   * 后面a={n: 2}优先执行，此时的a执行新的内存地址（RAM2），值为{n: 2}；
   * 然后执行a.x = a，即a.x= {n: 2},a.x指向新a的内存地址（即：RAM2）；
   * 此时的b的内存地址依然是RAM1，b不仅拥有第一步a（{n: 1}）的值，也新增了x属性。
+
+## for 和 forEach 哪个效率高
+
+测试代码：
+
+```ts
+let arr = new Array(arrLength);
+
+console.time('for');
+for (let i = 0; i < arrLength; i++) {}
+console.timeEnd('for');
+
+console.time('forEach');
+arr.forEach((a) => {});
+console.timeEnd('forEach');
+```
+
+结果：
+![结果](/blog/images/base/interview3.png)
+
+### 分析
+
+#### for
+
+* 需要获取容器的大小，如果你计算大小比较耗时，那么for循环的效率会很低；(这个问题在例子中可以忽略)
+* 为了 防止循环越界，每次循环都需要进行一次比较。
+
+#### forEach
+
+forEach 编译成字节码之后，使用的是迭代器实现的，所以本质上是通过迭代器遍历的。
+
+```js
+public static void testForEach(List list) {  
+    for (Iterator iterator = list.iterator(); iterator.hasNext();) {  
+        Object t = iterator.next();  
+        Object obj = t;  
+    }  
+}
+```
+
+可以看到，只比迭代器遍历多了生成中间变量这一步，因此性能也略微下降了一些。
+
+* 无需获取容器大小。
+* 需要创建额外的迭代器变量。
+* 遍历期间得到的是对象，没有索引位置信息，因此没办法将指定索引位置对象替换为新对象，也就是不能赋值。
