@@ -1,86 +1,15 @@
 ---
 sidebarDepth: 3
 ---
-# 作用域
+# 知识点总结
 
-## 1、IIFE（打印结果）
+## 箭头函数和普通函数区别
 
-[IIFE(Immediately Invoked Function Expressions)](https://developer.mozilla.org/zh-CN/docs/Glossary/IIFE)
-
-```js
-var b = 10;
-(function b() {
-  // 内部作用域，会先去查找是有已有变量b的声明，有就直接赋值20，确实有了，发现了具名函数 function b () {}, 拿此b做赋值；
-  // IIFE 的函数无法进行赋值（内部机制，类似const定义的常量），所以 赋值无效
-  // IIFE - 查找IIFE 在 JS 引擎的工作方式，堆栈存储IIFE的方式等
-  b = 20;
-  console.log(b); // [Function b]
-  console.log(window.b); // 10
-})();
-```
-
-### 严格模式下会报错
-
-Uncaught TypeError: Assignment to constant variable
-
-```js
-var b = 10;
-(function b() {
-  'use strict'
-  b = 20;
-  console.log(b); // [Function b]
-  console.log(window.b); // 10
-})(); // Uncaught TypeError: Assignment to constant variable
-```
-
-### 有 var 的情况
-
-```js
-var b = 10;
-(function b() {
-  var b = 20;
-  console.log(b); // 20
-  console.log(window.b); // 10
-})();
-```
-
-### 结果
-
-打印内容：
-
-```js
-ƒ b() {
-  b = 20;
-  console.log(b);
-  console.log(window.b);
-}
-```
-
-### 原因
-
-* 作用域： 执行上下文中包含作用域链：
-  在理解作用域链之前，先介绍一下作用域，作用域可以理解为执行上下文中申明的变量和作用的范围；包括块级作用域/函数作用域；
-* 特性：声明提前，一个声明在函数体内部是可见的，函数声明优于变量声明；
-* 在非匿名自执行函数中，函数变量为只读状态无法修改。
-
-```js
-var b = 10;
-(function () {
-  var b = 20;
-  console.log(b); // 20
-  console.log(window.b); // 10
-})();
-
-(function () {
-  b = 20;
-  console.log(b); // 20
-  console.log(window.b); // 20
-})();
-
-(function () {
-  console.log(b); // 10
-  b = 20;
-  console.log(window.b); // 20
-})();
-
-```
+* 1、箭头函数没有this，它会从自己的作用域链的上层继承this（因此无法使用apply/call/bind来帮定this）；
+* 2、箭头函数不可以使用arguments对象，该对象在函数体内不存在，如果需要，可以使用rest参数提代。
+* 3、箭头函数不可以使用 yield 命令，因此箭头函数不能用作generator函数；
+* 4、箭头函数不可以使用new命令，因为：
+  * 没有自己的this，无法调用 call，apply。
+  * 没有prototype 属性，而 new命令在执行时候需要将构造函数的prototype赋值给新对象的prototype.
+  
+[构造函数 new的过程](/blog/base/javascript/newConstructor.html)
