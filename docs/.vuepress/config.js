@@ -54,7 +54,7 @@ module.exports = {
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
-      "/base/interview/": [""],
+      "/base/interview/": ["", "arrayMap"],
       "/typescript/": [
         "",
         "tsBase",

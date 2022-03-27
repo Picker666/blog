@@ -1,6 +1,9 @@
+---
+sidebarDepth: 3
+---
 # 作用域
 
-## 1、下面代码打印什么
+## 1、IIFE（打印结果）
 
 [IIFE(Immediately Invoked Function Expressions)](https://developer.mozilla.org/zh-CN/docs/Glossary/IIFE)
 
@@ -16,7 +19,9 @@ var b = 10;
 })();
 ```
 
-### 严格模式下会报错：Uncaught TypeError: Assignment to constant variable
+### 严格模式下会报错
+
+Uncaught TypeError: Assignment to constant variable
 
 ```js
 var b = 10;
@@ -51,7 +56,7 @@ var b = 10;
 }
 ```
 
-原因：
+### 原因
 
 * 作用域： 执行上下文中包含作用域链：
   在理解作用域链之前，先介绍一下作用域，作用域可以理解为执行上下文中申明的变量和作用的范围；包括块级作用域/函数作用域；
