@@ -42,6 +42,7 @@ module.exports = {
     sidebar: {
       "/base/javascript/": [
         "",
+        "varletconst",
         "toString",
         "valueOf",
         "equal",
