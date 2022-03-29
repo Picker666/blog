@@ -50,7 +50,8 @@ module.exports = {
         "allSettled",
         "arrayDeDuplication",
         "newConstructor",
-        "setMap"
+        "setMap",
+        "arrayPerformance"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": [""],
