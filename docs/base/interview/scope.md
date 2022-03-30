@@ -84,3 +84,39 @@ var b = 10;
 })();
 
 ```
+
+## 2、函数形参
+
+```js
+function changeObjProperty(webSite) {
+  webSite = 'http://www.google.com';
+
+  console.log(webSite); // {siteUrl: 'http://www.google.com'}
+}
+
+let webSite = 'http://www.baidu.com';
+changeObjProperty(webSite);
+console.log(webSite, '=========='); // http://www.baidu.com
+```
+
+```js
+function changeObjProperty(o) {
+  o.siteUrl = 'http://www.baidu.com';
+  o = new Object();
+  o.siteUrl = 'http://www.google.com';
+
+  console.log(o); // {siteUrl: 'http://www.google.com'}
+}
+
+let webSite = new Object();
+changeObjProperty(webSite);
+console.log(webSite.siteUrl, '=========='); // http://www.baidu.com
+```
+
+### 原因
+
+形参传递的问题：
+
+* 简单数据类型：传递的是值；
+* 引用数据类型：传递的是内存地址
+
