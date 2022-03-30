@@ -120,3 +120,38 @@ console.log(webSite.siteUrl, '=========='); // http://www.baidu.com
 * 简单数据类型：传递的是值；
 * 引用数据类型：传递的是内存地址
 
+## 原型方法和类方法
+
+```js
+function Foo() {
+  Foo.a = function () {
+    console.log(1);
+  };
+  this.a = function () {
+    console.log(2);
+  };
+}
+
+Foo.prototype.a = function () {
+  console.log(3);
+};
+Foo.a = function () {
+  console.log(4);
+};
+
+Foo.a(); // （1）
+let obj = new Foo();
+obj.a(); // （2）
+Foo.a(); // （3）
+```
+
+### 结果
+
+4 2 1
+
+### 分析
+
+* （1）Foo.a() 这个调用的Foo的静态方法a, 虽然Foo中有优先级更高的属性方法 a，但 Foo 这时候并没有被调用，所以此时输出 Foo静态方法a的结果是： 4
+* let obj = new Foo(); 使用了 new 方法调用了此函数，返回函数的实例对象，此时 Foo 函数内部的属性方法初始化，原型方法建立；（[new 的过程(/blog/docs/base/javascript/newConstructor.html)]）
+* （2）、obj.a(); 调用的 obj 实例上的方法 a, 该实例是目前有两个a方法。一个是内部属性的方法，另一个是原型方法，二者重名，会优先调用实例内部的属性方法，所以输出2；
+* （3）、Foo.a(); 由于Foo通过new生成实例的时候，在Foo内部初始化时，覆盖了同名的静态方法，所以输出：1。
