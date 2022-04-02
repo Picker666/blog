@@ -1,4 +1,6 @@
-# >跨站脚本攻击(xss cross site scripting)
+# 跨站脚本攻击(xss)
+
+cross site scripting
 
 ## 什么是XSS
 
