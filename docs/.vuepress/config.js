@@ -54,7 +54,7 @@ module.exports = {
         "arrayPerformance"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
-      "/base/security/": ["", 'xss', "CSRF", "SQLInjection"],
+      "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
       "/base/interview/": ["", "scope", "arrayObject"],
       "/typescript/": [
         "",
