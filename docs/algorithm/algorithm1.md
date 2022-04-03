@@ -45,7 +45,7 @@ const algorithm1 = (nums: number[], target: number) => {
 
 给定一个包含n个整数的数组 nums， 判断 nums 中是否存在三个元素 a, b, c, 使得 a + b + c = 0？请找出所有的满足条件且不重复的三元数组。
 
-### 三元组不能重复！！！
+### 三元组不能重复
 
 ::: tip
 nums = [-1, 0, 1, 2, -1, -1];
@@ -72,7 +72,7 @@ const algorithm2 = (nums: number[], target: number) => {
 };
 ```
 
-### 没有重复元素！！！
+### 没有重复元素
 
 ```js
 const algorithm2 = (nums: number[], target: number) => {
