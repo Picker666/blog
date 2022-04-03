@@ -438,28 +438,28 @@ WeakMap 中，每个键对自己所引用对象的引用都是弱引用，在没
 
 ```ts
 let Person = (function () {
-let privateData = new WeakMap();
+  let privateData = new WeakMap();
 
-function Person(name, age) {
-  privateData.set(this, { name: name, age: age });
-}
+  function Person(name, age) {
+    privateData.set(this, { name: name, age: age });
+  }
 
-Person.prototype.getName = function () {
-  return privateData.get(this).name;
-};
-Person.prototype.getAge = function () {
-  return privateData.get(this).age;
-};
-Person.prototype.setName = function (name) {
-  let obj = privateData.get(this);
-  obj.name = name;
-};
-Person.prototype.setAge = function (age) {
-  let obj = privateData.get(this);
-  obj.age = age;
-};
+  Person.prototype.getName = function () {
+    return privateData.get(this).name;
+  };
+  Person.prototype.getAge = function () {
+    return privateData.get(this).age;
+  };
+  Person.prototype.setName = function (name) {
+    let obj = privateData.get(this);
+    obj.name = name;
+  };
+  Person.prototype.setAge = function (age) {
+    let obj = privateData.get(this);
+    obj.age = age;
+  };
 
-return Person;
+  return Person;
 })();
 
 let ssf = new Person('picker', 19);

@@ -145,7 +145,8 @@ module.exports = {
       '/algorithm/': [
         '',
         'linkedList',
-        'sorting'
+        'sorting',
+        'algorithm1'
       ]
     },
   },
