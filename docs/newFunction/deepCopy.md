@@ -1,5 +1,7 @@
 # 深拷贝
 
+## 简单粗暴的方式
+
 ```js
 const getType = obj => Object.prototype.toString.call(obj);
 
@@ -108,5 +110,37 @@ const deepClone = (target, map = new WeakMap()) => {
     }
   }
   return cloneTarget;
+}
+```
+
+## hasOwnProperty
+
+```js
+function deepClone(obj, hash = new WeakMap()) {
+    if (hash.has(obj)) {
+        return obj;
+    }
+    let res = null;
+    const reference = [Date, RegExp, Set, WeakSet, Map, WeakMap, Error];
+
+    if (reference.includes(obj?.constructor)) {
+        res = new obj.constructor(obj);
+    } else if (Array.isArray(obj)) {
+        res = [];
+        obj.forEach((e, i) => {
+            res[i] = deepClone(e);
+        });
+    } else if (typeof obj === "object" && obj !== null) {
+        res = {};
+        for (const key in obj) {
+            if (Object.hasOwnProperty.call(obj, key)) {
+                res[key] = deepClone(obj[key]);
+            }
+        }
+        hash.set(obj, res);
+    } else {
+        res = obj;
+    }
+    return res;
 }
 ```
