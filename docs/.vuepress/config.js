@@ -52,7 +52,8 @@ module.exports = {
         "newConstructor",
         "setMap",
         "arrayPerformance",
-        "prototype"
+        "prototype",
+        "eventLoop"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
