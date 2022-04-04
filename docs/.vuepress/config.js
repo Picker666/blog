@@ -51,7 +51,8 @@ module.exports = {
         "arrayDeDuplication",
         "newConstructor",
         "setMap",
-        "arrayPerformance"
+        "arrayPerformance",
+        "prototype"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
