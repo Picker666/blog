@@ -124,3 +124,7 @@ var person2 = new Person("VV",32);
 ```js
 console.log(person1.sayName == person2.sayName);    //false
 ```
+
+## 手动实现new
+
+[手动实现new](/newFunction/newClass.html)

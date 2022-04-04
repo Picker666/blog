@@ -7,7 +7,7 @@
 * 将步骤1新创建的对象作为 `this` 的上下文 ；
 * 如果该函数没有返回对象，则返回 `this`。
 
-## 代码实现：
+## 代码实现
 
 ```js
 function new_object() {
@@ -28,13 +28,13 @@ function new_object() {
 通过现代浏览器的操作属性的便利性，可以改变一个对象的 `[[Prototype]]` 属性, 这种行为在每一个JavaScript引擎和浏览器中都是一个非常慢且影响性能的操作，使用这种方式来改变和继承属性是对性能影响非常严重的，并且性能消耗的时间也不是简单的花费在 `obj.__proto__ = ...` 语句上, 它还会影响到所有继承来自该 `[[Prototype]]` 的对象，如果你关心性能，你就不应该在一个对象中修改它的 `[[Prototype]]`。相反, 创建一个新的且可以继承 [`[Prototype]]` 的对象，推荐使用 `Object.create()`。—MDN
 :::
 
-## 进一步优化 new 实现:
+## 进一步优化 new 实现
 
 ```js
 // 优化后 new 实现
 function create() {
   // 1、获得构造函数，同时删除 arguments 中第一个参数
-  Con = [].shift.call(arguments);
+  const Con = [].shift.call(arguments);
   // 2、创建一个空的对象并链接到原型，obj 可以访问构造函数原型中的属性
   let obj = Object.create(Con.prototype);
   // 3、绑定 this 实现继承，obj 可以访问到构造函数中的属性
@@ -43,3 +43,7 @@ function create() {
   return ret instanceof Object ? ret : obj;
 };
 ```
+
+## new 操作符的过程
+
+[new 操作符的过程](/base/javascript/newConstructor.html)
