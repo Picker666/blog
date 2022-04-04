@@ -54,7 +54,9 @@ module.exports = {
         "arrayPerformance",
         "prototype",
         "eventLoop",
-        "modular"
+        "modular",
+        "Proxy",
+        "Reflect"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
