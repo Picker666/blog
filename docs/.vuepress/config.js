@@ -53,7 +53,8 @@ module.exports = {
         "setMap",
         "arrayPerformance",
         "prototype",
-        "eventLoop"
+        "eventLoop",
+        "modular"
       ],
       "/base/browser/": ["", "storage", "crossDomain"],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
