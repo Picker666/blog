@@ -172,7 +172,11 @@ Function.prototype.newBind = function (context) {
     var args = Array.prototype.slice.call(arguments, 1); 
 
     // 实现第3点,返回一个函数
-    return function () {
+    return function F () {
+      // 通过 new 的方式，在之前的章节中我们学习过如何判断 this，对于 new 的情况来说，不会被任何方式改变 this，所以对于这种情况我们需要忽略传入的 this
+      if (this instanceof F) {
+          return new self(...args, ...arguments);
+        }
         // 实现第4点，这时的arguments是指bind返回的函数传入的参数
         // 即 return function 的参数
         var bindArgs = Array.prototype.slice.call(arguments);
