@@ -16,7 +16,7 @@
 ```html
 <script>
     if (top.location != window.location) {
-        //如果不相等，说明使用了iframe，可进行相关的操作
+        // 如果不相等，说明使用了iframe，可进行相关的操作
     }
 </script>
 ```
@@ -38,4 +38,3 @@ ALLOW-FROM // 指定可以内嵌的地址
 ```
 
 * 一些辅助手段，比如添加验证码，提高用户的防范意识。
-
