@@ -111,7 +111,7 @@ Expires 是 HTTP/1 的产物，表示资源会在 Wed, 22 Oct 2018 08:41:00 GMT 
 Expires 受限于**本地时间**，如果修改了本地时间，可能会造成缓存失效。
 :::
 
-### Cache-control
+* Cache-control
 
 ```js
 Cache-control: max-age=30
