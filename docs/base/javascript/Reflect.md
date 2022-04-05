@@ -2,6 +2,8 @@
 
 `Reflect` 对象与 `Proxy` 对象一样，也是 ES6 为了操作对象而提供的新 API。 
 
+Reflect是一个内置的对象，它提供拦截 JavaScript 操作的方法。Reflect不是一个函数对象，因此它是不可构造的。Reflect的所有的方法都是静态的就和Math一样，目前它还没有静态属性。
+
 ## Reflect 对象的设计目的
 
 * （1） 将 Object 对象的一些明显属于语言内部的方法（比如 Object.defineProperty ），放到 Reflect 对象上。现阶段，某些方法同时在 Object 和 Reflect 对象上部署，未来的新方法将只部署在 Reflect 对象上。也就是说，从 Reflect 对象上可以拿到语言内部的方法。
