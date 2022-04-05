@@ -58,7 +58,7 @@ module.exports = {
         "Proxy",
         "Reflect"
       ],
-      "/base/browser/": ["", "storage", "crossDomain"],
+      "/base/browser/": ["", "storage", "crossDomain", "browserCache"],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
       "/base/interview/": ["", "scope", "arrayObject"],
       "/typescript/": [
