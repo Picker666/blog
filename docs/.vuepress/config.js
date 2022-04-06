@@ -107,6 +107,7 @@ module.exports = {
         "simpleReducer",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
+       "/falsework/webpack/": ["", "optimization"],
       "/falsework/umi/": ["", "NoHistory"],
       "/designPatterns/": [
         '',
