@@ -104,6 +104,7 @@ module.exports = {
         "useCallback",
         "useRef",
         "useLayoutEffect",
+        "reactEvent",
         "simpleReducer",
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
