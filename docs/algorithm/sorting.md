@@ -77,9 +77,17 @@ function bubbleSort(array: number[]) {
 
 ![执行过程](/blog/images/algorithm/sorting3.png)
 
+![执行过程](/blog/images/algorithm/sorting8.awebp)
+
 ## 简单选择排序
 
 基本思想：每一次从待排序的数据元素中选出最小（或最大）的一个元素，才放在序列的起始位置，直到全部待排序的数据元素排完为止！
+
+按顺序，从数组arr中，选择一个索引是 `i` 元素与后边索引是 `j` 的元素对比，根据条件（较大/较小）**更换**两个元素位置，一直对比到数组arr到最后，目的**选择**出最大/最小的元素，并将之更换到 `i` 的位置。
+
+::: warning
+一次可能更改 `i` 之后的多个元素。
+:::
 
 ```ts
 const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
@@ -104,9 +112,17 @@ function changeSort(array: number[]) {
 
 ![执行过程](/blog/images/algorithm/sorting4.png)
 
+![执行过程](/blog/images/algorithm/sorting10.awebp)
+
 ## 插入排序
 
 基本思想：每步将一个待排序的记录，按其关键码值的大小插入前面已经排好序的数组中适当位置，直到全部插入为止！
+
+将数组索引是 i 的元素，依次和 i 之前的元素对比，满足条件（较大/较小）就将元素后移一位，直至不需要移动，将 i 元素赋值到该位置。目的是将 i 位置的元素按顺序**插入**到他之前的某个位置或者它本身位置不变。
+
+::: warning
+一次可能更改一个元素的顺序。
+:::
 
 ```ts
 const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
@@ -129,6 +145,8 @@ function insertSorting(array: number[]) {
 执行的过程
 
 ![执行过程](/blog/images/algorithm/sorting5.png)
+
+![执行过程](/blog/images/algorithm/sorting9.awebp)
 
 ## 二路归并排序
 
@@ -172,6 +190,8 @@ function mergeSort(array: number[], left: number, right: number) {
 
 ![执行过程](/blog/images/algorithm/sorting6.png)
 
+![执行过程](/blog/images/algorithm/sorting11.awebp)
+
 ## 快速排序
 
 基本思想：采用分治算法通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另外一部分的所有数据都要小，然后再按此方法对这部分数据进行快速排序，整个排序过程可以递归进行，依此达到整个数据编程有序序列！
@@ -209,3 +229,5 @@ function quickSort(array: number[], left: number, right: number) {
 执行的过程
 
 ![执行过程](/blog/images/algorithm/sorting7.png)
+
+![执行过程](/blog/images/algorithm/sorting12.awebp)
