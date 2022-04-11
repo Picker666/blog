@@ -221,8 +221,8 @@ function quickSort(array: number[], left: number, right: number) {
 
   console.log(`快速排序===result===`, array)
 
-  quickSort(array, left, i) //左边递归
-  quickSort(array, i + 1, right) //右边递归
+  quickSort(array, left, i); //左边递归
+  quickSort(array, i + 1, right); //右边递归
 }
 ```
 
