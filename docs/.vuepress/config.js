@@ -96,6 +96,7 @@ module.exports = {
       "/react/": [
         "",
         "lifeCycleNew",
+        "super",
         "hoc",
         "middleware",
         "useState",
