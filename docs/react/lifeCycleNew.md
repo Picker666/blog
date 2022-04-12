@@ -21,3 +21,9 @@ react16.4后使用了新的生命周期，使用 `getDerivedStateFromProps`代�
 在 `React` 开启异步渲染模式后，在执行函数时读到的 `DOM` 元素状态并不总是渲染时相同，这就导致在 `componentDidUpdate` 中使用 `componentWillUpdate` 中读取到的 `DOM` 元素状态是不安全的，因为这时的值很有可能已经失效了。
 
 而 `getSnapshotBeforeUpdate` 会在最终的 `render` 之前被调用，也就是说在 `getSnapshotBeforeUpdate` 中读取到的 `DOM` 元素状态是可以保证与 `componentDidUpdate` 中一致的。
+
+getSnapshotBeforeUpdate()方法在呈现DOM之前被调用。用于在render后，DOM更新后存储状态的先前值。
+
+getSnapshotBeforeUpdate()方法返回的任何值都将用作componentDidUpdate()方法的参数。此函数始终与componentDidUpdate()方法一起使用。
+
+它接受两个参数，它们是prevProps和prevState只是相关组件为re-rendered之前的道具或状态。
