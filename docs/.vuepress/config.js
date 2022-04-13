@@ -107,6 +107,7 @@ module.exports = {
         "useLayoutEffect",
         "reactEvent",
         "simpleReducer",
+        "diff"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
        "/falsework/webpack/": ["", "optimization"],
