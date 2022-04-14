@@ -96,6 +96,7 @@ module.exports = {
       "/react/": [
         "",
         "lifeCycleNew",
+        "lifeCycleChange",
         "super",
         "hoc",
         "middleware",
@@ -107,7 +108,8 @@ module.exports = {
         "useLayoutEffect",
         "reactEvent",
         "simpleReducer",
-        "diff"
+        "diff",
+        "fiber"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
        "/falsework/webpack/": ["", "optimization"],
