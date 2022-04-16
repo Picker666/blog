@@ -10,15 +10,15 @@
 
 这里说的js跨域是指通过js在不同的域之间进行数据传输或通信，比如用ajax向一个不同的域请求数据，或者通过js获取页面中不同域的框架中(iframe)的数据。只要协议、域名、端口有任何一个不同，都被当作是不同的域。
 
-下表给出了相对<http://store.company.com/dir/page.html>同源检测的结果:
+下表给出了相对 http://store.company.com/dir/page.html 同源检测的结果:
 
-| url                                                      | 结果 | 原因       |
-| -------------------------------------------------------- | ---- | ---------- |
-| <http://store.company.com/dir2/other.html>               | 成功 |            |
-| <http://store.company.com/dir/inner/annner/another.html> | 成功 |            |
-| <https://store.company.com/secure.html>                  | 失败 | 协议不同   |
-| <http://store.company.com:8080/dir2/etc.html>            | 失败 | 端口不同   |
-| <http://news.company.com/dir/page.html>                  | 失败 | 主机名不同 |
+| url                                                    | 结果 | 原因       |
+| ------------------------------------------------------ | ---- | ---------- |
+| http://store.company.com/dir2/other.html               | 成功 |            |
+| http://store.company.com/dir/inner/annner/another.html | 成功 |            |
+| https://store.company.com/secure.html                  | 失败 | 协议不同   |
+| http://store.company.com:8080/dir2/etc.html            | 失败 | 端口不同   |
+| http://news.company.com/dir/page.html                  | 失败 | 主机名不同 |
 
 要解决跨域的问题，我们可以使用以下几种方法：
 
@@ -26,7 +26,7 @@
 
 在js中，我们直接用XMLHttpRequest请求不同域上的数据时，是不可以的。但是，在页面上引入不同域上的js脚本文件却是可以的，jsonp正是利用这个特性来实现的。
 
-比如，有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是<http://example.com/data.php,那么a.html>中的代码就可以这样：
+比如，有个a.html页面，它里面的代码需要利用ajax获取一个不同域上的json数据，假设这个json数据地址是 http://example.com/data.php,那么a.html 中的代码就可以这样：
 
 ```html
 <script>
@@ -39,7 +39,7 @@ function dosomething (jsondata) {
 
 我们看到获取数据的地址后面还有一个callback参数，按惯例是用这个参数名，但是你用其他的也一样。当然如果获取数据的jsonp地址页面不是你自己能控制的，就得按照提供数据的那一方的规定格式来操作了。
 
-因为是当做一个js文件来引入的，所以<http://example.com/data.php返回的必须是一个能执行的js文件，所以这个页面的php>代码可能是这样的:
+因为是当做一个js文件来引入的，所以 http://example.com/data.php 返回的必须是一个能执行的js文件，所以这个页面的php代码可能是这样的:
 
 ```php
 $callback == $_GET['callback'];
@@ -53,7 +53,7 @@ echo $callback.'('.json_encode($data).')';
 dosomething(['a', 'b', 'c']);
 ```
 
-所以通过<http://example.com/data.php?callback=dosomething得到的js文件，就是我们之前定义的dosomething函数,并且它的参数就是我们需要的json>数据，这样我们就跨域获得了我们需要的数据。
+所以通过 http://example.com/data.php?callback=dosomething 得到的js文件，就是我们之前定义的dosomething函数,并且它的参数就是我们需要的json数据，这样我们就跨域获得了我们需要的数据。
 
 这样jsonp的原理就很清楚了，通过script标签引入一个js文件，这个js文件载入成功后会执行我们在url参数中指定的函数，并且会把我们需要的json数据作为参数传入。所以jsonp是需要服务器端的页面进行相应的配合的。
 
@@ -73,7 +73,7 @@ dosomething(['a', 'b', 'c']);
 
 浏览器都有一个同源策略，其限制之一就是第一种方法中我们说的不能通过ajax的方法去请求不同源中的文档。 它的第二个限制是浏览器中不同域的框架之间是不能进行js的交互操作的。有一点需要说明，不同的框架之间（父子或同辈），是能够获取到彼此的window对象的，但蛋疼的是你却不能使用获取到的window对象的属性和方法(html5中的postMessage方法是一个例外，还有些浏览器比如ie6也可以使用top、parent等少数几个属性)，总之，你可以当做是只能获取到一个几乎无用的window对象。
 
-比如，有一个页面，它的地址是<http://www.example.com/a.html>  ， 在这个页面里面有一个iframe，它的src是<http://example.com/b.html>, 很显然，这个页面与它里面的iframe框架是不同域的，所以我们是无法通过在页面中书写js代码来获取iframe中的东西的：
+比如，有一个页面，它的地址是 http://www.example.com/a.html  ， 在这个页面里面有一个iframe，它的src是 http://example.com/b.html , 很显然，这个页面与它里面的iframe框架是不同域的，所以我们是无法通过在页面中书写js代码来获取iframe中的东西的：
 
 ```html
 <script>
@@ -87,9 +87,9 @@ function onLoad() {
 <iframe id="iframe" src="http://example.com/b.html" onLoad="onLoad"></iframe>
 ```
 
-这个时候，document.domain就可以派上用场了，我们只要把<http://www.example.com/a.html> 和 <http://example.com/b.html这两个页面的document.domain都设成相同的域名就可以了。但要注意的是，document.domain的设置是有限制的，我们只能把document.domain设置成自身或更高一级的父域，且主域必须相同。例如：a.b.example.com> 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。
+这个时候，document.domain就可以派上用场了，我们只要把 http://www.example.com/a.html  和 http://example.com/b.html这两个页面的document.domain都设成相同的域名就可以了。但要注意的是，document.domain的设置是有限制的，我们只能把document.domain设置成自身或更高一级的父域，且主域必须相同。例如：a.b.example.com 中某个文档的document.domain 可以设成a.b.example.com、b.example.com 、example.com中的任意一个，但是不可以设成 c.a.b.example.com,因为这是当前域的子域，也不可以设成baidu.com,因为主域已经不相同了。
 
-在页面 <http://www.example.com/a.html> 中设置document.domain:
+在页面 http://www.example.com/a.html 中设置document.domain:
 
 ```html
 <iframe src="http://example.com/b.html" id="iframe" onLoad="test()"></iframe>
@@ -99,6 +99,7 @@ function onLoad() {
     alert(document.getElementById("iframe").contentWindow);
   }
 </script>
+```
 
 在页面 http://example.com/b.html 中也设置document.domain，而且这也是必须的，虽然这个文档的domain就是example.com,但是还是必须显示的设置document.domain的值：
 
@@ -110,7 +111,7 @@ function onLoad() {
 
 这样我们就可以通过js访问到iframe中的各种属性和对象了。
 
-不过如果你想在<http://www.example.com/a.html> 页面中通过ajax直接请求<http://example.com/b.html> 页面，即使你设置了相同的document.domain也还是不行的，所以修改document.domain的方法只适用于**不同子域**的框架间的交互。如果你想通过ajax的方法去与不同子域的页面交互，除了使用jsonp的方法外，还可以用一个隐藏的iframe来做一个代理。原理就是让这个iframe载入一个与你想要通过ajax获取数据的目标页面处在相同的域的页面，所以这个iframe中的页面是可以正常使用ajax去获取你要的数据的，然后就是通过我们刚刚讲得修改document.domain的方法，让我们能通过js完全控制这个iframe，这样我们就可以让iframe去发送ajax请求，然后收到的数据我们也可以获得了。
+不过如果你想在 http://www.example.com/a.html 页面中通过ajax直接请求 http://example.com/b.html 页面，即使你设置了相同的document.domain也还是不行的，所以修改document.domain的方法只适用于**不同子域**的框架间的交互。如果你想通过ajax的方法去与不同子域的页面交互，除了使用jsonp的方法外，还可以用一个隐藏的iframe来做一个代理。原理就是让这个iframe载入一个与你想要通过ajax获取数据的目标页面处在相同的域的页面，所以这个iframe中的页面是可以正常使用ajax去获取你要的数据的，然后就是通过我们刚刚讲得修改document.domain的方法，让我们能通过js完全控制这个iframe，这样我们就可以让iframe去发送ajax请求，然后收到的数据我们也可以获得了。
 
 ## 3、window.name
 
@@ -192,7 +193,7 @@ data.html页面里的代码很简单，就是给当前的window.name设置一个
 
 ## 4、window.postMessage
 
-window.postMessage(message,targetOrigin)  方法是html5新引进的特性，可以使用它来向其它的window对象发送消息，无论这个window对象是属于同源或不同源，目前IE8+、FireFox、Chrome、Opera等浏览器都已经支持window.postMessage方法。
+window.postMessage(message,targetOrigin)  方法是html5新引进的特性，可以使用它来向**其它的window对象**发送消息，无论这个window对象是属于同源或不同源，目前IE8+、FireFox、Chrome、Opera等浏览器都已经支持window.postMessage方法。
 
 调用postMessage方法的window对象是指要接收消息的那一个window对象，该方法的第一个参数message为要发送的消息，类型只能为字符串；第二个参数targetOrigin用来限定接收消息的那个window对象所在的域，如果不想限定域，可以使用通配符 *  。
 
