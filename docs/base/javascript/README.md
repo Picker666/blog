@@ -80,7 +80,7 @@ console.log(obj1.a, obj2.a)
 
 因为`'1'.toString()`中的字符串`'1'`在这个时候会被封装成其对应的字符串对象，以上代码相当于`new String('1').toString()`，因为`new String('1')`创建的是一个对象，而这个对象里是存在`toString()`方法的。
 
-详见 **[toString 详解](/base/toString)**
+详见 **[toString 详解](/base/javascript/toString)**
 <a name="nullInstruction"></a>
 
 :::
@@ -443,7 +443,7 @@ console.log(Object.prototype.toString.call(f))   // [object Object]
 无法区分自定义对象类型，自定义类型可以采用 `instanceof` 区分
 :::
 
-关于 toString 可以参考： [toString 详解](/base/toString.md)
+关于 toString 可以参考： [toString 详解](/base/javascript/toString.md)
 
 #### Summary
 

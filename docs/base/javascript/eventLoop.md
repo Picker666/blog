@@ -12,7 +12,7 @@ js 的执行栈，在执行某段代码时，将其入栈，执行完毕后将�
 
 ![js 代码运行过程](/blog/images/base/eventLoop2.awebp)
 
-当开始执行 JS 代码时，首先会执行一个 main 函数，然后执行我们的代码。根据先进后出的原则，后执行的函数会先弹出栈，在图中我们也可以发现，foo 函数后执行，当执行完毕后就从栈中弹出了。
+当开始执行 JS 代码时，首先会执行一个 main 函数，然后执行我们的代码。根据**先进后出**的原则，后执行的函数会先弹出栈，在图中我们也可以发现，foo 函数后执行，当执行完毕后就从栈中弹出了。
 
 平时在开发中，大家也可以在报错中找到执行栈的痕迹
 
@@ -63,7 +63,7 @@ bar()
 * 通过 I/O 进行文件读取时注册的 callback （Node 中独有）
 * setImmediate 中注册的 callback（Node 中独有）
 
-通过上面列出来的这些 WebAPIs 注册的 callback，也通常被称为 `**macrotasks（宏任务）**`。会被放到 macrotasks queue（宏任务队列）中，对应上文图中的 callback queue，下文也称 task queue。
+通过上面列出来的这些 WebAPIs 注册的 callback，也通常被称为 **macrotasks（宏任务）**。会被放到 macrotasks queue（宏任务队列）中，对应上文图中的 callback queue，下文也称 task queue。
 
 V8 的 stack 加上 macrotasks queue，它的执行过程有一个特别重要的点，只有当 stack 为空后，才会去取 macrotasks queue 中的下一个 macrotask，并将其推入 stack 执行，同样的，当下一个 macrotask 执行完， stack 正好也变成空，就去 macrotasks queue 取下一个 macrotask,。并将其推入 stack 执行。
 

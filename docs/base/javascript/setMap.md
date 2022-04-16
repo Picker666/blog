@@ -15,7 +15,7 @@ sidebarDepth: 4
 * 顶层数据结构不具备key—>value特征,内部会自动加index序列。
 * 可以存储不同类型的任何数据。
 * 向Set对象加入值得时候，不会发生类型转换，所以，5和'5'是两个不同的值。
-* Set 内部判断两个值是否不通，是哦那个的算法叫做： “same-value-zero equality”,类似与精确想等运算符 `===`，主要区别是: **NaN 等于自身，而全等认为NaN不等于自身**。
+* Set 内部判断两个值是否不通，是通过算法叫做： “same-value-zero equality”,类似与精确想等运算符 `===`，主要区别是: **NaN 等于自身，而全等认为NaN不等于自身**。
 
 ::: tip 唯一性：?
 对于原始数据类型（boolean，number，string，null，undefined）如果存储相同值则只会保存一个，对于引用类型做“==”判断即引用地址完全相同则只会存一个。
@@ -422,9 +422,9 @@ function jsonToStrMap(jsonStr) {
 jsonToStrMap('{"name": "An", "des": "JS"}') // Map {"name" => "An", "des" => "JS"}
 ```
 
-## WeakSet
+## WeakMap
 
-### WeakMap与Map的区别:
+### WeakMap与Map的区别
 
 WeakMap 对象是一组键值对的集合，其中的键是弱引用对象，而值可以是任意。
 

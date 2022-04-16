@@ -27,28 +27,29 @@ Promise.all([p1, p2])
 
 ```js
 function promiseAll(promises){
-     return new Promise(function(resolve,reject){
-            if(!Array.isArray(promises)){
-             return reject(new TypeError("argument must be anarray"))
-           }
+  return new Promise(function(resolve,reject){
+    if(!Array.isArray(promises)){
+      return reject(new TypeError("argument must be anarray"))
+    }
     var countNum=0;
     var promiseNum=promises.length;
     var resolvedvalue=new Array(promiseNum);
     for(var i=0;i<promiseNum;i++){
       (function(i){
-         Promise.resolve(promises[i]).then(function(value){
-            countNum++;
-           resolvedvalue[i]=value;
+        Promise.resolve(promises[i]).then(function(value){
+          countNum++;
+          resolvedvalue[i]=value;
           if(countNum===promiseNum){
               return resolve(resolvedvalue)
           }
-       },function(reason){
-        return reject(reason)
-      )
-     })(i)
+        }, function(reason){
+          return reject(reason)
+        })
+      })(i)
     }
-})
+  })
 }
+
 var p1=Promise.resolve(1),
 p2=Promise.resolve(2),
 p3=Promise.resolve(3);
