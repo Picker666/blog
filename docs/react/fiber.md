@@ -101,8 +101,10 @@ Fiber 把一个渲染任务分解为多个渲染任务，而不是一次性完�
 
 实现的方式是`requestIdleCallback`这一 API，但 React 团队 polyfill 了这个 API，使其对比原生的浏览器兼容性更好且拓展了特性。
 
+[React 团队 polyfill 的 requestIdleCallback](/react/requestIdleCallback.html)
+
 ::: tip
-`window.requestIdleCallback()` 方法插入一个函数，这个函数将在浏览器空闲时期被调用。这使开发者能够在主事件循环上执行 后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。
+`window.requestIdleCallback()` 方法插入一个函数，这个函数将在浏览器**空闲**时期被调用。这使开发者能够在主事件循环上执行 后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。???
 
 你可以在空闲回调函数中调用requestIdleCallback()，以便在下一次通过事件循环之前调度另一个回调。
 
@@ -150,7 +152,8 @@ Fiber 架构可以分为三层：
 
 * 每个更新任务都会被赋予一个优先级。
 * 当更新任务抵达调度器时，高优先级的更新任务（记为 A）会更快地被调度进 Reconciler 层；
-* 此时若有新的更新任务（记为 B）抵达调度器，调度器会检查它的优先级，若发现 B 的优先级高于当前任务 A，那么当前处于 Reconciler 层的 A 任务就会被中断，* 调度器会将 B 任务推入 Reconciler 层。
+* 此时若有新的更新任务（记为 B）抵达调度器，调度器会检查它的优先级，若发现 B 的优先级高于当前任务 A，那么当前处于 Reconciler 层的 A 任务就会被中断，
+* 调度器会将 B 任务推入 Reconciler 层。
 * 当 B 任务完成渲染后，新一轮的调度开始，之前被中断的 A 任务将会被重新推入 Reconciler 层，继续它的渲染之旅，即“可恢复”。
 
 ::: tip
@@ -207,7 +210,9 @@ Renderer根据Reconciler为虚拟 DOM 打的标记，同步执行对应的 DOM �
 
 其中 pre-commit 和 commit 从大阶段上来看都属于 commit 阶段。
 
-在 render 阶段，React 主要是在内存中做计算，明确 DOM 树的更新点；而 commit 阶段，则负责把 render 阶段生成的更新真正地执行掉。
+在 render 阶段，React 主要是在内存中做计算，明确 DOM 树的更新点；
+
+而 commit 阶段，则负责把 render 阶段生成的更新真正地执行掉。
 
 新老两种架构对 React 生命周期的影响主要在 render 这个阶段，这个影响是通过增加 Scheduler 层和改写 Reconciler 层来实现的。
 

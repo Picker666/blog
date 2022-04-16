@@ -109,7 +109,8 @@ module.exports = {
         "reactEvent",
         "simpleReducer",
         "diff",
-        "fiber"
+        "fiber",
+        "requestIdleCallback"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
        "/falsework/webpack/": ["", "optimization"],
