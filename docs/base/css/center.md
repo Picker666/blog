@@ -12,7 +12,7 @@
 实现元素水平垂直居中的方式：
 
 * （1）、利用定位+margin:auto
-* （2）、+margin:负值
+* （2）、利用定位+margin:负值
 * （3）、利用定位+transform
 * （4）、table布局
 * （5）、flex布局

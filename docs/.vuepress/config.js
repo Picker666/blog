@@ -41,7 +41,7 @@ module.exports = {
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
-      "/base/css/": ["", "BFC", "center"],
+      "/base/css/": ["", "BFC", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
         "toString",
