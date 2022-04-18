@@ -178,7 +178,9 @@ class Counter extends React.Component {
 * 只有一个参数，是一个回调函数，参数是 `preCount`, 并且返回新对象, 是同步；
 * 其他的情况都是异步。
   
-与 class 组件中的 `setState` 方法不同，`useState` 不会自动合并更新对象。
+与 class 组件中的 `setState` 方法相同，当同时有多个set操作（不同的set方法）时，`useState` 会自动合并更新对象。（都可以生效）
+
+当同时有多个set操作（相同的set方法）时，只有最后一个生效
 :::
 
 ## 性能优化
