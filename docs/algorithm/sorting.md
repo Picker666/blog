@@ -197,7 +197,7 @@ function mergeSort(array: number[], left: number, right: number) {
 基本思想：采用分治算法通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另外一部分的所有数据都要小，然后再按此方法对这部分数据进行快速排序，整个排序过程可以递归进行，依此达到整个数据编程有序序列！
 
 ```ts
-const arr: number[] = [2, 4, 6, 1, 10, 8, 7, 3, 9, 5]
+const arr: number[] = [5, 4, 6, 2, 1, 10, 7, 3, 8, 9];
 
 function quickSort(array: number[], left: number, right: number) {
   if (left >= right) {
@@ -227,7 +227,7 @@ function quickSort(array: number[], left: number, right: number) {
 ```
 
 执行的过程
-
+[5, 4, 6, 2, 1, 10, 7, 3, 8, 9];
 ![执行过程](/blog/images/algorithm/sorting7.png)
 
 ![执行过程](/blog/images/algorithm/sorting12.awebp)

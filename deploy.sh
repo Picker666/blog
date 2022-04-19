@@ -26,4 +26,4 @@ git commit -m 'deploy'
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
 git push -f https://github.com/Picker666/blog.git master:deploy
 
-cd -
+# cd -
