@@ -106,7 +106,8 @@ module.exports = {
         "instanceof",
         "thousands",
         "loading",
-        "loginTimeout"
+        "loginTimeout",
+        "eventEmiter"
       ],
       "/react/": [
         "",
