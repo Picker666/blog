@@ -173,6 +173,7 @@ module.exports = {
       ],
       '/algorithm/': [
         '',
+        "dataStructure",
         'linkedList',
         'sorting',
         'algorithm1'
