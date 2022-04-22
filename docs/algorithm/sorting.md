@@ -192,6 +192,8 @@ function mergeSort(array: number[], left: number, right: number) {
 
 ![执行过程](/blog/images/algorithm/sorting11.awebp)
 
+![图解](/blog/images/algorithm/sorting8.png)
+
 ## 快速排序
 
 基本思想：采用分治算法通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据比另外一部分的所有数据都要小，然后再按此方法对这部分数据进行快速排序，整个排序过程可以递归进行，依此达到整个数据编程有序序列！
@@ -240,3 +242,9 @@ function quickSort(array: number[], left: number, right: number) {
 ![执行过程](/blog/images/algorithm/sorting7.png)
 
 ![执行过程](/blog/images/algorithm/sorting12.awebp)
+
+快速排序是冒泡排序的升级版，最坏情况下每一次基准元素都是数组中最小或者最大的元素，则快速排序就是冒泡排序
+
+这种情况时间复杂度就是冒泡排序的时间复杂度：T[n] = n * (n-1) = n^2 + n，也就是O(n^2)
+
+最好情况下是O(nlogn)，其中递归算法的时间复杂度公式：T[n] = aT[n/b] + f(n)，推导如下所示。
