@@ -176,6 +176,7 @@ module.exports = {
         "dataStructure",
         'linkedList',
         'sorting',
+        'dichotomy',
         'algorithm1'
       ]
     },
