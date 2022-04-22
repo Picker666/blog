@@ -9,7 +9,7 @@ module.exports = {
     logo: "/images/logo1.png",
     searchMaxSuggestions: 10,
     smoothScroll: true,
-    lastUpdated: "更新时间",
+    // lastUpdated: "更新时间",
     nav: [
       {
         text: "基础梳理",
