@@ -175,8 +175,10 @@ module.exports = {
         '',
         "dataStructure",
         'linkedList',
-        'sorting',
         'dichotomy',
+        
+        'sorting',
+        'deduplication',
         'sum'
       ]
     },
