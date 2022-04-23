@@ -181,6 +181,8 @@ module.exports = {
         'deduplication',
         'maxDuplication',
         'fibonacci',
+        'shuffle',
+        
         'sum'
       ]
     },
