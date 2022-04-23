@@ -177,7 +177,7 @@ module.exports = {
         'linkedList',
         'sorting',
         'dichotomy',
-        'algorithm1'
+        'sum'
       ]
     },
   },

@@ -18,6 +18,47 @@ return arr;
 }
 ```
 
+## 利用对象的key不能重复的特性
+
+```js
+const withObject = (arr: number[]) => {
+  let newArray = [arr[0]];
+  for (let i of Object.keys(arr)) {
+    const value1 = arr[i];
+    let repeat = false;
+
+    for (let j of Object.keys(arr)) {
+      const vales2 = newArray[j];
+
+      if (value1 === vales2) {
+        repeat = true;
+        break;
+      }
+    }
+    if (!repeat) {
+      newArray.push(value1);
+    }
+  }
+  console.log(newArray, '=======================');
+};
+
+const withObject2 = (arr: number[]) => {
+    let newArray = [arr[0]];
+    let obj = {
+      [arr[0]]: true,
+    };
+    for (let i of Object.keys(arr)) {
+      const value1 = arr[i];
+
+      if (obj[value1] === undefined) {
+        newArray.push(value1);
+        obj[value1] = true;
+      }
+    }
+    console.log(newArray, '=======================');
+  };
+```
+
 ## 使用 indexOf 或 includes 加新数组
 
 ```js
