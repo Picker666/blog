@@ -179,6 +179,8 @@ module.exports = {
         
         'sorting',
         'deduplication',
+        'maxDuplication',
+        'fibonacci',
         'sum'
       ]
     },
