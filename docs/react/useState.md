@@ -170,7 +170,7 @@ class Counter extends React.Component {
 对于 `setState` 可以认为:
 
 * 只有一个参数，是一个回调函数，参数是 `preState`, 并且返回新对象, 是同步；
-* 在定时器中的操作是同步的；
+* 在定时器/原生事件中的操作是同步的；
 * 其他的都是异步；
 
 对于 `useState` 中更新状态的方法，如： `setCount`:
