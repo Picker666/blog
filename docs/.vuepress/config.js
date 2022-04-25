@@ -113,6 +113,7 @@ module.exports = {
         "",
         "lifeCycleNew",
         "lifeCycleChange",
+        "setState",
         "super",
         "hoc",
         "middleware",
