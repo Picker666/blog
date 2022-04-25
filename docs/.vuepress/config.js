@@ -15,6 +15,7 @@ module.exports = {
         text: "基础梳理",
         link: "/base/",
         items: [
+          { text: "HTML", link: "/base/html/" },
           { text: "CSS", link: "/base/css/" },
           { text: "Javascript", link: "/base/javascript/" },
           { text: "浏览器", link: "/base/browser/" },
@@ -41,6 +42,7 @@ module.exports = {
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
+      "/base/html/": [""],
       "/base/css/": ["", "BFC", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
