@@ -60,7 +60,8 @@ module.exports = {
         "eventLoop",
         "modular",
         "Proxy",
-        "Reflect"
+        "Reflect",
+        "functionalProgramming"
       ],
       "/base/browser/": [
         "",

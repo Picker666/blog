@@ -5,7 +5,8 @@ sidebarDepth: 3
 # 纯手写一个`Promise`
 
 ::: tip
-`Promise`就是为了解决callback的问题而产生的。
+`Promise`就是为了解决`callback`的问题而产生的。
+
 `Promise` 本质上就是一个绑定了回调的对象，而不是将回调传回函数内部.
 :::
 
@@ -548,20 +549,20 @@ MyPromise.prototype.then = function(onFulfilled, onRejected) {
         // 如果promise1（此处为self/this）的状态已经确定并且为fulfilled，我们调用onFulfilled
         // 如果考虑到有可能throw，所以我们将其包在try/catch块中
         return promise2 = new MyPromise(function(resolve, reject) {
-            // 规范 2.2.4，保证 onFulfilled，onRjected 异步执行
-        // 所以用了 setTimeout 包裹下
-            setTimeout(function() {
-                try {
-                 var x = onFulfilled(_this.value)
-                 // 如果 onFulfilled 的返回值是一个 Promise 对象，直接取它的结果作为 promise2 的结果
-                 if (x instanceof MyPromise) {
-                     x.then(resolve, reject)
-                 }
-                 resolve(x) // 否则，以它的返回值为 promise2 的结果
-             } catch (err) {
-                 reject(err) // 如果出错，以捕获到的错误作为promise2的结果
-             }
-            })
+            // 规范 2.2.4，保证 onFulfilled，onRejected 异步执行
+          // 所以用了 setTimeout 包裹下
+          setTimeout(function() {
+            try {
+              var x = onFulfilled(_this.value)
+              // 如果 onFulfilled 的返回值是一个 Promise 对象，直接取它的结果作为 promise2 的结果
+              if (x instanceof MyPromise) {
+                  x.then(resolve, reject)
+              }
+              resolve(x) // 否则，以它的返回值为 promise2 的结果
+            } catch (err) {
+              reject(err) // 如果出错，以捕获到的错误作为promise2的结果
+            }
+          })
         })
     }
     // 此处实现与FULFILLED相似，区别在使用的是onRejected而不是onFulfilled
