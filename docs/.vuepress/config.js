@@ -177,13 +177,20 @@ module.exports = {
       ],
       '/algorithm/': [
         '',
+        'algorithmBase',
         "dataStructure",
+        'stackQueue',
         'linkedList',
+
         'dichotomy',
-        
+        'divideVSDynamic',
+        'greedyVSBacktracking',
+
         'sorting',
         'deduplication',
         'maxDuplication',
+        'mergeArray',
+        'palindrome',
         'fibonacci',
         'shuffle',
         
