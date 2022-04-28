@@ -78,7 +78,7 @@ module.exports = {
         "renderPrinciple"
       ],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
-      "/base/interview/": ["", "scope", "arrayObject"],
+      "/base/interview/": ["", "scope", "arrayObject", "FEOptimization"],
       "/typescript/": [
         "",
         "tsBase",
@@ -133,7 +133,7 @@ module.exports = {
         "requestIdleCallback"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/falsework/webpack/": ["", "start", "buildProcess", "optimization"],
+      "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "interview"],
       "/falsework/umi/": ["", "NoHistory"],
       "/falsework/vite/": ["", 'principle'],
       "/designPatterns/": [
