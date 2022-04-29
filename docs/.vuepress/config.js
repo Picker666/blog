@@ -75,6 +75,7 @@ module.exports = {
         "UDP",
         "TCP",
         "https",
+        "httpVersion",
         "renderPrinciple"
       ],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
