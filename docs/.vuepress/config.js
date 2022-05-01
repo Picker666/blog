@@ -135,7 +135,7 @@ module.exports = {
         "requestIdleCallback"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "interview"],
+      "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "AST", "interview"],
       "/falsework/umi/": ["", "NoHistory"],
       "/falsework/vite/": ["", 'principle'],
       "/designPatterns/": [
