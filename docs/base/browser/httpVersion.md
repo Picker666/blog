@@ -8,7 +8,7 @@
 
 * 1、缓存策略
 
-http1.0 强缓存；http1.1加入协商缓存。
+**http1.0 强缓存；http1.1加入协商缓存**。
 
 http1.0的缓存策略主要是依赖header中的If-Modified-Since,Expire(到期)
 
@@ -16,13 +16,16 @@ http1.1的缓存策略要比http1.0略多,例如 Entity tag(实体标签), If-Un
 
 * 2、宽带和网络连接优化
 
-加入断点续传。
+加入**断点续传**。
 
 http1.0中会存在一些性能浪费,比如我们的只需要对象中的一部分,但是每次请求返回的却是整个对象,这无疑造成了性能的损害
 
 http1.1则不然,它可以通过在请求头处设置range头域,就可以返回请求资源的某一部分,也就是返回码为206(Partial Content)的时候,这对于性能优化很有必要.
 
+::: tip
 这里所谓的请求资源的一部分,也就是大家常说的断点续传
+:::
+
 关于断点续传的应用场景,例如用户需要下载一个大文件,最佳的方式是将这个大文件分割成几部分,然后由多个进程同时进行.
 
 这个时候,我们可以在请求头中设置range字段,来规定分割的byte数范围.
@@ -68,11 +71,15 @@ http1.1支持长连接和请求的流水线(pipelining),在一个TCP链接上可
 
 * 1、http1的解析是基于文本协议的各式解析,而http2.0的协议解析是二进制格式,更加的强大
 * 2、多路复用(Mutiplexing) : 一个连接上可以有多个request,且可以随机的混在一起,每个不同的request都有对应的id,服务端可以通过request_id来辨别,大大加快了传输速率
-* 3、header压缩: http1.x中的header需要携带大量信息.而且每次都要重复发送.http2.0使用encode来减少传输的header大小.而且客户端和服务端可以各自缓存(cache)一份header filed表,避免了header的重复传输,还可以减少传输的大小.
-* 4、服务端推送(server push): 可以通过解析html中的依赖,只能的返回所需的其他文件(css或者js等),而不用再发起一次请求。
+* 3、header压缩: http1.x中的header需要携带大量信息，而且每次都要重复发送。http2.0使用encode来减少传输的header大小，而且客户端和服务端可以各自缓存(cache)一份header filed表，避免了header的重复传输，还可以减少传输的大小。
+* 4、服务端推送(server push): 可以通过解析html中的依赖，只能的返回所需的其他文件(css或者js等)，而不用再发起一次请求。
 
 ## http与https的区别
 
 * 1、https协议需要CA申请证书(换句换说,是要钱的)
 * 2、http协议运行在TCP协议之上,传输的内容都是明文传送,安全性较差,而https则是运行在SSL/TLS层之上, 而SSL/TLS层是运行在TCP层之上,https传输的内容都是经过加密的,安全性较高
-* 3、http与https使用不同的连接方式.其中http默认用的是80端口,而https默认用的是443端口(uzi打kid的那个443)
+* 3、http与https使用不同的连接方式.其中http默认用的是80端口,而https默认用的是443端口。
+
+::: tip
+SSL/TLS ==> secure socket layer / transport layer security
+:::
