@@ -90,7 +90,7 @@ public class ReferenceCountingGC{
 
 ### 4、分代收集（Generational Collection）算法
 
-分代收集法是目前大部分JVM所采用的方法，其核心思想是根据对象存活的不同生命周期将内存划分为不同的域，一般情况下将GC堆划分为老生代(Tenured/Old Generation)和新生代(YoungGeneration)。老生代的特点是每次垃圾回收时只有少量对象需要被回收，新生代的特点是每次垃圾回收时都有大量垃圾需要被回收，因此可以根据不同区域选择不同的算法。
+[分代收集法](/base/browser/garbageCollectionByV8.html#_3、v8的垃圾回收策略)是目前大部分JVM所采用的方法，其核心思想是根据对象存活的不同生命周期将内存划分为不同的域，一般情况下将GC堆划分为老生代(Tenured/Old Generation)和新生代(YoungGeneration)。老生代的特点是每次垃圾回收时只有少量对象需要被回收，新生代的特点是每次垃圾回收时都有大量垃圾需要被回收，因此可以根据不同区域选择不同的算法。
 
 目前大部分JVM的GC对于新生代都采取Copying算法，因为新生代中每次垃圾回收都要回收大部分对象，即要复制的操作比较少，但通常并不是按照1：1来划分新生代。一般将新生代划分为一块较大的Eden空间和两个较小的Survivor空间(From Space, To Space)，每次使用Eden空间和其中的一块Survivor空间，当进行回收时，将该两块空间中还存活的对象复制到另一块Survivor空间中。
 
@@ -101,3 +101,5 @@ public class ReferenceCountingGC{
 * Young区分为Eden区和两个Survivor区域，其中所有新创建的对象都在Eden区，当Eden区满后会触发minor GC将仍然存活的对象复制到其中一个Survivor区域中，另外一个Survivor区域中的存活对象也复制到这个Survivor区域中，保证始终有一个Survivor区域时空的。
 * 当Eden区域满后会将对象存放到Survivor区域中，如果Survivor区域仍然存放不下这些对象，GC收集器会将这些对象直接存放到Old区域。如果在Survivor区域中的对象足够老，也直接存放到Old区域中。如果Old区域也满了，将会触发Full GC，回收整个堆内存。
 * Perm区域存放的主要是类的Class对象，如果一个类被频繁地加载，也可能会导致Perm区满，Perm区的垃圾回收也是由Full GC触发的。
+
+[V8引擎的垃圾回收](/base/browser/garbageCollectionByV8.html)

@@ -77,7 +77,8 @@ module.exports = {
         "https",
         "httpVersion",
         "renderPrinciple",
-        "garbageCollection"
+        "garbageCollection",
+        "garbageCollectionByV8"
       ],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
       "/base/interview/": ["", "scope", "arrayObject", "FEOptimization"],
