@@ -2,7 +2,7 @@
 
 ![原型、原型链](/blog/images/base/prototype1.png)
 
-## 原型 prototype 和 __proto__
+## 原型 prototype 和 `__proto__`
 
 * 每个对象都有一个__proto__属性，并且指向它的prototype原型对象
 * 每个构造函数都有一个prototype原型对象
