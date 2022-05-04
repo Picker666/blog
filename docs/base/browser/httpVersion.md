@@ -80,7 +80,6 @@ http1.1支持长连接和请求的流水线(pipelining),在一个TCP链接上可
 SSL/TLS ==> secure socket layer / transport layer security
 :::
 
-
 [](https://juejin.cn/book/6844733763675488269/section/6844733763792961550)
 
 [](https://zhuanlan.zhihu.com/p/85093818)
