@@ -6,7 +6,7 @@ module.exports = {
     lineNumbers: true,
   },
   themeConfig: {
-    logo: "/images/logo1.png",
+    logo: "/images/logo.png",
     searchMaxSuggestions: 10,
     smoothScroll: true,
     // lastUpdated: "更新时间",
