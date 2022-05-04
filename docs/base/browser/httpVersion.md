@@ -1,9 +1,5 @@
 # HTTP/1 、HTTP/2 及 HTTP/3
 
-[](https://juejin.cn/book/6844733763675488269/section/6844733763792961550)
-
-[](https://zhuanlan.zhihu.com/p/85093818)
-
 ## http1.0与http1.1之间的区别
 
 * 1、缓存策略
@@ -83,3 +79,8 @@ http1.1支持长连接和请求的流水线(pipelining),在一个TCP链接上可
 ::: tip
 SSL/TLS ==> secure socket layer / transport layer security
 :::
+
+
+[](https://juejin.cn/book/6844733763675488269/section/6844733763792961550)
+
+[](https://zhuanlan.zhihu.com/p/85093818)
