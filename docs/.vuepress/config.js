@@ -77,6 +77,7 @@ module.exports = {
         "https",
         "httpVersion",
         "renderPrinciple",
+        "urlToRender",
         "garbageCollection",
         "garbageCollectionByV8"
       ],
