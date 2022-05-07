@@ -43,7 +43,7 @@ module.exports = {
     ],
     sidebar: {
       "/base/html/": [""],
-      "/base/css/": ["", "BFC", "center", "columnsLayout"],
+      "/base/css/": ["", "BFC", "flexbox", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
         "toString",
@@ -138,7 +138,7 @@ module.exports = {
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "AST", "interview"],
-      "/falsework/umi/": ["", "NoHistory"],
+      "/falsework/umi/": ["", "route", "NoHistory"],
       "/falsework/vite/": ["", 'principle'],
       "/designPatterns/": [
         '',
