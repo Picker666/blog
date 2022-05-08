@@ -42,7 +42,7 @@ module.exports = {
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
-      "/base/html/": [""],
+      "/base/html/": ["", "deferAsync"],
       "/base/css/": ["", "BFC", "flexbox", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
