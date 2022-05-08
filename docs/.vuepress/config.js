@@ -138,7 +138,7 @@ module.exports = {
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "AST", "interview"],
-      "/falsework/umi/": ["", "route", "NoHistory"],
+      "/falsework/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/falsework/vite/": ["", 'principle'],
       "/designPatterns/": [
         '',
