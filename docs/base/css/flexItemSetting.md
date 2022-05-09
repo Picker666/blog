@@ -2,6 +2,8 @@
 
 [flex](/base/css/flexBox.html#_5、flex)
 
+[本文所有例子代码 ](https://github.com/Picker666/blog-example/blob/main/src/component/Base/Flex.tsx)
+
 ## 一、默认值
 
 ```js
