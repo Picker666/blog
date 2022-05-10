@@ -55,7 +55,7 @@ node --v8-options
 
 然后我们会在命令行窗口中看到大量关于V8的选项，这里我们暂且只关注图中红色选框中的几个选项：
 
-![v8引起操作](/images/base/GC1.awebp)
+![v8引起操作](/blog/images/base/GC1.awebp)
 
 ```js
 // 设置新生代内存中单个半空间的内存最小值，单位MB
@@ -70,7 +70,7 @@ node --max-old-space-size=2048 xxx.js
 
 通过以上方法便可以手动放宽V8引擎所使用的内存限制，同时node也为我们提供了`process.memoryUsage()`方法来让我们可以查看当前node进程所占用的实际内存大小。
 
-![v8引起操作](/images/base/GC2.awebp)
+![v8引起操作](/blog/images/base/GC2.awebp)
 
 在上图中，包含的几个字段的含义分别如下所示，单位均为字节：
 
@@ -105,7 +105,7 @@ V8的垃圾回收策略主要是基于**分代式垃圾回收机制**，其根�
 
 内存结构图如下所示：
 
-![v8引起操作](/images/base/GC3.awebp)
+![v8引起操作](/blog/images/base/GC3.awebp)
 
 上图中的带斜纹的区域代表暂未使用的内存，新生代(new_space)被划分为了两个部分，其中一部分叫做inactive new space，表示暂未激活的内存区域，另一部分为激活状态，为什么会划分为两个部分呢，在下一小节我们会讲到。
 
@@ -123,43 +123,43 @@ V8的垃圾回收策略主要是基于**分代式垃圾回收机制**，其根�
 
 * 1、假设我们在From空间中分配了三个对象A、B、C
 
-![v8引起操作](/images/base/GC4.awebp)
+![v8引起操作](/blog/images/base/GC4.awebp)
 
 * 2、当程序主线程任务第一次执行完毕后进入垃圾回收时，发现对象A已经没有其他引用，则表示可以对其进行回收
 
-![v8引起操作](/images/base/GC5.awebp)
+![v8引起操作](/blog/images/base/GC5.awebp)
 
 * 3、对象B和对象C此时依旧处于活跃状态，因此会被复制到To空间中进行保存
 
-![v8引起操作](/images/base/GC6.awebp)
+![v8引起操作](/blog/images/base/GC6.awebp)
 
 * 4、接下来将From空间中的所有非存活对象全部清除
 
-![v8引起操作](/images/base/GC7.awebp)
+![v8引起操作](/blog/images/base/GC7.awebp)
 
 * 5、此时From空间中的内存已经清空，开始和To空间完成一次角色互换
 
-![v8引起操作](/images/base/GC8.awebp)
+![v8引起操作](/blog/images/base/GC8.awebp)
 
 * 6、当程序主线程在执行第二个任务时，在From空间中分配了一个新对象D
 
-![v8引起操作](/images/base/GC9.awebp)
+![v8引起操作](/blog/images/base/GC9.awebp)
 
 * 7、任务执行完毕后再次进入垃圾回收，发现对象D已经没有其他引用，表示可以对其进行回收
 
-![v8引起操作](/images/base/GC10.awebp)
+![v8引起操作](/blog/images/base/GC10.awebp)
 
 * 8、对象B和对象C此时依旧处于活跃状态，再次被复制到To空间中进行保存
 
-![v8引起操作](/images/base/GC11.awebp)
+![v8引起操作](/blog/images/base/GC11.awebp)
 
 * 9、再次将From空间中的所有非存活对象全部清除
 
-![v8引起操作](/images/base/GC12.awebp)
+![v8引起操作](/blog/images/base/GC12.awebp)
 
 * 10、From空间和To空间继续完成一次角色互换
 
-![v8引起操作](/images/base/GC13.awebp)
+![v8引起操作](/blog/images/base/GC13.awebp)
 
 通过以上的流程图，我们可以很清楚地看到，Scavenge算法的垃圾回收过程主要就是将存活对象在From空间和To空间之间进行复制，同时完成两个空间之间的角色互换，因此该算法的缺点也比较明显，浪费了一半的内存用于复制。
 
@@ -174,11 +174,11 @@ V8的垃圾回收策略主要是基于**分代式垃圾回收机制**，其根�
 
 默认情况下，我们创建的对象都会分配在From空间中，当进行垃圾回收时，在将对象从From空间复制到To空间之前，会先检查该对象的内存地址来判断是否已经经历过一次Scavenge算法，如果地址已经发生变动则会将该对象转移到老生代中，不会再被复制到To空间，可以用以下的流程图来表示：
 
-![v8引起操作](/images/base/GC14.awebp)
+![v8引起操作](/blog/images/base/GC14.awebp)
 
 如果对象没有经历过Scavenge算法，会被复制到To空间，但是如果此时To空间的内存占比已经超过25%，则该对象依旧会被转移到老生代，如下图所示:
 
-![v8引起操作](/images/base/GC15.awebp)
+![v8引起操作](/blog/images/base/GC15.awebp)
 
 之所以有25%的内存限制是因为To空间在经历过一次Scavenge算法后会和From空间完成角色互换，会变为From空间，后续的内存分配都是在From空间中进行的，如果内存使用过高甚至溢出，则会影响后续对象的分配，因此超过这个限制之后对象会被直接转移到老生代来进行管理。
 
@@ -241,7 +241,7 @@ Mark-Sweep(标记清除)分为标记和清除两个阶段，在标记阶段会�
 * 本地函数的局部变量和参数
 * 当前嵌套调用链上的其他函数的变量和参数
 
-![v8引起操作](/images/base/GC16.awebp)
+![v8引起操作](/blog/images/base/GC16.awebp)
 
 但是`Mark-Sweep`算法存在一个问题，就是在经历过一次标记清除后，内存空间可能会出现**不连续**的状态，因为我们所清理的对象的内存地址可能不是连续的，所以就会出现内存碎片的问题，导致后面如果需要分配一个大对象而空闲内存不足以分配，就会提前触发垃圾回收，而这次垃圾回收其实是没必要的，因为我们确实有很多空闲内存，只不过是不连续的。
 
@@ -249,19 +249,19 @@ Mark-Sweep(标记清除)分为标记和清除两个阶段，在标记阶段会�
 
 * 假设在老生代中有A、B、C、D四个对象\
 
-![v8引起操作](/images/base/GC17.awebp)
+![v8引起操作](/blog/images/base/GC17.awebp)
 
 * 在垃圾回收的标记阶段，将对象A和对象C标记为活动的
 
-![v8引起操作](/images/base/GC18.awebp)
+![v8引起操作](/blog/images/base/GC18.awebp)
 
 * 在垃圾回收的整理阶段，将活动的对象往堆内存的一端移动
 
-![v8引起操作](/images/base/GC19.awebp)
+![v8引起操作](/blog/images/base/GC19.awebp)
 
 * 在垃圾回收的清除阶段，将活动对象左侧的内存全部回收
 
-![v8引起操作](/images/base/GC20.awebp)
+![v8引起操作](/blog/images/base/GC20.awebp)
 
 至此就完成了一次老生代垃圾回收的全部过程，我们在前文中说过，由于JS的单线程机制，垃圾回收的过程会阻碍主线程同步任务的执行，待执行完垃圾回收后才会再次恢复执行主任务的逻辑，这种行为被称为全停顿(stop-the-world)。在标记阶段同样会阻碍主线程的执行，一般来说，老生代会保存大量存活的对象，如果在标记阶段将整个堆内存遍历一遍，那么势必会造成严重的卡顿。
 
