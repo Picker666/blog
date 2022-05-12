@@ -153,7 +153,7 @@ function MyPromise(callback) {
 MyPromise.prototype.then = function(resolve, reject) {}
 ```
 
-大致框架已经出来了，但我们看到`Promise`状态、`reslove`函数、`reject`函数以及`then`等都没有处理。
+大致框架已经出来了，但我们看到`Promise`状态、`resolve`函数、`reject`函数以及`then`等都没有处理。
 
 ### `Promise`构建之二：链式存储
 
