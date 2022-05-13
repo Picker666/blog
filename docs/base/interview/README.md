@@ -12,7 +12,7 @@ sidebarDepth: 3
   * 没有自己的this，无法调用 call，apply。
   * 没有prototype 属性，而 new命令在执行时候需要将构造函数的prototype赋值给新对象的prototype.
   
-[构造函数 new的过程](/blog/base/javascript/newConstructor.html)
+[构造函数 new的过程](/base/javascript/newConstructor.html)
 
 ## var/let/const 区别
 

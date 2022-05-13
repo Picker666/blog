@@ -46,6 +46,7 @@ module.exports = {
       "/base/css/": ["", "BFC", "flexBox", "flexItemSetting", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
+        "scope",
         "toString",
         "valueOf",
         "equal",
