@@ -83,7 +83,7 @@ module.exports = {
         "garbageCollectionByV8"
       ],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
-      "/base/interview/": ["", "scope", "arrayObject", "FEOptimization"],
+      "/base/interview/": ["", "scope", "questionAnswer", "arrayObject", "FEOptimization"],
       "/typescript/": [
         "",
         "tsBase",
