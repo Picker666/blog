@@ -135,7 +135,8 @@ module.exports = {
         "simpleReducer",
         "diff",
         "fiber",
-        "requestIdleCallback"
+        "requestIdleCallback",
+        "componentControlled"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "interview"],
