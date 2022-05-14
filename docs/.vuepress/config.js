@@ -133,6 +133,7 @@ module.exports = {
         "useLayoutEffect",
         "reactEvent",
         "simpleReducer",
+        "virtualDom",
         "diff",
         "fiber",
         "requestIdleCallback",
