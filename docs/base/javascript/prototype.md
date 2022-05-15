@@ -226,7 +226,7 @@ hasOwnProperty 是 JavaScript 中唯一处理属性并且不会遍历原型链�
 
 ## 总结
 
-### prototype 和 __proto__
+### prototype 和 `__proto__`
 
 * 每个对象都有一个__proto__属性，并且指向它的prototype原型对象
 * 每个构造函数都有一个prototype原型对象
@@ -234,7 +234,7 @@ hasOwnProperty 是 JavaScript 中唯一处理属性并且不会遍历原型链�
 
 ### 原型链总结
 
-每个对象都有一个__proto__，它指向它的prototype原型对象，而prototype原型对象又具有一个自己的prototype原型对象，就这样层层往上直到一个对象的原型prototype为null
+每个对象都有一个`__proto__`，它指向它的prototype原型对象，而prototype原型对象又具有一个自己的prototype原型对象，就这样层层往上直到一个对象的原型prototype为null
 
 这个查询的路径就是原型链
 

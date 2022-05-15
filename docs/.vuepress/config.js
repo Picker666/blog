@@ -47,6 +47,7 @@ module.exports = {
       "/base/javascript/": [
         "",
         "scope",
+        "closure",
         "toString",
         "valueOf",
         "equal",
