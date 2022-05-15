@@ -417,3 +417,51 @@ undefined
 ```
 
 在上述示例中，我们发现虽然我们没有手动清除WeakMap中的键名对数组的引用，但是内存依旧已经回到原始的大小，说明该数组已经被回收，那么这个也就是弱引用的具体含义了。
+
+### 6、被遗忘的 ES6 Set 成员
+
+如下是有内存泄漏的（成员是引用类型的，即对象）:
+
+```js
+let map = new Set();
+let value = { test: 22};
+map.add(value);
+
+value= null;
+```
+
+需要改成这样，才没内存泄漏：
+
+```js
+let map = new Set();
+let value = { test: 22};
+map.add(value);
+
+map.delete(value);
+value = null;
+```
+
+### 7、被遗忘的 ES6 Map 键名
+
+如下是有内存泄漏的（键值是引用类型的，即对象）:
+
+```js
+let map = new Map();
+let key = new Array(5 * 1024 * 1024);
+map.set(key, 1);
+key = null;
+```
+
+需要改成这样，才没内存泄漏：
+
+```js
+let map = new Map();
+let key = new Array(5 * 1024 * 1024);
+map.set(key, 1);
+
+map.delete(key);
+key = null;
+```
+
+### 8、被遗忘的订阅发布事件监听器
+

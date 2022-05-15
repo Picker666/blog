@@ -63,10 +63,13 @@ module.exports = {
         "modular",
         "Proxy",
         "Reflect",
-        "functionalProgramming"
+        "functionalProgramming",
+        "generator",
+        "eventModel"
       ],
       "/base/browser/": [
         "",
+        "workingPrinciple",
         "storage",
         "crossDomain",
         "cache",
@@ -81,7 +84,8 @@ module.exports = {
         "renderPrinciple",
         "urlToRender",
         "garbageCollection",
-        "garbageCollectionByV8"
+        "garbageCollectionByV8",
+        "whiteScreen"
       ],
       "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
       "/base/interview/": ["", "scope", "questionAnswer", "arrayObject", "FEOptimization"],
