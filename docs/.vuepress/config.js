@@ -43,7 +43,7 @@ module.exports = {
     ],
     sidebar: {
       "/base/html/": ["", "deferAsync"],
-      "/base/css/": ["", "BFC", "flexBox", "flexItemSetting", "center", "columnsLayout"],
+      "/base/css/": ["", "BFC", "flexBox", "flexItemSetting", "grid", "center", "columnsLayout"],
       "/base/javascript/": [
         "",
         "scope",
