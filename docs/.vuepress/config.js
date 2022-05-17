@@ -32,6 +32,7 @@ module.exports = {
         text: "脚手架",
         link: "/falsework/",
         items: [
+          { text: "home", link: "/falsework/common" },
           { text: "Webpack", link: "/falsework/webpack/" },
           { text: "Vite", link: "/falsework/vite/" },
           { text: "Umi", link: "/falsework/umi/" },
@@ -145,6 +146,7 @@ module.exports = {
         "componentControlled"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
+      "/falsework/common": [''],
       "/falsework/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "interview"],
       "/falsework/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/falsework/vite/": ["", 'principle'],
