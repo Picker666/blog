@@ -302,7 +302,7 @@ completeWork 内部有 3 个关键动作:
 
 "递"和"归"阶段会交错执行直到"归"到 rootFiber。至此，协调阶段的工作就结束了。
 
-#### commit 提交阶段
+### commit 提交阶段
 
 commit 阶段的主要工作（即 Renderer 的工作流程）分为三部分：
 
