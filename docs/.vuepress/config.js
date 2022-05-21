@@ -32,7 +32,8 @@ module.exports = {
         text: "前端工程化",
         link: "/engineering/",
         items: [
-          { text: "home", link: "/engineering/common" },
+          { text: "Common", link: "/engineering/common/" },
+          { text: "Pack", link: "/engineering/pack/" },
           { text: "Webpack", link: "/engineering/webpack/" },
           { text: "Vite", link: "/engineering/vite/" },
           { text: "Umi", link: "/engineering/umi/" },
@@ -146,7 +147,8 @@ module.exports = {
         "componentControlled"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/engineering/common": [''],
+      "/engineering/common/": ['', 'Helmet'],
+      "/engineering/pack/": ["",],
       "/engineering/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "interview"],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", 'principle'],
