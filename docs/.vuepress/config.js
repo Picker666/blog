@@ -147,7 +147,7 @@ module.exports = {
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
       "/engineering/common/": ['', 'Helmet'],
-      "/engineering/pack/": ["", "modular",],
+      "/engineering/pack/": ["", "modular", "AST"],
       "/engineering/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "interview"],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", 'principle'],
