@@ -146,7 +146,7 @@ module.exports = {
         "componentControlled"
       ],
       "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/engineering/common/": ['', 'Helmet'],
+      "/engineering/common/": ['', 'Helmet', 'firstPageOp'],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
       "/engineering/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "externals","interview"],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
