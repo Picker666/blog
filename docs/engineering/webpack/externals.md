@@ -1,4 +1,4 @@
-# webpack之externals解析
+# webpack 之 externals 解析
 
 script
 
