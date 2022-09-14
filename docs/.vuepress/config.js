@@ -39,13 +39,21 @@ module.exports = {
           { text: "Umi", link: "/engineering/umi/" },
         ],
       },
-      { text: '设计模式', link: '/designPatterns/' },
-      { text: '算法', link: '/algorithm/'},
+      { text: "设计模式", link: "/designPatterns/" },
+      { text: "算法", link: "/algorithm/" },
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
       "/base/html/": ["", "deferAsync"],
-      "/base/css/": ["", "BFC", "flexBox", "flexItemSetting", "grid", "center", "columnsLayout"],
+      "/base/css/": [
+        "",
+        "BFC",
+        "flexBox",
+        "flexItemSetting",
+        "grid",
+        "center",
+        "columnsLayout",
+      ],
       "/base/javascript/": [
         "",
         "scope",
@@ -66,7 +74,7 @@ module.exports = {
         "Reflect",
         "functionalProgramming",
         "generator",
-        "eventModel"
+        "eventModel",
       ],
       "/base/browser/": [
         "",
@@ -86,10 +94,23 @@ module.exports = {
         "urlToRender",
         "garbageCollection",
         "garbageCollectionByV8",
-        "whiteScreen"
+        "whiteScreen",
       ],
-      "/base/security/": ["", 'xss', "CSRF", "SQLInjection", "cookieHold", "clickJacking"],
-      "/base/interview/": ["", "scope", "questionAnswer", "arrayObject", "FEOptimization"],
+      "/base/security/": [
+        "",
+        "xss",
+        "CSRF",
+        "SQLInjection",
+        "cookieHold",
+        "clickJacking",
+      ],
+      "/base/interview/": [
+        "",
+        "scope",
+        "questionAnswer",
+        "arrayObject",
+        "FEOptimization",
+      ],
       "/typescript/": [
         "",
         "tsBase",
@@ -121,7 +142,7 @@ module.exports = {
         "thousands",
         "loading",
         "loginTimeout",
-        "eventEmiter"
+        "eventEmiter",
       ],
       "/react/": [
         "",
@@ -143,16 +164,25 @@ module.exports = {
         "diff",
         "fiber",
         "requestIdleCallback",
-        "componentControlled"
+        "componentControlled",
       ],
-      "/git/": ["", "rebase", "mergeOrRebase", "catchUp"],
-      "/engineering/common/": ['', 'Helmet', 'firstPageOp'],
+      "/git/": ["", "flow", "rebase", "mergeOrRebase", "catchUp"],
+      "/engineering/common/": ["", "Helmet", "firstPageOp"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
-      "/engineering/webpack/": ["", "start", "buildProcess", "optimization", "AST", "dynamicImport", "externals","interview"],
+      "/engineering/webpack/": [
+        "",
+        "start",
+        "buildProcess",
+        "optimization",
+        "AST",
+        "dynamicImport",
+        "externals",
+        "interview",
+      ],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
-      "/engineering/vite/": ["", 'principle'],
+      "/engineering/vite/": ["", "principle"],
       "/designPatterns/": [
-        '',
+        "",
         "factoryPattern",
         "abstractFactoryPattern",
         "singletonPattern",
@@ -190,27 +220,27 @@ module.exports = {
         // "serviceLocatorPattern",
         // "transferObjectPattern",
       ],
-      '/algorithm/': [
-        '',
-        'algorithmBase',
+      "/algorithm/": [
+        "",
+        "algorithmBase",
         "dataStructure",
-        'stackQueue',
-        'linkedList',
+        "stackQueue",
+        "linkedList",
 
-        'dichotomy',
-        'divideVSDynamic',
-        'greedyVSBacktracking',
+        "dichotomy",
+        "divideVSDynamic",
+        "greedyVSBacktracking",
 
-        'sorting',
-        'deduplication',
-        'maxDuplication',
-        'mergeArray',
-        'palindrome',
-        'fibonacci',
-        'shuffle',
-        
-        'sum'
-      ]
+        "sorting",
+        "deduplication",
+        "maxDuplication",
+        "mergeArray",
+        "palindrome",
+        "fibonacci",
+        "shuffle",
+
+        "sum",
+      ],
     },
   },
   configureWebpack: {
