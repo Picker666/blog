@@ -1,5 +1,8 @@
 # git 开发流程
 
+[](https://www.jianshu.com/p/4d7512b78562)
+[](https://cloud.tencent.com/developer/article/1592957)
+
 ## Git 的作用
 
 Git 是优秀的分布式代码管理软件，它分支管理 的重要性？
