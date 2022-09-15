@@ -170,6 +170,7 @@ module.exports = {
         "",
         "flow",
         "commitRules",
+        "branchMerge",
         "rebase",
         "mergeOrRebase",
         "catchUp",
