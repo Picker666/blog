@@ -166,7 +166,14 @@ module.exports = {
         "requestIdleCallback",
         "componentControlled",
       ],
-      "/git/": ["", "flow", "rebase", "mergeOrRebase", "catchUp"],
+      "/git/": [
+        "",
+        "flow",
+        "commitRules",
+        "rebase",
+        "mergeOrRebase",
+        "catchUp",
+      ],
       "/engineering/common/": ["", "Helmet", "firstPageOp"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
       "/engineering/webpack/": [
