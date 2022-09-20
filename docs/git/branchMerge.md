@@ -6,7 +6,7 @@
 
 如下，从A 拉了一条 dev 分支出来，在节点 B 中新增了一个文件 http.js，并且合并到 master 分支，合并节点为 E，这个时候发现会引起线上 bug，赶紧撤回这个合并，新增一个 revert 节点 E1。`过了几天继续在 dev 分支上面开发新增了一个文件 main.js`,并在这个文件中 import 了 http.js 里面的逻辑，在 dev 分支上面一切运行正常。可当他将此时的 dev 分支合并到 master 时候却发现，http.js 文件不见了，导致 main.js 里面的逻辑运行报错了，http.js不见了。**但这次合并并没有任何冲突**。他又得重新做了一下 revert，并且迷茫的怀疑是 Git 的 bug。
 
-![git flow 流程图](/blog/images/git/git11.png)
+![git flow 流程图](/blog/images/git/git11.jpg)
 
 ## 如何合并两个文件
 
@@ -121,7 +121,7 @@ rebase 也是一种经常被用来做合并的方法，其与 git merge 的最�
 
 ## 解答
 
-![git flow 流程图](/blog/images/git/git11.png)
+![git flow 流程图](/blog/images/git/git11.jpg)
 
 现在我们再来看一下文章开头的例子，我们就可以理解为什么最后一次 merge 会导致 http.js 文件不见了。根据 Git 的合并策略，在合并两个有分叉的分支(上图中的 D、E‘)时，Git 默认会选择 Recursive 策略。找到 D 和 E'的最短路径共同祖先节点 B，以 B 为 base，对 D，E‘做三向合并。B 中有 http.js，D 中有 http.js 和 main.js，E'中什么都没有。根据三向合并，B、D 中都有 http.js 且没有变更，E‘删除了 http.js，所以合并结果就是没有 http.js，没有冲突，所以 http.js 文件不见了。
 
