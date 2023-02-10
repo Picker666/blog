@@ -41,6 +41,7 @@ module.exports = {
       },
       { text: "设计模式", link: "/designPatterns/" },
       { text: "算法", link: "/algorithm/" },
+      { text: "Java", link: "/java/" },
       { text: "Github", link: "https://github.com/Picker666/blog" },
     ],
     sidebar: {
@@ -249,6 +250,7 @@ module.exports = {
 
         "sum",
       ],
+      "/java/": [""],
     },
   },
   configureWebpack: {
