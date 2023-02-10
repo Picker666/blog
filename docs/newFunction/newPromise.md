@@ -4,6 +4,8 @@ sidebarDepth: 3
 
 # 纯手写一个`Promise`
 
+[my demo](https://github.com/Picker666/blog-example/blob/main/src/component/newFunction/Promise.jsx)
+
 ::: tip
 `Promise`就是为了解决`callback`的问题而产生的。
 
