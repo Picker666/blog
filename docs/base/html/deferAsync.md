@@ -110,3 +110,5 @@ defer与async的区别是：
 
 * 一句话，defer是“渲染完再执行”，async是“下载完就执行”。
 * 另外，如果有多个defer脚本，会按照它们在页面出现的顺序加载，而多个async脚本是不能保证加载顺序的。
+
+* 同时使用sync和defer，defer不起作用，sync生效。
