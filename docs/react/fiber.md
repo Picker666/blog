@@ -26,7 +26,7 @@ Fiber 的中文翻译叫**纤程**，与进程、线程同为程序执行过程�
 
 ```js
 type Fiber = {
-  // 用于标记fiber的WorkTag类型，主要表示当前fiber代表的组件类型如FunctionComponent、ClassComponent等
+  // 用于标记fiber的WorkTag类型，主要表示当前fiber代表的组件类型如 FunctionComponent、ClassComponent等
   tag: WorkTag,
   // ReactElement里面的key
   key: null | string,
@@ -317,3 +317,5 @@ commit 阶段的主要工作（即 Renderer 的工作流程）分为三部分：
 修言-深入浅出搞定 React
 
 React 技术揭秘
+
+[额外的参考](https://juejin.cn/post/6943896410987659277)
