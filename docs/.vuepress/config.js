@@ -166,6 +166,7 @@ module.exports = {
         "diff",
         "requestIdleCallback",
         "componentControlled",
+        "react18"
       ],
       "/git/": [
         "",
@@ -176,7 +177,7 @@ module.exports = {
         "mergeOrRebase",
         "catchUp",
       ],
-      "/engineering/common/": ["", "Helmet", "firstPageOp"],
+      "/engineering/common/": ["", "modulesHistory", "packTool", "Helmet", "firstPageOp"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
       "/engineering/webpack/": [
         "",

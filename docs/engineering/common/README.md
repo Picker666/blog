@@ -10,13 +10,17 @@
 
 ## 模块化
 
-[js 模块化](/base/javascript/modular.html)
+<!-- [js 模块化](/base/javascript/modular.html) -->
 
 很多人觉得模块化开发的工程意义是复用，其实应该是模块化开发的最大价值应该是分治。
 
 分而治之是软件工程中的重要思想，是复杂系统开发和维护的基石，这点放在前端开发中同样适用。在解决了基本开发效率运行效率问题之后，前端团队开始思考维护效率，模块化是目前前端最流行的分治手段。
 
-常用的模块化工具：webpack、parcel、requireJS、Sea.js、sass、less Stylus等等。
+常用的模块化工具：webpack、parcel、requireJS、Sea.js、vite等等。
+
+[模块化发展史](/engineering/common/modulesHistory.html)
+
+[模块化打包工具的出现](/engineering/common/packTool.html)
 
 ### JS 模块化方案
 
