@@ -184,6 +184,7 @@ module.exports = {
         "start",
         "buildProcess",
         "optimization",
+        "loaderAndPlugin",
         "AST",
         "dynamicImport",
         "externals",
