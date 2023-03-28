@@ -166,7 +166,7 @@ React v18 在 SSR 下支持了Suspense，最大的区别是什么呢？
 * 2、hydration 的过程是逐步的，不需要等待所有的 js 加载完毕再开始 hydration，避免了页面的卡顿。
 * 3、React 会提前监听页面上交互事件（如鼠标的点击），对发生交互的区域优先级进行 hydration
 
-## 4、Suspense 不再需要 fallback 来捕获
+## 4、Suspense不再需要fallback来捕获
 
 在 React 18 的 Suspense 组件中，官方对 空的fallback 属性的处理方式做了改变：不再跳过 缺失值 或 值为null 的 fallback 的 Suspense 边界。相反，会捕获边界并且向外层查找，如果查找不到，将会把 fallback 呈现为 null。
 
