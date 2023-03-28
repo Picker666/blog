@@ -242,13 +242,13 @@ import(/* webpackPreload: true */ 'lodash').then(({ default: _ }) => {
 
 两者的区别在于：
 
-* prefetch：使用 prefetch 加载的文件在未来可能会用到，所以 webpack 会在父组件 loaded 后将以下标签添加到 head 标签内，并在浏览器有空闲时间的时候去下载该文件。
+* prefetch：使用 prefetch 加载的文件在未来可能会用到，所以 webpack 会在父组件 loaded 后将以下标签添加到 head 标签内，并在浏览器有**空闲时间**的时候去下载该文件。
 
 ```html
 <link rel="prefetch" href="xxxxx"> 
 ```
 
-* preload：加载的文件需要立即用到，在浏览器的主渲染机制介入前就进行预加载，这一机制使得资源可以更早的得到加载并可用，且更不易阻塞页面的初步渲染，进而提升性能。
+* preload：加载的文件需要立即用到，在浏览器的**主渲染机制介入前**就进行预加载，这一机制使得资源可以更早的得到加载并可用，且更不易阻塞页面的初步渲染，进而提升性能。
 
 ```html
 <link rel="preload" href="xxxxx"> 

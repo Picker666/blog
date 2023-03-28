@@ -124,11 +124,11 @@ webpack构建的主要钩子：
 * seal：封装模块
 * emit：生成文件
 
-compiler和compilation都继承于Tapable
+compiler和compilation都继承于**Tapable**
 
 webpack的插件是基于Tapable的，Tapable允许你添加和应用插件到javascript模块中，类似于 NodeJS的EventEmitter，可以被继承和mixin到其他模块中
 
-其中关键的方法是
+其中关键的方法是：
 
 * plugin(name:string, handler:function)
 * apply(...pluginInstances: (AnyPlugin|function)[])

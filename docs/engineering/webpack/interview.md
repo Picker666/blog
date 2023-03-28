@@ -39,7 +39,7 @@ webpack 的运行是一个串行的过程，从启动到结束一次会执行以
 * 3. css-loader：加载 CSS，支持模块化、压缩、文件导入等特性
 * 4. style-loader：把 CSS 代码注入到 JavaScript 中，通过 DOM 操作去加载 CSS
 * 5. json-loader: 加载 JSON 文件（默认包含）
-* 6. ts-loader: babel-loader：把 ES6 转换成 ES5
+* 6. babel-loader：把 ES6 转换成 ES5
 * 7. ts-loader: 将 TypeScript 转换成 JavaScript
 * 8. less-loader：将less代码转换成CSS
 * 9. eslint-loader：通过 ESLint 检查 JavaScript 代码
@@ -55,6 +55,8 @@ webpack 的运行是一个串行的过程，从启动到结束一次会执行以
 * 6. webpack-bundle-analyzer: 可视化 Webpack 输出文件的体积 (业务组件、依赖第三方模块)
 
 ## 6、Loader和Plugin的区别
+
+[loader 和 plugin](/engineering/webpack/loaderAndPlugin.html)
 
 * 1. Loader 本质就是一个函数，在该函数中对接收到的内容进行转换，返回转换后的结果。 因为 Webpack 只认识 JavaScript，所以 Loader 就成了翻译官，对其他类型的资源进行转译的预处理工作。
 * 2. Plugin 就是插件，基于事件流框架 Tapable，插件可以扩展 Webpack 的功能，在 Webpack 运行的生命周期中会广播出许多事件，Plugin 可以监听这些事件，在合适的时机通过 Webpack 提供的 API 改变输出结果。

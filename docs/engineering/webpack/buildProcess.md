@@ -56,7 +56,7 @@ module.exports = {
 };
 ```
 
-完成上述步骤之后，则开始初始化Compiler编译对象，该对象掌控者webpack声明周期，不执行具体的任务，只是进行一些调度工作。
+完成上述步骤之后，则开始初始化Compiler编译对象，该对象**掌控着webpack生命周期**，不执行具体的任务，只是进行一些**调度**工作。
 
 ```js
 class Compiler extends Tapable{
