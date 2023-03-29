@@ -238,6 +238,7 @@ module.exports = {
         "stackQueue",
         "linkedList",
 
+        "linkedListFunc",
         "dichotomy",
         "divideVSDynamic",
         "greedyVSBacktracking",
