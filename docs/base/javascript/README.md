@@ -286,8 +286,6 @@ console.log(sum instanceof Function); // true
 
 * **其他**
 
-juejin.cn/post/691441
-
 ## 数据类型的4种判断方法
 
 ### typeof
@@ -350,9 +348,9 @@ console.log({} instanceof Object)
 
 小结
 
-不难看出，`instanceof` 可以用于引用类型的检测，但对于基本类型是不生效的;
+**`instanceof` 可以用于引用类型的检测，但对于基本类型是不生效的;**
 
-另外，**不能**用于检测 `null` 和 `undefined`， 会抛错。
+**不能用于检测 `null` 和 `undefined`， 会抛错。**
 
 ### constructor
 
