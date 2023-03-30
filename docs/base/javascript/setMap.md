@@ -66,14 +66,14 @@ console.log(set);
 
 #### 操作方法
 
-* size属性: 返回集合的元素个数。（类似数组的长度length）
-* add(value)方法: 向集合中添加一个元素value。注意：如果向集合中添加一个已经存在的元素，不报错但是集合不会改变。
-* delete(value)方法: 从集合中删除元素value。
-* has(value)方法: 判断value是否在集合中，返回true或false.
-* clear()方法: 清空集合
+* `size` 属性: 返回集合的元素个数。（类似数组的长度length）
+* `add(value)` 方法: 向集合中添加一个元素value。注意：如果向集合中添加一个已经存在的元素，不报错但是集合不会改变。
+* `delete(value)` 方法: 从集合中删除元素value。
+* `has(value)` 方法: 判断value是否在集合中，返回true或false.
+* `clear()` 方法: 清空集合
 
 ::: tip
-Array.from() 方法 或者 结构运算符（...）可将 Set 结构转化为数组。
+`Array.from()` 方法 或者 结构运算符（`...`）可将 Set 结构转化为数组。
 :::
 
 ```ts
@@ -89,12 +89,12 @@ console.log(array); // [1,2,3]
 
 #### 遍历方法（遍历顺序为插入顺序）
 
-* keys()：返回一个包含集合中所有**键**的迭代器；
-* values()：返回一个包含集合中所有**值**的迭代器；
-* entries()：返回一个包含Set对象中所有**键值对**迭代器
-* 支持forEach(callbackFn, thisArg)，循环执行callbackFn, 如果提供了 thisArg ,回调中的this会是这个参数，没有返回值。
-* Set 可默认遍历，默认迭代器生成函数是 values();
-* Set 可以使用 map, filter 等方法。
+* `keys()`：返回一个包含集合中所有**键**的迭代器；
+* `values()`：返回一个包含集合中所有**值**的迭代器；
+* `entries()`：返回一个包含Set对象中所有**键值对**迭代器
+* 支持`forEach(callbackFn, thisArg)`，循环执行callbackFn, 如果提供了 thisArg ,回调中的this会是这个参数，没有返回值。
+* Set 可默认遍历，默认迭代器生成函数是 `values()`;
+* Set 可以使用 `map`, `filter` 等方法。
 
 ```ts
 let set = new Set([1, 2, 8]);
@@ -155,8 +155,9 @@ WeakSet 对象允许将`弱引用对象`存储在一个集合中
 
 ### WeakSet 和 Set 的区别
 
-* WeakSet 只能存储对象引用，不能存放值，而 Set 对象都可以；
-* WeakSet 对象中储存的对象值都是被弱引的，即垃圾回收机制不考虑 WeakSet 对该对象的应用，如果没有其他的变量或者属性引用这个对象值，则这个对象会被垃圾回收掉（不考虑该对象还存在于 WeakSet 中），所以， WeakSet 对象有多少个成员元素，取决于垃圾回收机制有没有运行，运行前后成员个数有可能不一致，遍历结果之后，有的成员可能取不到（被垃圾回收了），WeakSet 对象是无法被遍历的（ES6 规定 WeakSet 不可遍历），也没办法拿到它包含的所有元素。
+* WeakSet 只能存储`对象引用`，`不能存放值`，而 Set 对象都可以；
+* WeakSet 对象中储存的对象值都是被弱引的，即垃圾回收机制不考虑 WeakSet 对该对象的应用，如果没有其他的变量或者属性引用这个对象值，则这个对象会被垃圾回收掉（不考虑该对象还存在于 WeakSet 中），所以， WeakSet 对象有多少个成员元素，取决于垃圾回收机制有没有运行，运行前后成员个数有可能不一致，遍历结果之后，有的成员可能取不到（被垃圾回收了）;
+* WeakSet 对象是`无法被遍历`的（ES6 规定 WeakSet 不可遍历），也没办法拿到它包含的所有元素。
 
 ### 属性
 
@@ -175,10 +176,14 @@ console.log(weakSet);
 
 ### 方法
 
-* add(value)：在 WeakSet 对象中添加一个元素 value;
-* has(value)：判断 WeakSet 对象中是否 包含value;
-* delete(value)：删除元素 value;
-* clear()：清空所有元素，（该方法已废弃）
+* `add(value)`：在 WeakSet 对象中添加一个元素 value;
+* `has(value)`：判断 WeakSet 对象中是否 包含value;
+* `delete(value)`：删除元素 value;
+* `clear()`：清空所有元素，（该方法已废弃）
+
+:::warning
+没有 `size` 属性！
+:::
 
 ```ts
 let ws = new WeakSet();
@@ -215,10 +220,10 @@ m.has(o); // false
 
 ### 与Object的区别
 
-* 一个 Object 的键只能是字符串或者 Symbols，但一个 Map 的键可以是任意值。
-* Map 中的键值是有序的（FIFO 原则），而添加到对象中的键则不是。
-* Map 的键值对个数可以从 size 属性获取，而 Object 的键值对个数只能手动计算。
-* Object 都有自己的原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突，而map健不可重复，如果键名冲突则会覆盖对应的值。
+* 一个 Object 的键只能是字符串或者 Symbols，但一个 Map 的键可以是`任意值`。
+* Map 中的键值是`有序`的（FIFO 原则），而添加到对象中的键则不是。
+* Map 的键值对个数可以从 `size` 属性获取，而 Object 的键值对个数只能手动计算。
+* Object 都有自己的原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突，而map健不可重复，如果`键名冲突则会覆盖`对应的值。
 
 ```ts
 let map = new Map();
@@ -285,10 +290,10 @@ console.log(map1, '==============', map2);
 
 * 如果 Map 的键是一个简单类型的值（数字、字符串、布尔值），则只要两个值严格相等，Map 将其视为一个键
 
-  * 0和-0就是一个键;
+  * `0`和`-0`就是`一个键`;
   * 布尔值true和字符串true则是两个不同的键;
   * undefined和null也是两个不同的键;
-  * 虽然NaN不严格相等于自身，但 Map 将其视为同一个键
+  * 虽然`NaN`不严格相等于自身，但 Map 将其视为`同一个键`
 
 ```ts
 let map = new Map();
@@ -310,18 +315,18 @@ map.get(NaN) // 123
 
 #### 操作方法
 
-* set(key, value)：向字典中添加新元素；
-* get(key)：通过键查找特定的数值并返回；
-* has(key)：判断字典中是否存在键key；
-* delete(key)：通过键 key 从字典中移除对应的数据；
-* clear()：将这个字典中的所有元素删除。
+* `set(key, value)`：向字典中添加新元素；
+* `get(key)`：通过键查找特定的数值并返回；
+* `has(key)`：判断字典中是否存在键key；
+* `delete(key)`：通过键 key 从字典中移除对应的数据；
+* `clear()`：将这个字典中的所有元素删除。
 
 ```ts
 const map = new Map([
             ['name', 'An'],
             ['des', 'JS']
         ]);
-console.log(map.entries())	// MapIterator {"name" => "An", "des" => "JS"}
+console.log(map.entries())// MapIterator {"name" => "An", "des" => "JS"}
 console.log(map.keys()) // MapIterator {"name", "des"}
 ```
 
@@ -331,7 +336,7 @@ Map 结构的默认遍历器接口（Symbol.iterator属性），就是entries方
 map[Symbol.iterator] === map.entries
 ```
 
-Map 结构转为数组结构，比较快速的方法是使用扩展运算符（...）。
+Map 结构转为数组结构，比较快速的方法是使用扩展运算符（`...`）。
 
 对于 forEach ，看一个例子
 
@@ -426,13 +431,13 @@ jsonToStrMap('{"name": "An", "des": "JS"}') // Map {"name" => "An", "des" => "JS
 
 ### WeakMap与Map的区别
 
-WeakMap 对象是一组键值对的集合，其中的键是弱引用对象，而值可以是任意。
+WeakMap 对象是一组键值对的集合，其中的键是`弱引用`对象，而值可以是任意。
 
 ::: warning 注意
-WeakMap 弱引用的只是键名，而不是键值。键值依然是正常引用。
+WeakMap 弱引用的只是`键名`，而不是键值。键值依然是正常引用。
 :::
 
-WeakMap 中，每个键对自己所引用对象的引用都是弱引用，在没有其他引用和该键引用同一对象，这个对象将会被垃圾回收（相应的key则变成无效的），所以，WeakMap 的 key 是不可枚举的。
+WeakMap 中，每个键对自己所引用对象的引用都是弱引用，在没有其他引用和该键引用同一对象，这个对象将会被垃圾回收（相应的key则变成无效的），所以，WeakMap 的 `key` 是`不可枚举`的。
 
 ### 用WeakMap来实现私有属性
 
