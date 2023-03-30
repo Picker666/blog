@@ -24,6 +24,7 @@ module.exports = {
         ],
       },
       { text: "Typescript", link: "/typescript/" },
+      { text: "ThreeJS", link: "/threeJS/"},
       { text: "手写", link: "/newFunction/" },
       { text: "源码分析", link: "/sourceAnalysis/" },
       { text: "React", link: "/react/" },
@@ -115,6 +116,7 @@ module.exports = {
         "questionAnswer",
         "arrayObject",
         "FEOptimization",
+        "collections"
       ],
       "/typescript/": [
         "",
@@ -124,6 +126,7 @@ module.exports = {
         "infer",
         "innerTool",
       ],
+      "/threeJS/": [""],
       "/sourceAnalysis/": [
         "",
         "reduxThunk",
