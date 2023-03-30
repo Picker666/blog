@@ -94,9 +94,24 @@ window.onpopstate 监听url的变化，并且可以获取存储在该历史记�
 
 怎么停止requestAnimationFrame？
 
-cancelAnimationFrame()接收一个参数 requestAnimationFrame默认返回一个id
+`cancelAnimationFrame()`接收一个参数 `requestAnimationFrame` 默认返回一个id
 
 ## 7、js中自定义事件的使用与触发
+
+### 7.1、Event()
+
+```js
+const myEvent = new Event(eventName, eventOptions);
+```
+
+* eventName : String类型，必选项，表示事件的名称;
+* eventOptions : Object类型，事件的可选配置项;
+
+|字段 | 说明 | 类型 | 默认值|
+| -- | ---| --- | --- |
+|bubbles| 事件是否冒泡 | Boolean | false|
+|bubbles | 事件是否冒泡 | Boolean |  false|
+|cancelable | 事件是否能被取消| Boolean | false|
 
 ```js
 var event = new Event('build');
@@ -107,6 +122,36 @@ elem.addEventListener('build', function (e) { ... }, false);
 // Dispatch the event.
 elem.dispatchEvent(event);
 ```
+
+### 7.2、CustomEvent()
+
+```js
+const myEvent = new CustomEvent(eventName, eventOptions);
+```
+
+* eventName : String类型，必选项，表示事件的名称
+* eventOptions : Object类型，事件的可选配置项
+
+|字段 | 说明 | 类型 | 默认值|
+| -- | ---| --- | --- |
+|detail| 事件中需要被传递的数据 | Any | null|
+|bubbles | 事件是否冒泡 | Boolean |  false|
+|cancelable | 事件是否能被取消| Boolean | false|
+
+```js
+const sendEvent = new CustomEvent("sendMsg", {detail:{
+  name: "Picker"
+}})
+document.addEventListener("sendMsg",print)
+document.dispatchEvent(sendEvent)
+function print(e) {
+  console.log(e.detail.name)
+}
+```
+
+::: tip
+Event和CustomEvent最大的区别在于，CustomEvent可以传递数据。
+:::
 
 ## 8、可控组件和非可控组件的选择
 
@@ -121,3 +166,8 @@ elem.dispatchEvent(event);
 | 固定输入格式                     | ❌              | ✅         |
 | 多个输入确定一个值               | ❌              | ✅         |
 | 动态的输入框（例如：小组成员）   | ❌              | ✅         |
+
+## 9、e.target和e.curerntTarget
+
+e.target 是触发事件的元素。
+e.currentTarget 是绑定事件的元素。
