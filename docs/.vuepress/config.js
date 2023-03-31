@@ -59,7 +59,8 @@ module.exports = {
         "grid",
         "center",
         "columnsLayout",
-        "hide"
+        "hide",
+        "clip"
       ],
       "/base/javascript/": [
         "",
