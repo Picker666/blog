@@ -59,6 +59,7 @@ module.exports = {
         "grid",
         "center",
         "columnsLayout",
+        "hide"
       ],
       "/base/javascript/": [
         "",
