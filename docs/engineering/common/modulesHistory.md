@@ -180,7 +180,80 @@ require(['jquery', './modules-a.js'], function($, modulesA) {
 
 但是，**当页面的模块划分比较细致的时候，可能存在同一个页面中对一个模块请求次数过多的情况**，导致运行效率低。
 
-## 7、ES Modules
+## 7、CMD （Common Module Definition）
+
+CMD是SeaJS 在推广过程中对模块定义的规范化产出。因此与AMD类似的，在使用CMD时，也需要引入第三方的库文件 ---- SeaJS。
+
+SeaJS也是主要解决两个问题：
+
+* 多个JS文件可能有依赖关系，被依赖的文件需要早于依赖它的文件加载到浏览器。
+* JS加载的时候，浏览器会停止渲染页面，加载文件越多，浏览器失去响应时间越长。
+
+通过上述特点，不难看出CMD与AMD非常相似，只不过在模块定义方式和模块加载时机上两者存在不同。
+
+```js
+define(factory);
+
+define({"uName":"xdl"});//factory是对象
+ 
+define('Hello world,my name is {{name}}.');    //factory是字符串
+
+
+define(function(require, exports, module) {
+  var aM = require('./aM');        // 引入aM模块，这里是相对路径
+  aM.doSomething();  
+
+
+// 异步加载一个模块，在加载完成时，执行回调
+  require.async('./aModule', function(aModule) {
+    aModule.doSomething();
+  });
+ 
+  // 异步加载多个模块，在加载完成时，执行回调
+  require.async(['./bModule', './cModule'], function(bModule, cModule) {
+    bModule.doSomething();
+    cModule.doSomething();
+  })
+
+  // 对外提供 uName 属性
+  exports.uName = 'xdl';
+ 
+  // 对外提供 doSomething 方法
+  exports.doSomething = function() {
+    console.log('Hello world!');
+  };
+
+  // 通过 return 直接提供接口
+  return {
+    uName: 'xdl',
+    doSomething: function() {
+        console.log('Hello world');
+    }
+  };
+
+  module.exports = {
+      uName: 'xdl',
+      doSomething: function() {
+          console.log('Hello world!');
+      }
+  }
+
+  // exports 是 module.exports 的一个引用
+  console.log(module.exports === exports); // true
+ 
+  // 重新给 module.exports 赋值为 XXXCLass 类的一个实例
+  module.exports = new XXXClass();
+ 
+  // exports 不再等于 module.exports
+  console.log(module.exports === exports); // false
+})
+```
+
+与之前介绍的 AMD 规范相比，CMD 规范在尽量保持简单同时，能够与 CommonJS 和 Node.js 的 Modules 规范保持很强的兼容性。
+
+通过 CMD 规范书写的模块，可以很容易在 Node.js 中运行。
+
+## 8、ES Modules
 
 * 在 Node.js 环境，遵循 CommonJs规范来组织模块；
 * 在浏览器环境中，遵循 ES Modules 规范。
