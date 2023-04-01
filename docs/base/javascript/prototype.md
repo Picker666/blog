@@ -4,11 +4,15 @@
 
 ## 原型 prototype 和 `__proto__`
 
-* 每个对象都有一个__proto__属性，并且指向它的prototype原型对象
+* 每个对象都有一个__proto__属性，并且指向它的创造类的prototype。
 * 每个构造函数都有一个prototype原型对象
   * prototype原型对象里的constructor指向构造函数本身
 
 ![prototype 和 __proto__ 关系示意图](/blog/images/base/prototype2.png)
+
+:::tip
+`prototype`和`__proto__`里存储的都是`对象的引用`，修改任何一个会影响所有的
+:::
 
 ### prototype 和 __proto__有什么用呢
 

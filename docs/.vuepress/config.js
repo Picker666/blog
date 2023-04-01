@@ -119,7 +119,8 @@ module.exports = {
         "questionAnswer",
         "arrayObject",
         "FEOptimization",
-        "collections"
+        "collections",
+        "upload"
       ],
       "/typescript/": [
         "",
