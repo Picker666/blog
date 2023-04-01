@@ -77,6 +77,7 @@ module.exports = {
         "setMap",
         "arrayPerformance",
         "prototype",
+        "inherit",
         "eventLoop",
         "Proxy",
         "Reflect",

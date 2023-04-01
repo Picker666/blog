@@ -12,7 +12,7 @@
 
 ### prototype 和 __proto__有什么用呢
 
-实例对象的__proto__指向构造函数的prototype，从而实现继承。
+**实例对象的__proto__指向构造函数的prototype，从而实现继承**。
 
 prototype对象相当于特定类型所有实例对象都可以访问的公共容器
 
