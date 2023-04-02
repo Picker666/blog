@@ -60,7 +60,9 @@ module.exports = {
         "center",
         "columnsLayout",
         "hide",
-        "clip"
+        "clip",
+        "pseudo",
+        "triangle"
       ],
       "/base/javascript/": [
         "",
