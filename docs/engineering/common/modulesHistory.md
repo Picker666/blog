@@ -1,5 +1,7 @@
 # 模块化进化史
 
+[CommonJS、AMD、CMD、ES6模块化区别详细总结](https://blog.csdn.net/weixin_45709829/article/details/124138115)
+
 ## 1、文件划分方式
 
 早期约定每个文件就是一个单独的模块，使用模块时可以通过 script 标签引入模块，然后就可以使用各个模块内的方法和变量。
@@ -127,15 +129,30 @@ window.modulesB = {
 
 ## 5、CommonJS
 
-CommonJS是Nodejs中所遵循的模块化规范，该规范一个文件就是一个模块，每个模块都有单独的作用域，通过 modules.exports导出成员，再通过 require 函数载入模块。
+CommonJS是`Nodejs`中所遵循的模块化规范，该规范一个文件就是一个模块，每个模块都有单独的作用域，在一个文件里面定义的变量、函数、类，都是私有的，对其他文件不可见.
+
+通过 `modules.exports`导出成员，再通过 `require` 函数载入模块。
 
 但是，在浏览器端会存在一些问题：
 
-CommonJS 是启动时同步加载模块，在浏览器端会导致大量同步请求，进而导致长时间页面空白。
+* CommonJS 是启动时**同步加载**模块，在浏览器端会导致**大量同步请求**，进而导致长时间页面空白。
+* 浏览器不兼容CommonJS的根本原因，在于缺少四个Node.js环境的变量。`module`、`exports`、`require`、`global` 只要能够提供这四个变量，浏览器就能加载 CommonJS 模块。
+
+::: warning
+
+* exports 是模块内的私有局部变量，它只是指向了 module.exports，所以直接对 exports **赋值是无效的**，这样只是让 exports 不再指向 module.exports了而已
+* require 命令的基本功能是，**读入并执行**一个 js 文件，然后返回该模块的 exports 对象；
+* 第一次加载某个模块时，Node.js 会缓存该模块。以后再加载该模块，就直接从缓存取出该模块的 module.exports 属性返回了
+* CommonJS 模块的加载机制是，require 的是被导出的**值的拷贝**。也就是说，一旦导出一个值，模块内部的变化就影响不到这个值。
+:::
+
+[前端科普系列-CommonJS](https://zhuanlan.zhihu.com/p/113009496)
 
 ## 6、AMD（Asynchronous Modules Definition）
 
 AMD是专门为浏览器端设计的一种规范，异步模块定义规范。
+
+它采用异步方式加载模块，模块的加载不影响它后面语句的运行。所有依赖这个模块的语句，都定义在回调函数中，等到加载完成之后，这个回调函数才会运行。
 
 ::: tip
 require.js
@@ -259,6 +276,21 @@ define(function(require, exports, module) {
 * 在浏览器环境中，遵循 ES Modules 规范。
 
 ES Modules 最初制定，很多浏览器并不支持，随着 webpack 等一系列的打包工具出现，逐渐被主力浏览器接受，并且浏览器逐步的支持原生 ES Modules。
+
+### 特点
+
+* 自动采用严格模式，忽略 ' use strict';
+* 每个 ESM 模块都是单独的私有作用域;
+* ESM 是通过 CORS 跨域请求 去请求外部 JS 模块的;
+* ESM 的 script 标签会延迟执行脚本 （等待网页渲染完成再执行脚本）;
+
+### ES Module用法和注意事项
+
+* 导出成员并不是一个字面量对象或里面的值，而是一个存放成员的**地址**，拿到成员会受到当前模块修改的影响；
+* 在外部导入的成员，导入的模块成员是一个只读成员；
+* import时不会去执行模块
+
+[ES Modules 参考](https://zhuanlan.zhihu.com/p/448054417)
 
 ```js
 // module.js
