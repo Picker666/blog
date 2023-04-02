@@ -53,9 +53,9 @@ const patches = patch(oldVNode, newVNode){
 
 基于策略一，
 
-* 将新旧两棵树逐层对比，找出那个节点需要更新
-* 如果节点是组件 就使用 Component diff
-* 如果节点是标签就看 Element diff
+* 将新旧两棵树**逐层对比**，找出那个节点需要更新
+* 如果节点是**组件** 就使用 `Component diff`
+* 如果节点是**标签**就看 `Element diff`
 
 React 对树的算法进行了简洁明了的优化，即对树进行分层比较，两棵树只会对**同一层次**的节点进行比较。
 
@@ -97,7 +97,7 @@ React 是基于组件构建应用的，对于组件间的比较所采取的策�
 :::tip
 对于同一类型的组件，有可能其 Virtual DOM 没有任何变化，如果能够确切知道这点，那么就可以节省大量的 diff 运算时间。
 
-因此，React允许用户通过`shouldComponentUpdate()`来判断该组件是否需要进行diff算法分析，
+因此，React允许用户通过`shouldComponentUpdate()`来判断该组件**是否需要进行diff算法分析**，
 
 但是如果调用了`forceUpdate`方法，shouldComponentUpdate则失效。
 :::
@@ -121,11 +121,11 @@ React 是基于组件构建应用的，对于组件间的比较所采取的策�
 * key 旧的不存在，新的存在，则为新增
 * 然后进入标签做 Tree diff（递归）
 
-当节点处于同一层级时，diff 提供了 3 种节点操作，分别为 INSERT_MARKUP (插入)、MOVE_EXISTING (移动)和 REMOVE_NODE (删除)。
+当节点处于同一层级时，diff 提供了 3 种节点操作，分别为 `INSERT_MARKUP` (插入)`、MOVE_EXISTING` (移动)和 `REMOVE_NODE` (删除)。
 
-* INSERT_MARKUP：新的组件类型不在旧集合里，即全新的节点，需要对新节点执行插入操作。
-* MOVE_EXISTING：旧集合中有新组件类型，且 element 是可更新的类型，generateComponentChildren 已调用receiveComponent ，这种情况下 prevChild=nextChild ，就需要做移动操作，可以复用以前的 DOM 节点。
-* REMOVE_NODE：旧组件类型，在新集合里也有，但对应的 element 不同则不能直接复用和更新，需要执行删除操作，或者旧组件不在新集合里的，也需要执行删除操作。
+* `INSERT_MARKUP`：新的组件类型不在旧集合里，即全新的节点，需要对新节点执行插入操作。
+* `MOVE_EXISTING`：旧集合中有新组件类型，且 element 是可更新的类型，generateComponentChildren 已调用receiveComponent ，这种情况下 prevChild=nextChild ，就需要做移动操作，可以复用以前的 DOM 节点。
+* `REMOVE_NODE`：旧组件类型，在新集合里也有，但对应的 element 不同则不能直接复用和更新，需要执行删除操作，或者旧组件不在新集合里的，也需要执行删除操作。
 
 #### （1）、没有key的diff
 
@@ -190,7 +190,7 @@ React针对这一现象提出了一种优化策略：允许开发者对同一层
 
 当然这种diff并非完美无缺的，我们来看这么一种情况：
 
-[element diff](/blog/images/react/diff11.png)
+![element diff](/blog/images/react/diff11.png)
 
 实际我们只需对D执行移动操作，然而由于D在旧集合中的位置是最大的，导致其他节点的oldIndex < maxIndex，造成D没有执行移动操作，而是A、B、C全部移动到D节点后面的现象。针对这种情况，官方建议：
 
@@ -202,7 +202,7 @@ React针对这一现象提出了一种优化策略：允许开发者对同一层
 
 ### key 一定提升性能?
 
-由于key的存在，react可以准确地判断出该节点在新集合中是否存在，这极大地提高了diff效率。我们在开发过中进行列表渲染的时候，若没有加key，react会抛出警告要求开发者加上key，就是为了提高diff效率。但是加了key一定要比没加key的性能更高吗？我们再来看一个例子：
+由于key的存在，react可以准确地判断出该节点在新集合中是否存在，这**极大地提高了diff效率**。我们在开发过中进行列表渲染的时候，若没有加key，react会抛出警告要求开发者加上key，就是为了提高diff效率。但是加了key一定要比没加key的性能更高吗？我们再来看一个例子：
 
 ```js
 现在有一集合[1,2,3,4,5],渲染成如下的样子：
@@ -253,7 +253,7 @@ React针对这一现象提出了一种优化策略：允许开发者对同一层
 通过上面的例子我们发现，虽然加了key提高了diff效率，但是未必一定提升了页面的性能。因此我们要注意这么一点：
 
 ::: tip
-对于简单列表页渲染来说，不加key要比加了key的性能更好
+对于**简单列表页渲染**来说，不加key要比加了key的性能更好
 :::
 
 根据上面的情况，最后我们总结一下key的作用：

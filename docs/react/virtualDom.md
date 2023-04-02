@@ -2,11 +2,11 @@
 
 ## 什么是虚拟DOM
 
-虚拟DOM(元素)是一个一般的js对象，准确的说是一个倒立的对象树
+虚拟DOM(元素)是一个一般的js对象，准确的说是一个**倒立的对象树**
 
-虚拟DOM保存了真实DOM的层次关系和基本属性，与真实DOM一一对应
+虚拟DOM保存了真实DOM的**层次关系**和**基本属性**，与真实DOM**一一对应**
 
-如果只是更新虚拟DOM,页面不会重绘，大大提高了绘制效率。
+如果只是更新虚拟DOM，页面**不会重绘**，大大提高了绘制效率。
 
 ## 为什么虚拟DOM更快
 
@@ -45,7 +45,7 @@ const cNode = {
 
 ## 虚拟DOM创建
 
-createElement方法可以帮我们创建一个虚拟DOM，来模仿你想要的真实DOM的结构
+`createElement`方法可以帮我们创建一个虚拟DOM，来模仿你想要的真实DOM的结构
 
 参数：
 
@@ -78,7 +78,7 @@ let virtualDOM = createElement('div',{id:'container'},[
 
 ## 虚拟DOM到真实的DOM
 
-render方法：render( virtualDOM, DOM )
+render方法：`render( virtualDOM, DOM )`
 
 render 方法可以将你的虚拟DOM解析成真实的DOM并渲染到页面上
 

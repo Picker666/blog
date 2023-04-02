@@ -4,13 +4,13 @@
 
 1、JavaScript语言的一大特点就是**单线程**，换言之就是同一个时间只能做一件事。其他任务都必须在后面排队等待。
 
-2、JavaScript 引擎和页面渲染引擎两个线程是**互斥**的，当其中一个线程执行时，另一个线程只能挂起等待。
+2、**JavaScript 引擎**和**页面渲染引擎**两个线程是**互斥**的，当其中一个线程执行时，另一个线程只能挂起等待。
 
 3、在这样的机制下，如果 JavaScript **线程**长时间地占用了主线程，那么渲染层面的更新就不得不长时间地**等待**，界面长时间不更新，会导致页面响应度变差，用户可能会感觉到**卡顿**。
 
 这正是 React 15 的 `Stack Reconciler` 所面临的问题，即是 **JavaScript 对主线程的超时占用问题**。
 
-`Stack Reconciler` 是一个**同步的递归**过程，使用的是 JavaScript 引擎自身的函数调用栈，它会一直执行到栈空为止，所以当 React 在渲染组件时，从开始到渲染完成整个过程是一气呵成的。如果渲染的组件比较庞大，js 执行会占据主线程较长时间，会导致页面响应度变差。
+`Stack Reconciler` 是一个**同步的递归**过程，使用的是 JavaScript 引擎自身的函数调用栈，它会一直执行到栈空为止，所以当 React 在渲染组件时，从开始到渲染完成整个过程是一气呵成的。如果渲染的组件比较庞大，js 执行会占据**主线程较长时间**，会导致页面**响应度变差**。
 
 4、而且所有的任务都是按照先后顺序，没有区分优先级，这样就会导致优先级比较高的任务无法被优先执行。
 
@@ -104,7 +104,7 @@ Fiber 把一个渲染任务分解为多个渲染任务，而不是一次性完�
 [React 团队 polyfill 的 requestIdleCallback](/react/requestIdleCallback.html)
 
 ::: tip
-`window.requestIdleCallback()` 方法插入一个函数，这个函数将在浏览器**空闲**时期被调用。这使开发者能够在主事件循环上执行 后台和低优先级工作，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。???
+`window.requestIdleCallback()` 方法插入一个函数，这个函数将在浏览器**空闲**时期被调用。这使开发者能够在**主事件循环上执行后台和低优先级工作**，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。???
 
 你可以在空闲回调函数中调用requestIdleCallback()，以便在下一次通过事件循环之前调度另一个回调。
 
@@ -157,7 +157,7 @@ Fiber 架构可以分为三层：
 * 当 B 任务完成渲染后，新一轮的调度开始，之前被中断的 A 任务将会被重新推入 Reconciler 层，继续它的渲染之旅，即“可恢复”。
 
 ::: tip
-Fiber 架构的核心即是**"可中断"**、**"可恢复"**、**"优先级"**
+Fiber 架构的核心即是**可中断**、**可恢复**、**优先级**
 :::
 
 ### Scheduler 调度器
@@ -204,15 +204,15 @@ Renderer根据Reconciler为虚拟 DOM 打的标记，同步执行对应的 DOM �
 
 ![生命周期](/blog/images/react/fiber1.awebp)
 
-* render 阶段：纯净且没有副作用，可能会被 React 暂停、终止或重新启动。
-* pre-commit 阶段：可以读取 DOM。
-* commit 阶段：可以使用 DOM，运行副作用，安排更新。
+* render 阶段：纯净且没有副作用，可能会被 React **暂停、终止或重新启动**。
+* pre-commit 阶段：**可以读取 DOM**，进行 Dom 操作，`getSnapshotBeforeUpdate`、 `useLayoutEffect` 会在这个阶段执行。
+* commit 阶段：可以使用 DOM，运行副作用，安排更新，**不可中断**。
 
 其中 pre-commit 和 commit 从大阶段上来看都属于 commit 阶段。
 
-在 render 阶段，React 主要是在内存中做计算，明确 DOM 树的更新点；
+在 render 阶段，React 主要是在内存中通过diff算法计算，明确 DOM 树的更新点和更新的类型；
 
-而 commit 阶段，则负责把 render 阶段生成的更新真正地执行掉。
+而 commit 阶段，则负责把 render 阶段生成的更新真正地执行掉，即渲染到页面。
 
 新老两种架构对 React 生命周期的影响主要在 render 这个阶段，这个影响是通过增加 Scheduler 层和改写 Reconciler 层来实现的。
 
@@ -226,7 +226,7 @@ componentWillUpdate
 componentWillReceiveProps
 ```
 
-由于 render 阶段是允许暂停、终止和重启的，这就导致 render 阶段的生命周期都有可能被重复执行，故也是废弃他们的原因之一。
+由于 render 阶段是允许**暂停、终止和重启**的，这就导致 render 阶段的生命周期都有可能被**重复执行**，故也是废弃他们的原因之一。
 
 ## 更新过程
 
@@ -268,7 +268,7 @@ performUnitOfWork方法将触发对 beginWork 的调用，进而实现对新 Fib
 
 #### "递阶段"
 
-首先从 rootFiber 开始向下深度优先遍历。为遍历到的每个 Fiber 节点调用beginWork方法。
+首先从 rootFiber 开始**向下深度优先遍历**。为遍历到的每个 Fiber 节点调用beginWork方法。
 
 ```js
 function beginWork(
@@ -306,9 +306,9 @@ completeWork 内部有 3 个关键动作:
 
 commit 阶段的主要工作（即 Renderer 的工作流程）分为三部分：
 
-* before mutation 阶段，这个阶段 DOM 节点还没有被渲染到界面上去，过程中会触发 getSnapshotBeforeUpdate，也会处理 useEffect 钩子相关的调度逻辑。
-* mutation 阶段，这个阶段负责 DOM 节点的渲染。在渲染过程中，会遍历 effectList，根据 flags（effectTag）的不同，执行不同的 DOM 操作。
-* layout 阶段，这个阶段处理 DOM 渲染完毕之后的收尾逻辑。比如调用 componentDidMount/componentDidUpdate，调用 useLayoutEffect 钩子函数的回调等。除了这些之外，它还会把 fiberRoot 的 current 指针指向 workInProgress Fiber 树。
+* `before mutation` 阶段，这个阶段 DOM 节点还没有被渲染到界面上去，过程中会触发 `getSnapshotBeforeUpdate`，也会处理 useEffect 钩子相关的调度逻辑（useLayoutEffect）。
+* `mutation` 阶段，这个阶段负责 DOM 节点的渲染。在渲染过程中，会遍历 effectList，根据 flags（effectTag）的不同，执行不同的 DOM 操作。
+* `layout` 阶段，这个阶段处理 DOM **渲染完毕之后的收尾逻辑**。比如调用 componentDidMount/componentDidUpdate，调用 useLayoutEffect 钩子函数的回调等。除了这些之外，它还会把 fiberRoot 的 current 指针指向 workInProgress Fiber 树。
 
 参考：
 
