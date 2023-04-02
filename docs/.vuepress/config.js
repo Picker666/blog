@@ -72,6 +72,7 @@ module.exports = {
         "copy",
         "promiseAll",
         "allSettled",
+        "promiseAsync",
         "arrayDeDuplication",
         "newConstructor",
         "setMap",
