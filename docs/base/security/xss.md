@@ -61,6 +61,13 @@ DOM based XSS通过恶意脚本修改页面的DOM节点来发起攻击，是发�
 
 * 标签过滤，如`<script>`、`<img>`、`<a>`标签等;
 * 编码，对字符< 、>、&、" 、' 、+、/等进行转义;
-* cookie防盗，将cookie设置为http-only,js脚本将无法读取到cookie信息;
+* cookie防盗，将cookie设置为**http-only**,js脚本将无法读取到cookie信息;
 * 纯前端渲染，明确innerText、setAttribute、style，将代码与数据分隔开;
 * 避免不可信的数据拼接到字符串中传递给这些API，如DOM中的内联事件监听器，`location`、`onclick`、`onload`、`onmouseover`等，`<a`>标签的`href`属性，`JavaScript`的`eval()`、`setTimeout()`、`setInterval()`等，都能把字符串作为代码运行。
+* 充分利用 CSP，
+  * 限制加载其他域下的资源文件，这样即使黑客插入了一个 JavaScript 文件，这个 JavaScript 文件也是无法被加载的；
+  * 禁止向第三方域提交数据，这样用户数据也不会外泄；
+  * 禁止执行内联脚本和未授权的脚本；
+  * 还提供了上报机制，这样可以帮助我们尽快发现有哪些 XSS 攻击，以便尽快修复问题。
+
+[详解](https://juejin.cn/post/6945277278347591688)

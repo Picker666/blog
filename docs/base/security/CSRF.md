@@ -8,7 +8,7 @@ cross site request forgery
 
 * 用户C浏览并登录信任网站A,产生cookie
 * 用户C未退出网站A，在同一个浏览器危险访问网站B
-* 网站B的页面存有一些攻击性的代码，会发出访问A的请求
+* 网站B的页面存有一些攻击性的代码，会发出访问A的请求，(默认带上 网站A 的登录态 Cookie)
 * 浏览器收到请求后，在用户不知情的情况下携带cookie访问网站A
 * A不知道请求是谁发的，浏览器会带上用户的cookie，所以A会根据用户的权限处理B发出的请求。这样就达到了攻击的目的。
 
@@ -18,5 +18,7 @@ cross site request forgery
 * 对Cookie设置SameSite属性。该属性表示Cookie不随着跨域请求发送，可以很大程度减少CSRF的攻击，但是该属性目前并不是所有浏览器都兼容。
 * 使用POST请求，避免使用GET，降低攻击风险，post请求攻击方需要构造一个form表单才可以发起请求，比get请求（img的src，a标签的href等等）的攻击方式复杂了一些，相对来说能降低风险，但不能阻止。
 * 检查HTTP中的referer字段，该字段记录了HTTP请求的来源地址
-* 在请求头中加入token验证字段，浏览器并不会自动携带Token去请求，且Token可以携带一段加密的jwt用作身份认证，这样进行CSRF的时候仅传递了cookie，并不能表明用户身份，网站即拒绝攻击请求。
+* **在请求头中加入token验证字段**，浏览器并不会自动携带Token去请求，且Token可以携带一段加密的jwt用作身份认证，这样进行CSRF的时候仅传递了cookie，并不能表明用户身份，网站即拒绝攻击请求。
 * 在http中自定义属性并验证。
+
+[前端安全之 CSRF 攻击原理和防护方法](https://blog.csdn.net/weixin_59124055/article/details/125253579)
