@@ -94,6 +94,7 @@ module.exports = {
         "workingPrinciple",
         "storage",
         "crossDomain",
+        "tokenSession",
         "browserCache",
         "cache",
         "serviceWorker",
