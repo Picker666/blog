@@ -50,7 +50,7 @@ Person.prototype.constructor === Person  //true
 
 ::: warning 注意
 
-* 1. 当`Object.prototype.__proto__` 已被大多数浏览器厂商所支持的今天，其存在和确切行为仅在ECMAScript 2015规范中被标准化为传统功能，以确保Web浏览器的兼容性。为了更好的支持，建议只使用 `Object.getPrototypeOf()`。
+* 1. 当`Object.prototype.__proto__` 已被大多数浏览器厂商所支持的今天，其存在和确切行为仅在ECMAScript 2015规范中被标准化为传统功能，以确保Web浏览器的兼容性。为了更好的支持，建议只使用 [Object.getPrototypeOf(a)(返回a的原型)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Object/getPrototypeOf)。
 * 2. Object.create(null) 新建的对象是没有__proto__属性的
 
 :::

@@ -187,3 +187,20 @@ e.currentTarget 是绑定事件的元素。
   * （2）http传输是明文的，HTTP协议不适合传输一些敏感信息，比如：信用卡号、密码等支付信息。而https是用ssl进行加密的，安全性更高。
   * （3）https要申请ca证书，一般免费证书较少，所以需要一定的费用，而http不需。
   * （4） http协议速度比https更快，因为较https而言，它不需要经过复杂的ssl握手。而https协议需要经过一些复杂的安全过程，页面响应速度会来得慢。
+
+## 12、说一下for…in 和 for…of的区别?
+
+* 1、for…of遍历获取的是对象的**键值**, for…in获取的是对象的**键名**;
+* 2、for…in会遍历对象的**整个原型链**, 性能非常差不推荐使用,而for…of只遍历**当前对象**不会遍历原型链;
+* 3、对于数组的遍历,for…in会返回数组中所有可枚举的属性(包括原型链上可枚举的属性),for…of只返回数组的下标对应的属性值;
+
+总结：for…in循环主要是为了遍历对象而生,不适用遍历数组; for…of循环可以用来遍历数组、类数组对象、字符串、Set、Map以及Generator对象
+
+## 13、Hash和history有什么区别
+
+* 1.hash就是指url后面的#号以及后面的字符，history没有带#；
+* 2.原理：
+  * (1) hash通过监听浏览器的onhaschange()事件变化，查找对应的路由规则；
+  * (2) history原理：理由H5的history中新增的两个API push State()和replace State() 和一个事件onpopstate监听url变化；
+* 3.hash能兼容到IE8，history只能兼容到IE10；
+* 4.由于hash值变化不会导致浏览器向服务器发出请求，而且hash改变会触发hashchange事件（hashchange只能改变#后面的url片段）；虽然hash路径出现在url中，但是不会出现在HTTP请求中，对后端完全没有影响，因此改变hash值不会重新加载页面，基本都是使用hash来实现前端路由的。
