@@ -116,6 +116,7 @@ module.exports = {
         "SQLInjection",
         "cookieHold",
         "clickJacking",
+        "logical"
       ],
       "/base/interview/": [
         "",
