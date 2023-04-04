@@ -183,6 +183,8 @@ module.exports = {
         "diff",
         "requestIdleCallback",
         "loadable",
+        "lazy",
+        "loadableComponent",
         "componentControlled",
         "react18"
       ],
