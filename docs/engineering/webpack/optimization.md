@@ -83,7 +83,7 @@ externals: {
 
 处理第三方库的姿势有很多：
 
-* Externals 会引发重复打包的问题；
+* Externals 会引发重复打包的问题；[详见](https://juejin.cn/post/6844903439999172622)
 * 而CommonsChunkPlugin 每次构建时都会重新构建一次 vendor；
 * 出于对效率的考虑，DllPlugin是最佳选择。
 
