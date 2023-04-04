@@ -182,6 +182,7 @@ module.exports = {
         "fiber",
         "diff",
         "requestIdleCallback",
+        "loadable",
         "componentControlled",
         "react18"
       ],
