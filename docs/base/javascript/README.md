@@ -352,6 +352,29 @@ console.log({} instanceof Object)
 
 **不能用于检测 `null` 和 `undefined`， 会抛错。**
 
+### isPrototypeOf()
+
+isPrototypeOf() 是 Object函数（类）的下的一个方法，用于判断当前对象是否为另外一个对象的原型，如果是就返回 true，否则就返回 false。
+
+这个函数理解的关键是在原型链上，这个据说是JavaScript的三座大山之一。
+
+```js
+let o = new Object();
+console.log(Object.prototype.isPrototypeOf(o)); // true
+
+function Human() {}
+let human = new Human();
+
+console.log(Human.prototype.isPrototypeOf(human)); // true
+// Human.prototype.__proto__ === Object.prototype
+// huamn.__proto__  === Human.prototype
+// huamn.__proto__.__proto__  === Object.prototype
+```
+
+与 instanceof， 两个表达的意思是一致的，就是写法不同。
+
+[JavaScript中isPrototypeOf函数详解](https://blog.csdn.net/chenjiebin/article/details/121121440)
+
 ### constructor
 
 ```js
