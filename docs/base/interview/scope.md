@@ -156,6 +156,28 @@ Foo.a(); // （3）
 * （2）、obj.a(); 调用的 obj 实例上的方法 a, 该实例是目前有两个a方法。一个是内部属性的方法，另一个是原型方法，二者重名，会优先调用实例内部的属性方法，所以输出2；
 * （3）、Foo.a(); 由于Foo通过new生成实例的时候，在Foo内部初始化时，覆盖了同名的静态方法，所以输出：1。
 
+## 原型链
+
+```js
+var F = function() {};
+Object.prototype.a = function() {
+  console.log('a');
+};
+Function.prototype.b = function() {
+  console.log('b');
+}
+var f = new F();
+f.a();
+f.b();
+F.a();
+F.b()
+
+a
+Uncaught TypeError: f.b is not a function
+a
+b
+```
+
 ## 运算中的类型转化
 
 ```js
