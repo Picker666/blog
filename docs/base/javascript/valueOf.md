@@ -12,6 +12,8 @@ console.log(typeof obj.valueOf());//boolean
 var a = true;
 console.log(a.valueOf());//true
 console.log(typeof a.valueOf());//boolean
+
+true.valueOf() // true
 ```
 
 如果是基本包装类型对应的基本类型，会返回原值。但这并不代表基本类型拥有 `valueOf()` 方法（基本类型不是对象，不拥有任何方法），而是在读取一个基本类型值时，后台会创建一个对应的基本包装类型的对象，从而调用一些方法。所以，基本类型“调用” `valueOf()` 方法时，实际上是先创建了一个对应的基本包装类型，由此基本包装类型调用 `valueOf()` ，最后返回了其对应的基本类型，看起来就好像是基本类型调用了 `valueOf()` 方法而得到了原始值。
@@ -26,6 +28,8 @@ console.log(typeof obj.valueOf());//string
 var a = "hello";
 console.log(a.valueOf());//hello
 console.log(typeof a.valueOf());//string
+
+'1'.valueOf() // 1
 ```
 
 同 1 ，`String` 基本包装类型和基本类型调用 `valueOf()` 方法都返回对应的基本类型。
@@ -40,9 +44,14 @@ console.log(typeof obj.valueOf());//number
 var a = 123;
 console.log(a.valueOf());//123
 console.log(typeof a.valueOf());//number
+
+1.valueOf() //Uncaught SyntaxError: Invalid or unexpected token
+(1).valueOf() // 1;
 ```
 
 同 1，`Number` 基本包装类型和基本类型调用 `valueOf()` 方法都返回对应的基本类型。
+
+[w为什么数字不能直接调用valueOf](/base/javascript/toString.html#_3、基本包装类型-number)
 
 ## 4、数组 `Array`
 
@@ -90,15 +99,20 @@ console.log(obj === obj.valueOf());//true
 
 ```js
 var obj = new Date();
-console.log(obj);//Wed May 10 2017 12:19:05 GMT+0800 (中国标准时间)
-console.log(obj.valueOf());//1494389910179
+console.log(obj);//Thu Apr 06 2023 16:51:34 GMT+0800 (中国标准时间)
+console.log(obj.valueOf());// 1680771111442
 console.log(obj === obj.valueOf());//false
 console.log(obj.getTime() === obj.valueOf());//true
 ```
+
+:::tip
+时间对象的 valueOf 方法会的是 时间的毫秒。
+:::
 
 ## Summary
 
 * 1、`undefined` 和 `null` 没有此方法（基本类型肯定没有方法，`String` 、`Number` 和`Boolean` 是因为有对应的基本包装类型，才可以调用方法）；
 * 2、基本包装类型和对应的基本类型，调用 `valueOf()` 返回对应的基本类型值；
-* 3、对象类型（除 `Date` 类型）返回原对象；
-* 4、`Date` 类型返回表示日期的毫秒数.
+* 3、数字不能直接调用 valueOf 方法，（如：1.valueOf）可以先赋值给变量再调用，或者使用**小括号**包括一下数字，才会转换成基本包装类型；
+* 4、对象类型（除 `Date` 类型）返回原对象；
+* 5、`Date` 类型返回表示日期的毫秒数.

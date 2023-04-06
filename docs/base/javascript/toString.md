@@ -7,11 +7,11 @@
 `toString` 方法的用法：`toString` 方法返回反映这个对象的字符串。
 
 ```js
-console.log("Picker".toString());//Picker
-console.log((1).toString());//1
-console.log([1,2].toString());//1,2
-console.log(new Date().toString());//Wed Dec 21 2016 20:35:48 GMT+0800 (中国标准时间)
-console.log(function(){}.toString());//function (){}
+console.log("Picker".toString());//'Picker'
+console.log((1).toString());//'1'
+console.log([1,2].toString());//'1,2'
+console.log(new Date().toString());//'Thu Apr 06 2023 16:56:52 GMT+0800 (中国标准时间)'
+console.log((function(){}).toString());//'function (){}'
 console.log(null.toString());//error
 console.log(undefined.toString());//error
 ```
@@ -45,6 +45,8 @@ console.log(typeof obj.toString());//string
 var a = true;
 console.log(a.toString());//"true"
 console.log(typeof a.toString());//string
+
+true.toString(); //"true"
 ```
 
 如果是基本包装类型对应的基本类型，会返回原值。但这并不代表基本类型拥有 `toString()` 方法【1】，而是在读取一个基本类型值时，后台会创建一个对应的基本包装类型的对象，从而调用一些方法。所以，基本类型“调用” `toString()` 方法时，实际上是先创建了一个对应的基本包装类型，由此基本包装类型调用 `toString()` 最后返回了其对应的字符串，看起来就好像是基本类型调用了 `toString()` 方法而得到了对应的字符串。
@@ -63,6 +65,8 @@ console.log(typeof obj.toString());//string
 var a = "hello";
 console.log(a.toString());//hello
 console.log(typeof a.toString());//string
+
+'picker'.toString() // 'picker
 ```
 
 同 1 ，String基本包装类型和基本类型调用 `toString()` 方法都返回对应的字符串。
@@ -77,12 +81,14 @@ console.log(typeof obj.toString());//string
 var a = 123;
 console.log(a.toString());//123
 console.log(typeof a.toString());//string
+
+1.toString() //Uncaught SyntaxError: Invalid or unexpected token
 ```
 
 同 1 ，Number基本包装类型和基本类型调用 `toString()` 方法都返回对应的字符串。
 
 ::: warning
-如果直接用整数调用时，要加上括号，否则会报错。因为整数后面的点会识别为小数点。浮点型不会报错。
+如果直接用整数调用时，**要加上括号**，否则会报错。因为整数后面的点会识别为**小数点**。浮点型不会报错。
 
 ```js
 console.log(123.toString());//Uncaught SyntaxError
@@ -169,9 +175,14 @@ console.log(typeof foo.toString());//string
 
 ## Summary
 
-* 1、`undefined` 和 `null` 没有此方法（基本类型肯定没有方法，`String` 、 `Number` 和 `Boolean` 只是因为有对应的基本包装类型，才可以调用方法）；
+* 1、`undefined` 和 `null` 没有此方法（**基本类型**肯定没有方法，`String` 、 `Number` 和 `Boolean` 只是因为有对应的基本包装类型，才可以调用方法）；
 * 2、`Date` 类型返回表示时间的字符串；
 * 3、`Object` 类型返回字符串 `“[object Object]”`。
+
+:::tip
+Object.prototype.toString.call(null); // '[object Null]'
+Object.prototype.toString.call(undefined); // '[object Undefined]'
+:::
 
 ## 与 `valueOf()` 对比
 
