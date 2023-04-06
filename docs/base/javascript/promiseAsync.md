@@ -15,7 +15,7 @@ async function 用来定义一个返回 AsyncFunction 对象的异步函数。�
 
 await 操作符用于等待一个 Promise 对象。它只能在异步函数 async function 中使用。
 
-* async/await是ES7新特性；
+* async/await是**ES7**新特性；
 * async/await是写异步代码的新方式，以前的方法有回调函数和Promise；
 * async/await是基于Promise实现的，它不能用于普通的回调函数；
 * async/await与Promise一样，是非阻塞的；
