@@ -356,6 +356,45 @@ export const a = ()=>{ console.log(666) }
 
 b方法直接删掉，这就是 Tree-Shaking 帮我们做的事情。删掉了没有用到的代码。
 
+Tree Shaking 是一个术语，在计算机中表示消除死代码，依赖于ES Module的静态语法分析（不执行任何的代码，可以明确知道模块的依赖关系）
+
+在webpack实现Tree shaking有两种不同的方案：
+
+* usedExports：通过标记某些函数是否被使用，之后通过Terser来进行优化的
+* sideEffects：跳过整个模块/文件，直接查看该文件是否有副作用
+
+两种不同的配置方案， 有不同的效果
+
+#### usedExports
+
+配置方法也很简单，只需要将usedExports设为true
+
+```js
+module.exports = {
+    ...
+    optimization:{
+        usedExports
+    }
+}
+```
+
+使用之后，没被用上的代码在webpack打包中会加入unused harmony export mul注释，用来告知 Terser 在优化时，可以删除掉这段代码
+
+#### sideEffects
+
+sideEffects用于告知webpack compiler哪些模块时有副作用，配置方法是在package.json中设置sideEffects属性
+如果sideEffects设置为false，就是告知webpack可以安全的删除未用到的exports
+如果有些文件需要保留，可以设置为数组的形式
+
+```js
+"sideEffecis":[
+    "./src/util/format.js",
+    "*.css" // 所有的css文件
+]
+```
+
+上述都是关于javascript的tree shaking，css同样也能够实现tree shaking
+
 ### 10、按需加载
 
 像vue 和 react spa应用，首次加载的过程中，由于初始化要加载很多路由，加载很多组件页面。会导致 首屏时间 非常长。一定程度上会影响到用户体验。所以我们需要换一种按需加载的方式。一次只加载想要看到的内容
@@ -548,3 +587,56 @@ module.exports = {
 这里我们还是推荐使用第三种方式，由polyfill.io 官方为我们提供的服务。
 
 我们可以先来使用polyfill.io 验证一下，在不同的User Agent，是会下发不同的polyfill。
+
+### 16、resolve.extensions
+
+resolve.extensions在导⼊语句没带⽂件后缀时，webpack会⾃动带上后缀后，去尝试查找⽂件是否存在。
+
+* 后缀尝试列表尽量的⼩
+* 导⼊语句尽量的带上后缀。
+
+如果想优化到极致的话，不建议用extensionx, 因为它会消耗一些性能。虽然它可以带来一些便利。
+
+### 17、抽离css
+
+借助mini-css-extract-plugin:本插件会将 CSS 提取到单独的文件中，为每个包含 CSS 的 JS 文件创建一个 CSS 文件，并且支持 CSS 和 SourceMaps 的按需加载。
+
+### 18、css代码压缩
+
+css-minimizer-webpack-plugin
+
+### 19、Html文件代码压缩
+
+html-minifier-terser
+
+### 20、文件大小压缩
+
+对文件的大小进行压缩，减少http传输过程中宽带的损耗
+
+compression-webpack-plugin
+
+### 21、css tree shaking
+
+```js
+const PurgeCssPlugin = require('purgecss-webpack-plugin')
+module.exports = {
+    ...
+    plugins:[
+        new PurgeCssPlugin({
+            path:glob.sync(`${path.resolve('./src')}/**/*`), {nodir:true}// src里面的所有文件
+            satelist:function(){
+                return {
+                    standard:["html"]
+                }
+            }
+        })
+    ]
+}
+```
+
+* paths：表示要检测哪些目录下的内容需要被分析，配合使用glob
+* 默认情况下，Purgecss会将我们的html标签的样式移除掉，如果我们希望保留，可以添加一个safelist的属性
+
+### 22、babel-plugin-transform-runtime减少ES6转化ES5的冗余
+
+Babel 插件会在将 ES6 代码转换成 ES5 代码时会注入一些辅助函数。在默认情况下， Babel 会在每个输出文件中内嵌这些依赖的辅助函数代码，如果多个源代码文件都依赖这些辅助函数，那么这些辅助函数的代码将会出现很多次，造成代码冗余。为了不让这些辅助函数的代码重复出现，可以在依赖它们时通过 require('babel-runtime/helpers/createClass') 的方式导入，这样就能做到只让它们出现一次。babel-plugin-transform-runtime 插件就是用来实现这个作用的，将相关辅助函数进行替换成导入语句，从而减小 babel 编译出来的代码的文件大小。
