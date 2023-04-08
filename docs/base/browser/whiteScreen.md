@@ -1,6 +1,8 @@
 # 前端性能优化之白屏时间
 
-[](https://cloud.tencent.com/developer/article/1508941)
+[性能优化之白屏时间](https://cloud.tencent.com/developer/article/1508941)
+
+[前端可以做的性能优化](https://juejin.cn/post/7194400984490049573)
 
 ## 白屏过程
 
