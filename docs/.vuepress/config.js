@@ -95,6 +95,7 @@ module.exports = {
         "storage",
         "crossDomain",
         "tokenSession",
+        "dnsPrefetch",
         "browserCache",
         "cache",
         "serviceWorker",
