@@ -57,6 +57,8 @@ module.exports = {
 }
 ```
 
+[私房菜](/engineering/common/eslintConfig.html)
+
 4、规则可以更改，见官网；
 
 5、package.json中配置检查命令行
