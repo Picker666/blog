@@ -87,7 +87,8 @@ module.exports = {
         "functionalProgramming",
         "generator",
         "eventModel",
-        "onLoadReady"
+        "onLoadReady",
+        "ajax"
       ],
       "/base/browser/": [
         "",
