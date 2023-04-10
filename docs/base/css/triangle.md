@@ -1,6 +1,9 @@
 # 纯css画一个三角形
 
+## 画个三角形
+
 ```css
+/* 方案一 */
  .triangle {
       width: 0px;
       height: 0px;
@@ -9,30 +12,56 @@
       border-left: 100px solid transparent;
       border-right: 100px solid transparent;
   }
+
+/* 方案二： */
+  #triangle1::before{
+    content: " ";
+    display: inline-block;
+    border-width: 40px 20px 0px;
+    border-style: solid;
+    border-color: orange transparent transparent;
+    width: 40px;
+}
   
 <div class="triangle"></div>
 ```
 
+## 画个梯形
+
 ```css
-   #triangle {
-        margin: 100px;
-        /* width: 100px;
-        height: 100px; */
-        background-color: pink;
-        position: relative;
-    }
+/* 方案一： */
+.ladderShaped {
+   display: inline-block;
+    border-width: 40px 20px 0px;
+    border-style: solid;
+    border-color: orange transparent transparent;
+    width: 60px;
+}
+/* 方案二： */
+.ladderShaped1 {
+  overflow: hidden;
+  height: 30px;
 
-    #triangle::before {
-        position: absolute;
-        content: "";
-        width: 0;
-        height: 0;
-        top: 0px;
-        left: 100px;
-        border-top: solid 50px transparent;
-        border-left: solid 50px pink;
-        border-bottom: solid 50px transparent;
-    }
-<div id='triangle'></div>
+   &::before{
+    content: " ";
+    display: inline-block;
+    border-width: 40px 20px 0px;
+    border-style: solid;
+    border-color: orange transparent transparent;
+    width: 40px;
+  }
+}
 
+/* 方案三： */
+.ladderShaped2 {
+
+   &::before{
+    content: " ";
+    display: inline-block;
+    border-width: 40px 20px 0px;
+    border-style: solid;
+    border-color: orange transparent transparent;
+    width: 60px;
+  }
+<div id='ladderShaped2'></div>
 ```
