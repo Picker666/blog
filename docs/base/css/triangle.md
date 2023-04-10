@@ -1,5 +1,7 @@
 # 纯css画一个三角形
 
+[demo](https://github.com/Picker666/blog-example/blob/main/src/component/Base/TriangleStyle.jsx)
+
 ## 画个三角形
 
 ```css
