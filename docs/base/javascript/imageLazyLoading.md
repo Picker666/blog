@@ -1,6 +1,6 @@
 # 图片懒加载 - 进入可视区域
 
-[demo](https://github.com/Picker666/blog-example/blob/main/src/component/base/imageLazyLoading.tsx)
+[demo](https://github.com/Picker666/blog-example/) (src/component/base/imageLazyLoading.tsx)
 
 ## 1、clientHeight + scroolTop > offsetTop
 
