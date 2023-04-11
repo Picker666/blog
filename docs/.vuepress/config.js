@@ -88,7 +88,8 @@ module.exports = {
         "generator",
         "eventModel",
         "onLoadReady",
-        "ajax"
+        "ajax",
+        "imageLazyLoading"
       ],
       "/base/browser/": [
         "",
