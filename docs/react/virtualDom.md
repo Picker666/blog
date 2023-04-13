@@ -80,7 +80,7 @@ let virtualDOM = createElement('div',{id:'container'},[
 
 render方法：`render( virtualDOM, DOM )`
 
-render 方法可以将你的虚拟DOM解析成真实的DOM并渲染到页面上
+`render` 方法可以将你的虚拟DOM解析成真实的DOM并渲染到页面上
 
 参数：
 

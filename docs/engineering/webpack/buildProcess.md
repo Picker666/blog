@@ -1,5 +1,17 @@
 # webpack的构建流程
 
+1、调用webpack(config)，初始化拿到webpack.config.js中的配置信息和命令行中的参数，并合并起来；
+2、以合并后的配置信息作为实例化 Compiler 构造函数的参数，创建 compiler 实例，compiler 实例中包含：开始编译run，和各个事件的广播方法；
+3、从 配置参数中拿到 plugins 的实例，并注册，对象执行apply(compiler)方法，函数执行 pluginFunc.call(compiler, compiler);
+4、开始编译，执行run(), 创建 compilation 编译对象，构建方法build，还有存储编译之后的模块 modules、最终生成的chunks，assets等等；执行 compilation.build()，开始构建；
+5、读取entries 配置信息，并根据入口文件，遍历编译；
+6、通过 fs 文件系统获取到文件内容；
+7、获取loader信息，逐个匹配找出对应的loader，并遍历执行，并返回执行结果；
+8、将loader执行之后的文件进行编译，生成AST静态语法树，识别 require 语法，找到依赖项，并放入modules.dependences中，并根据ast重新生成代码；
+9、根据modules.dependences 中的依赖递归执行 6- 8，并将最终的结果输出到 modules 中，至此编译完成；
+10、根据入口文件和modules生成chunk；
+11、遍历chunk，输出文件；
+
 ## 运行流程
 
 webpack 的运行流程是一个串行的过程，它的工作流程就是将各个插件串联起来。
