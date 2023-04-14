@@ -85,6 +85,23 @@ console.log(obj1.a, obj2.a)
 
 :::
 
+:::tip
+typeof 判断的原理
+
+在 javascript 的最初版本中，使用的 32 位系统，为了性能考虑使用低位存储了变量的类型信息：
+
+* 000：对象
+* 1：整数
+* 010：浮点数
+* 100：字符串
+* 110：布尔
+
+有 2 个值比较特殊：
+
+* undefined：用 - （−2^30）表示。
+* null：对应机器码的 NULL 指针，一般是全零。
+:::
+
 #### 1、null
 
 现在很多书籍把`null`解释成空对象，是一个对象类型。然而在早期`JavaScript`的版本中使用的是 32 位系统，考虑性能问题，使用低位存储变量的类型信息，`000`开头代表对象，而`null`就代表全零，所以将它错误的判断成`Object`，虽然后期内部判断代码已经改变，但`null`类型为`object`的判断却保留了下来，至于`null`具体是什么类型，属于仁者见仁智者见智，你说它是一个`bug`也好，说它是空对象，是对象类型也能理解的通。
@@ -374,6 +391,15 @@ console.log(Human.prototype.isPrototypeOf(human)); // true
 与 instanceof， 两个表达的意思是一致的，就是写法不同。
 
 [JavaScript中isPrototypeOf函数详解](https://blog.csdn.net/chenjiebin/article/details/121121440)
+
+### Object.getPrototypeOf()
+
+要返回其原型的对象。
+
+```js
+let arr = [];
+Object.getPrototypeOf(arr) === Array.prototype;
+```
 
 ### constructor
 
