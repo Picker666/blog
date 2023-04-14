@@ -1,5 +1,7 @@
 # JavaScript几种继承方式
 
+[demo 代码](https://github.com/Picker666/blog-example) `src/base/inherit`
+
 ## 1、原型链继承
 
 在原型链继承里涉及到`构造函数`、`原型`和`实例`；
