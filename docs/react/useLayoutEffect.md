@@ -6,9 +6,13 @@
 
 基本上90%的情况下,都应该用这个,这个是在render结束后,你的callback函数执行,但是不会block browser painting,算是某种异步的方式吧,但是class的 `componentDidMount` 和 `componentDidUpdate` 是同步的,在render结束后就运行, `useEffect` 在大部分场景下都比class的方式性能**更好**。
 
+useEffect 在渲染时是 **异步**执行，并且要等到浏览器将所有变化渲染到屏幕后才会被执行。
+
 * `useLayoutEffect` 在浏览器渲染前执行
 
 这个是用在处理DOM的时候,当你的 useEffect 里面的操作需要处理DOM,并且会改变页面的样式,就需要用这个,否则可能会出现出现闪屏问题, `useLayoutEffect` 里面的callback函数会在DOM更新完成后立即执行,但是会**在浏览器进行任何绘制之前运行完成**，阻塞了浏览器的绘制。
+
+useLayoutEffect 在渲染时是 **同步**执行，其执行时机与 componentDidMount，componentDidUpdate 一致。在DOM更新完成后，里面的callback函数会立即执行，但是会在浏览器进行任何绘制之前运行完成，阻塞了浏览器的绘制。
 
 特点：
 
