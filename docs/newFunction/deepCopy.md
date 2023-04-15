@@ -147,7 +147,7 @@ function deepClone(obj, hash = new WeakMap()) {
 
 ## 循环引用的深copy
 
-### 方案一：
+### 方案一
 
 :::tip
 for-in遍历对象所有的可枚举属性，包括**原型**;
@@ -224,7 +224,7 @@ const deepCopy2 = (data, map = new Map()) => {
 };
 ```
 
-### 方案三：
+### 方案三
 
 将 Date，RegExp归为对象进行遍历
 
@@ -291,9 +291,9 @@ const handleClick = () => {
 
 两个问题：
 
-1、symbal 属性没有遍历；（Object.getOwnpropertySymbal(), Reflect.ownKeys()）
-2、for in 遍历了 prototype上的属性，一下方法被放置到实例中；（Object.getOwnPropertyNames() ）
-3、不可枚举属性没有copy （Reflect.ownKeys()）
+* 1、symbal 属性没有遍历；（Object.getOwnpropertySymbal(), Reflect.ownKeys()）
+* 2、for in 遍历了 prototype上的属性，一下方法被放置到实例中；（Object.getOwnPropertyNames() ）
+* 3、不可枚举属性没有copy （Reflect.ownKeys()）
 
 :::tip
 Reflect.ownKeys()返回所有自有属性key，不管是否可枚举，但不包括继承自原型的属性;
