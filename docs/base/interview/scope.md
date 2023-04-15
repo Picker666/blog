@@ -204,3 +204,70 @@ Javascript 中所有对象基本都是先调用 valueOf 方法,如果不是数�
 
 * 'a'++'b'
 后面的 ‘+’ 将作为一元操作符，如果操作数是字符串，将调用Number 方法将该操作数转为数值，如果操作时无法转为数值，则为 NaN。
+
+### 时间循环机制
+
+```js
+console.log('script start')
+
+async function async1() {
+    await async2()
+    console.log('async1 end')
+}
+async function async2() {
+    console.log('async2 end')
+}
+async1()
+
+setTimeout(function() {
+    console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+console.log('Promise')
+resolve()
+})
+.then(function() {
+console.log('promise1')
+})
+.then(function() {
+console.log('promise2')
+})
+
+// script start => async2 end => Promise => script end => async1 end => promise1 => promise2 => setTimeout
+
+//=====================================
+
+console.log('script start')
+
+async function async1() {
+await async2()
+console.log('async1 end')
+}
+async function async2() {
+console.log('async2 end')
+return Promise.resolve().then(()=>{
+  console.log('async2 end1')
+})
+}
+async1()
+
+setTimeout(function() {
+console.log('setTimeout')
+}, 0)
+
+new Promise(resolve => {
+console.log('Promise')
+resolve()
+})
+.then(function() {
+console.log('promise1')
+})
+.then(function() {
+console.log('promise2')
+})
+
+console.log('script end')
+
+// script start => async2 end => Promise => script end =>async2 end1 => promise1 => promise2 => async1 end => setTimeout
+```
