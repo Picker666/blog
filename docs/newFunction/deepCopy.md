@@ -147,6 +147,24 @@ function deepClone(obj, hash = new WeakMap()) {
 
 ## 循环引用的深copy
 
+### 方案一：
+
+:::tip
+for-in遍历对象所有的可枚举属性，包括**原型**;
+
+ps：for-in和for-of的区别
+
+* for in 遍历的是数组的索引（即键名），for of遍历的是数组元素值;
+* for in 得到对象的key or 数组 or 字符串的下标;
+* for of 得到对象的value or 数组 or 字符串的值;
+
+hasOwnProperty 遍历可枚举属性;（返回一个布尔值，只能判断自有属性是否存在，对于继承属性会返回false，因为它不查找原型链的函数）
+
+getOwnPropertyNames() 返回可枚举属性和不可枚举属性;（不包括prototype属性，不包括symbol类型的key）
+
+getOwnPropertySymbols() 返回symbol类型的key属性；（不关心是否可枚举，返回对象自身的所有Symbol属性组成的数组）
+:::
+
 ```js
 const deepCopy = (data, keyMap?: Map<unknown, unknown>) => {
   if (!keyMap) {
@@ -177,7 +195,7 @@ const deepCopy = (data, keyMap?: Map<unknown, unknown>) => {
 };
 ```
 
-方案二
+### 方案二
 
 ```js
 const deepCopy2 = (data, map = new Map()) => {
@@ -205,5 +223,242 @@ const deepCopy2 = (data, map = new Map()) => {
   return newData;
 };
 ```
+
+### 方案三：
+
+将 Date，RegExp归为对象进行遍历
+
+```js
+const deepCopy = (data, mp = new Map()) => {
+  let copyedData;
+
+  if (typeof data === 'object' && data !== null) {
+    const dataValue = mp.get(data);
+    if (dataValue) {
+      return dataValue;
+    }
+
+    mp.set(data, data);
+    copyedData = new data.constructor();
+
+    for (let key in data) {
+      copyedData[key] = deepCopy(data[key], mp);
+    }
+  } else {
+    copyedData = data;
+  }
+
+  return copyedData;
+};
+
+const handleClick = () => {
+  const obj = {
+    name: 'picker666',
+    age: 22,
+    sex: '男',
+    hobby: ['跑步', '读书', '睡觉'],
+    fn: function () {
+      console.log(this.name);
+    },
+    friends: [11, 2, 3, { name: 'picker', age: 18 }],
+    time: new Date(),
+    reg: new RegExp(/D{9,19}/gi),
+    id: Symbol('picker'),
+  };
+
+  function People(name) {
+    this.name = name;
+  }
+  People.prototype.eat = function () {
+    console.log(`${this.name} eat any thing!`);
+  };
+  obj[Symbol('picker666')] = 'picker666';
+  obj.love = new People('Christine');
+
+  Object.defineProperty(obj, 'learning', {
+    enumerable: false,
+    value: 666,
+  });
+
+  obj.other = obj;
+
+  console.log('obj: ', obj);
+  const targetData = deepCopy(obj);
+  console.log('targetData: ', targetData);
+  console.log(new Date(targetData.time).getTime());
+};
+```
+
+两个问题：
+
+1、symbal 属性没有遍历；（Object.getOwnpropertySymbal(), Reflect.ownKeys()）
+2、for in 遍历了 prototype上的属性，一下方法被放置到实例中；（Object.getOwnPropertyNames() ）
+3、不可枚举属性没有copy （Reflect.ownKeys()）
+
+:::tip
+Reflect.ownKeys()返回所有自有属性key，不管是否可枚举，但不包括继承自原型的属性;
+:::
+
+![三个问题](/images/newFunction/deepCopy1.png)
+
+### 方案四
+
+```js
+const deepCopy = (data, mp = new Map()) => {
+  let copyedData;
+
+  if (typeof data === 'object' && data !== null) {
+    const dataValue = mp.get(data);
+    if (dataValue) {
+      return dataValue;
+    }
+
+    mp.set(data, data);
+    copyedData = new data.constructor();
+
+    if (Array.isArray(data)) {
+      copyedData = data.map((item) => deepCopy(item, mp));
+    } else {
+      const normalAttrs = Object.getOwnPropertyNames(data);
+      const symbalAttrs = Object.getOwnPropertySymbols(data);
+      [...normalAttrs, ...symbalAttrs].forEach((attr) => {
+        copyedData[attr] = deepCopy(data[attr], mp);
+      });
+    }
+  } else {
+    copyedData = data;
+  }
+
+  return copyedData;
+};
+
+const handleClick = () => {
+  const obj = {
+    name: 'picker666',
+    age: 22,
+    sex: '男',
+    hobby: ['跑步', '读书', '睡觉'],
+    fn: function () {
+      console.log(this.name);
+    },
+    friends: [11, 2, 3, { name: 'picker', age: 18 }],
+    time: new Date(),
+    reg: new RegExp(/D{9,19}/gi),
+    id: Symbol('picker'),
+  };
+
+  function People(name) {
+    this.name = name;
+  }
+  People.prototype.eat = function () {
+    console.log(`${this.name} eat any thing!`);
+  };
+  obj[Symbol('picker666')] = 'picker666';
+  obj.love = new People('Christine');
+
+  Object.defineProperty(obj, 'learning', {
+    enumerable: false,
+    value: 666,
+  });
+
+  obj.other = obj;
+
+  console.log('obj: ', obj);
+  const targetData = deepCopy(obj);
+  console.log('targetData: ', targetData);
+  console.log(new Date(targetData.time).getTime());
+};
+```
+
+Object.getOwnPropertyNames(data) + Object.getOwnPropertySymbols(data)
+
+解决了1，2的问题；但是不可枚举属性不可遍历；
+
+### 方案五
+
+Reflect.ownKeys();
+
+:::warning
+Object.getOwnPropertyNames(data) + Object.getOwnPropertySymbols(data) !== Reflect.ownKeys(data);
+:::
+
+```js
+const deepCopy = (data, mp = new Map()) => {
+  let copyedData;
+
+  if (typeof data === 'object' && data !== null) {
+    const dataValue = mp.get(data);
+    if (dataValue) {
+      return dataValue;
+    }
+
+    mp.set(data, data);
+    copyedData = new data.constructor();
+
+    if (Array.isArray(data)) {
+      copyedData = data.map((item) => deepCopy(item, mp));
+    } else {
+      const reflectKeys = Reflect.ownKeys(data);
+      reflectKeys.forEach((attr) => {
+        copyedData[attr] = deepCopy(data[attr], mp);
+      });
+    }
+  } else {
+    copyedData = data;
+  }
+
+  return copyedData;
+};
+```
+
+![一个小瑕疵](/images/newFunction/deepCopy2.png)
+
+不可枚举属性变成可枚举的！
+
+![一个小瑕疵](/images/newFunction/deepCopy3.png)
+
+这个问题不大，如果有必要可以设置成不可枚举属性；
+
+```js
+propertyIsEnumerable() // 判断属性是否可枚举
+Object.defineProperty(person,'age',{
+    enumerable:true //可以被枚举
+})
+
+const deepCopy = (data, mp = new Map()) => {
+  let copyedData;
+
+  if (typeof data === 'object' && data !== null) {
+    const dataValue = mp.get(data);
+    if (dataValue) {
+      return dataValue;
+    }
+
+    mp.set(data, data);
+    copyedData = new data.constructor();
+
+    if (Array.isArray(data)) {
+      copyedData = data.map((item) => deepCopy(item, mp));
+    } else {
+      const reflectKeys = Reflect.ownKeys(data);
+      reflectKeys.forEach((attr) => {
+        copyedData[attr] = deepCopy(data[attr], mp);
+
+        if (!Object.propertyIsEnumerable.call(data, attr)) {
+          Object.defineProperty(copyedData, attr, {
+            enumerable: false,
+          });
+        }
+      });
+    }
+  } else {
+    copyedData = data;
+  }
+
+  return copyedData;
+};
+```
+
+![完美](/images/newFunction/deepCopy4.png)
 
 [dom 地址](https://github.com/Picker666/blog-example/blob/main/src/component/newFunction/DeepCopy.tsx)
