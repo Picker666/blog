@@ -53,6 +53,7 @@ module.exports = {
       "/base/html/": ["", "deferAsync"],
       "/base/css/": [
         "",
+        'selectorWeight',
         "BFC",
         "flexBox",
         "flexItemSetting",
