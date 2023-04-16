@@ -5,21 +5,45 @@ sidebarDepth: 3
 
 ## 是什么
 
+### Promise
+
 Promise是ES6中的一个内置对象，实际是一个构造函数，是JS中进行异步编程的新的解决方案。
 
+特点：
+
 * 通常用来解决异步调用问题；
-* 解决多层回调嵌套的方案；
+* 解决多层回调嵌套的方案（回调地狱）；
 * 提高代码可读性、更便于维护。
+* 可并行调用。
+
+缺点：
+
+* 1、无法取消Promise，一旦新建它就会立即执行，无法中途取消；
+* 2、如果不设置回调函数，Promise内部抛出的错误，不会反应到外部；
+* 3、当处于Pending状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将完成）；
+* 4、Promise 真正执行回调的时候，定义 Promise 那部分实际上已经走完了，所以 Promise的报错堆栈上下文不太友好。
+
+### async/await
 
 async function 用来定义一个返回 AsyncFunction 对象的异步函数。异步函数是指通过事件循环异步执行的函数，它会通过一个隐式的 Promise 返回其结果，。如果你在代码中使用了异步函数，就会发现它的语法和结构会更像是标准的同步函数。
 
 await 操作符用于等待一个 Promise 对象。它只能在异步函数 async function 中使用。
+
+特点：
 
 * async/await是**ES7**新特性；
 * async/await是写异步代码的新方式，以前的方法有回调函数和Promise；
 * async/await是基于Promise实现的，它不能用于普通的回调函数；
 * async/await与Promise一样，是非阻塞的；
 * async/await使得异步代码看起来像同步代码，这正是它的魔力所在。
+
+缺点：
+
+* 1、async/await无法处理promise返回的reject对象，要借助try...catch...，或者使用then();
+* 2、await只能串行，做不到并行;
+* 3、全局捕获错误必须用window.onerror，不像Promise可以专用window.addEventListener('unhandledrejection', function)，而window.onerror会捕获各种稀奇古怪的错误，造成系统浪费
+* 4、try...catch...内部的变量无法传递给下一个try...catch...
+* 5、async/await无法简单实现Promise的各种原生方法，比如.race()之类。
 
 ## 区别
 
