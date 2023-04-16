@@ -21,4 +21,4 @@ cross site request forgery
 * **在请求头中加入token验证字段**，浏览器并不会自动携带Token去请求，且Token可以携带一段加密的jwt用作身份认证，这样进行CSRF的时候仅传递了cookie，并不能表明用户身份，网站即拒绝攻击请求。
 * 在http中自定义属性并验证。
 
-[前端安全之 CSRF 攻击原理和防护方法](https://blog.csdn.net/weixin_59124055/article/details/125253579)
+[前端安全之 CSRF 攻击原理和防护方法](https://juejin.cn/post/6844904021308735502#heading-74)
