@@ -139,6 +139,7 @@ module.exports = {
         "tsAdvanced2",
         "infer",
         "innerTool",
+        "practice"
       ],
       "/threeJS/": [""],
       "/sourceAnalysis/": [

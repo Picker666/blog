@@ -12,6 +12,8 @@
 * 10、根据入口文件和modules生成chunk；
 * 11、遍历chunk，输出文件；
 
+[webpack的构建流程](https://blog.csdn.net/gogo2027/article/details/127532122)
+
 ## 运行流程
 
 webpack 的运行流程是一个串行的过程，它的工作流程就是将各个插件串联起来。
