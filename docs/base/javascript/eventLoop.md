@@ -142,6 +142,94 @@ new Promise((resolve, reject) => {
 
 ```
 
+:::warning
+
+* 1.每执行完一个宏任务后 都会将微任务清空 然后再从宏任务队列中取出第一个宏任务执行；
+* 2.宏任务是到时间了才会放在宏任务队列；
+* 3.微任务是立刻放入到微任务队列中的。
+:::
+
+```js
+console.log('1');
+ 
+setTimeout(function() {
+    console.log('2');
+    process.nextTick(function() {
+        console.log('3');
+    })
+    new Promise(function(resolve) {
+        console.log('4');
+        resolve();
+    }).then(function() {
+        console.log('5')
+    })
+})
+process.nextTick(function() {
+    console.log('6');
+})
+new Promise(function(resolve) {
+    console.log('7');
+    resolve();
+}).then(function() {
+    console.log('8')
+})
+ 
+setTimeout(function() {
+    console.log('9');
+    process.nextTick(function() {
+        console.log('10');
+    })
+    new Promise(function(resolve) {
+        console.log('11');
+        resolve();
+    }).then(function() {
+        console.log('12')
+    })
+})
+
+// 1768 2435 9 11 10 12
+
+console.log('1');
+ 
+setTimeout(function() {
+    console.log('2');
+    process.nextTick(function() {
+        console.log('3');
+    })
+    new Promise(function(resolve) {
+        console.log('4');
+        resolve();
+    }).then(function() {
+        console.log('5')
+    })
+}, 1000)
+process.nextTick(function() {
+    console.log('6');
+})
+new Promise(function(resolve) {
+    console.log('7');
+    resolve();
+}).then(function() {
+    console.log('8')
+})
+ 
+setTimeout(function() {
+    console.log('9');
+    process.nextTick(function() {
+        console.log('10');
+    })
+    new Promise(function(resolve) {
+        console.log('11');
+        resolve();
+    }).then(function() {
+        console.log('12')
+    })
+})
+// 1768 9 11 10 12 2435 
+```
+
+[参考](https://blog.csdn.net/qq_33207292/article/details/102624553)
+
 ## 为什么
 
 **为什么会有 macrotask 和 microtask 及其对应的任务队列**？
