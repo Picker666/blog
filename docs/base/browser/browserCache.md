@@ -166,7 +166,7 @@ Cache-Control 可以在**请求头或者响应头**中设置，并且可以组�
 
 Last-Modified 表示本地文件最后修改日期，If-Modified-Since 会将 Last-Modified 的值发送给服务器，询问服务器在该日期后资源是否有更新，有更新的话就会将新的资源发送回来，否则返回 304 状态码
 
-但是 Last-Modified 存在一些弊端：
+但是 Last-Modified 存在一些**弊端**：
 
 * 如果本地打开缓存文件，即使没有对文件进行修改，但还是会造成 Last-Modified 被修改，服务端不能命中缓存导致发送相同的资源
 * 因为 Last-Modified 只能**以秒计时**，如果在不可感知的时间内修改完成文件，那么服务端会认为资源还是命中了，不会返回正确的资源
@@ -176,6 +176,11 @@ Last-Modified 表示本地文件最后修改日期，If-Modified-Since 会将 La
 * ETag 和 If-None-Match
 
 ETag 类似于文件指纹，If-None-Match 会将当前 ETag 发送给服务器，询问该资源 ETag 是否变动，有变动的话就将新的资源发送回来。并且 ETag 优先级比 Last-Modified 高。
+
+Etag 也存在一些**问题**:
+
+* 每个服务器上 Etag 的值都不一样，因此在考虑负载平衡时，最好不要设置 Etag 属性;
+* ETag 是根据静态文件内容计算出来的 hash值，很多情况下并不会用哈希来计算ETag，这会严重浪费服务器端资源。
 
 以上就是缓存策略的所有内容了，
 
