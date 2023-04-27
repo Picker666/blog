@@ -107,6 +107,7 @@ module.exports = {
         "UDP",
         "TCP",
         "https",
+        "http&https",
         "httpVersion",
         "renderPrinciple",
         "urlToRender",
