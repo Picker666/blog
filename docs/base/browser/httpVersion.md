@@ -77,7 +77,7 @@ http1.1支持长连接和请求的流水线(pipelining),在一个TCP链接上可
 
 ## HTTP1.1 的缺陷
 
-* 1、高延迟 — 队头阻塞(Head-Of-Line Blocking)
+* 1、高延迟 — [队头阻塞(Head-Of-Line Blocking)](https://zhuanlan.zhihu.com/p/363194611)
 * 2、无状态特性 — 阻碍交互
 * 3、明文传输 — 不安全性
 * 4、不支持服务端推送
