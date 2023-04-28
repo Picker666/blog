@@ -461,4 +461,51 @@ const deepCopy = (data, mp = new Map()) => {
 
 ![完美](/images/newFunction/deepCopy4.png)
 
+### 方案五 优化
+
+如果以上的例子中在copy之后执行一下代码，会怎样？
+
+```js
+obj.temp = '999';
+```
+
+![bug](/images/newFunction/deepCopy5.png)
+
+```js
+const deepCopy5 = (data, mp = new WeakMap()) => {
+  let copyedData;
+
+  if (typeof data === 'object' && data !== null) {
+    const dataValue = mp.get(data);
+    if (dataValue) {
+      return dataValue;
+    }
+
+    // mp.set(data, data); 
+    copyedData = new data.constructor();
+
+    mp.set(data, copyedData); // 改为缓存copy后的新对象
+
+    if (Array.isArray(data)) {
+      copyedData = data.map((item) => deepCopy5(item, mp));
+    } else {
+      const reflectKeys = Reflect.ownKeys(data);
+      reflectKeys.forEach((attr) => {
+        copyedData[attr] = deepCopy5(data[attr], mp);
+
+        if (!Object.propertyIsEnumerable.call(data, attr)) {
+          Object.defineProperty(copyedData, attr, {
+            enumerable: false,
+          });
+        }
+      });
+    }
+  } else {
+    copyedData = data;
+  }
+
+  return copyedData;
+};
+```
+
 [dom 地址](https://github.com/Picker666/blog-example/blob/main/src/component/newFunction/DeepCopy.tsx)
