@@ -55,13 +55,13 @@ bar()
 
 上文说到的 callback queue 中包含了调用 WebAPIs 时注册的各种 callback，通常是指下面这些 callback。
 
-* 各种 dom 监听事件注册的 callback
-* 定时器注册的 callback
-* XMLHttpRequest（ajax）注册的 callback
-* requestAnimationFrame 注册的 callback
-* postMessage 注册的 callback
+* 各种 dom **监听事件**注册的 callback
+* **定时器**注册的 callback
+* `XMLHttpRequest（ajax）`注册的 callback
+* `requestAnimationFrame` 注册的 callback
+* `postMessage` 注册的 callback
 * 通过 I/O 进行文件读取时注册的 callback （Node 中独有）
-* setImmediate 中注册的 callback（Node 中独有）
+* `setImmediate` 中注册的 callback（Node 中独有）
 
 通过上面列出来的这些 WebAPIs 注册的 callback，也通常被称为 **macrotasks（宏任务）**。会被放到 macrotasks queue（宏任务队列）中，对应上文图中的 callback queue，下文也称 task queue。
 
@@ -76,6 +76,8 @@ V8 的 stack 加上 macrotasks queue，它的执行过程有一个特别重要�
 * .then
 * .catch
 * .finally
+* MutationObersve
+* async/await
 
 ```js
 new Promise((resolve, reject) => {
