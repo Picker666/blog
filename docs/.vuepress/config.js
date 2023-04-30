@@ -109,6 +109,7 @@ module.exports = {
         "https",
         "http&https",
         "httpVersion",
+        "getPost",
         "renderPrinciple",
         "urlToRender",
         "garbageCollection",
