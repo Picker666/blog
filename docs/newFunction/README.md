@@ -187,3 +187,35 @@ Function.prototype.newBind = function (context) {
     }
 }
 ```
+
+完整版：
+
+```js
+Function.prototype.newBind = function () {
+  if (typeof this !== 'function') {
+    throw new Error('只有方法才能调用哦！');
+  }
+
+  const arg = [...arguments];
+  const _this = arg.shift();
+
+  const key = Symbol('fn');
+  _this[key] = this;
+
+  function F() {
+    const params = [...arg, ...arguments];
+    if (this instanceof F) {
+      _this[key] = this;
+    }
+    const result = _this[key](...params);
+
+    delete [key];
+
+    return result;
+  }
+
+  F.prototype = this.prototype;
+
+  return F;
+};
+```
