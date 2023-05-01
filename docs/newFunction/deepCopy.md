@@ -461,7 +461,7 @@ const deepCopy = (data, mp = new Map()) => {
 
 ![完美](/images/newFunction/deepCopy4.png)
 
-### 方案五 优化
+### 方案五 优化一
 
 如果以上的例子中在copy之后执行一下代码，会怎样？
 
@@ -507,5 +507,52 @@ const deepCopy5 = (data, mp = new WeakMap()) => {
   return copyedData;
 };
 ```
+
+### 方案五 优化二
+
+关于正则的处理
+
+![bug](/images/newFunction/deepCopy6.png)
+
+```js
+const deepCopy6 = (data, mp = new Map()) => {
+    let newData = data;
+    if (typeof data === 'object' && data !== null) {
+      const cd = mp.get(data);
+      if (cd) {
+        return cd;
+      }
+
+      let copyObj = new data.constructor();
+      if (data instanceof RegExp) {
+        copyObj = new data.constructor(data);
+      }
+
+      mp.set(data, copyObj);
+      if (Array.isArray(data)) {
+        newData = data.map((item) => deepCopy6(item, mp));
+      } else {
+        const keys = Reflect.ownKeys(data);
+
+        keys.forEach((item) => {
+          const copyValue = deepCopy6(data[item], mp);
+          copyObj[item] = copyValue;
+          // eslint-disable-next-line no-prototype-builtins
+          if (!data.propertyIsEnumerable(item)) {
+            Object.defineProperty(copyObj, item, {
+              enumerable: false,
+            });
+          }
+        });
+
+        newData = copyObj;
+      }
+    }
+
+    return newData;
+  };
+  ```
+
+![bug](/images/newFunction/deepCopy7.png)
 
 [dom 地址](https://github.com/Picker666/blog-example/blob/main/src/component/newFunction/DeepCopy.tsx)
