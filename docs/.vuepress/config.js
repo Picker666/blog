@@ -67,6 +67,7 @@ module.exports = {
       ],
       "/base/javascript/": [
         "",
+        "ECMAScript",
         "scope",
         "closure",
         "toString",
