@@ -254,7 +254,7 @@ import(/* webpackPreload: true */ 'lodash').then(({ default: _ }) => {
 <link rel="preload" href="xxxxx"> 
 ```
 
-### 6、happypack多进程编译
+### 6、happypack多线程编译
 
 我们都知道nodejs是单线程。无法一次性执行多个任务。这样会使得所有任务都排队执行。happypack可以根据cpu核数优势，建立子进程child_process,充分利用多核优势解决这个问题。提高了打包的效率。
 
