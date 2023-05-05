@@ -217,6 +217,7 @@ module.exports = {
         "dynamicImport",
         "externals",
         "interview",
+        "dynamicImportPrinciple"
       ],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", "principle"],
