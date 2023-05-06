@@ -281,6 +281,7 @@ module.exports = {
         "shuffle",
 
         "sum",
+        "dynamicProgram1"
       ],
     },
   },
