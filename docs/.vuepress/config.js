@@ -205,7 +205,7 @@ module.exports = {
         "mergeOrRebase",
         "catchUp",
       ],
-      "/engineering/common/": ["", "standard", "modulesHistory", "packTool", "Helmet", "firstPageOp"],
+      "/engineering/common/": ["", "standard", "modulesHistory", "packTool", "Helmet", "firstPageOp", "packageManage"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
       "/engineering/webpack/": [
         "",
