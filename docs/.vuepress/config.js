@@ -282,7 +282,8 @@ module.exports = {
 
         "sum",
         "dynamicProgram1",
-        "dynamicProgram2"
+        "dynamicProgram2",
+        "dynamicProgram3"
       ],
     },
   },
