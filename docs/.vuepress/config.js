@@ -140,7 +140,8 @@ module.exports = {
         "",
         "RAIL",
         "WebPageTest",
-        "lighthouse"
+        "lighthouse",
+        "renderOptimizetion"
       ],
       "/typescript/": [
         "",
