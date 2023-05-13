@@ -21,6 +21,7 @@ module.exports = {
           { text: "浏览器", link: "/base/browser/" },
           { text: "安全", link: "/base/security/" },
           { text: "Interview", link: "/base/interview/" },
+          { text: "Performance", link: "/base/performance/" },
         ],
       },
       { text: "Typescript", link: "/typescript/" },
@@ -134,6 +135,12 @@ module.exports = {
         "FEOptimization",
         "collections",
         "upload"
+      ],
+      "/base/performance/":[
+        "",
+        "RAIL",
+        "WebPageTest",
+        "lighthouse"
       ],
       "/typescript/": [
         "",
