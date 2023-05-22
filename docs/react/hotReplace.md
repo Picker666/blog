@@ -11,7 +11,7 @@
 * 9、当 HMR 失败后，回退到 live reload 操作，也就是进行浏览器刷新来获取最新打包代码。
 
 * 1、文件发生更新，webpack打包生成新的模块和新的hash；
-* 2、webpack-dev-server 监听到文件更新，和打包过程，并把更新信息告知浏览器（hash）；
+* 2、webpack-dev-server 监听到文件更新和打包过程，并把更新信息告知浏览器（hash）；
 * 3、浏览器通过 ajax 请求获取 本次更新 的详细信息；
 * 4、浏览器通过 Jsonp 的方式获取到更新的模块；
 * 5、HotModulePlugin 对比新旧模块和新旧模块的依赖，并更新。
