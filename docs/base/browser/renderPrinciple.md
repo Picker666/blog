@@ -94,7 +94,7 @@
 
 从上图中我们可以发现，即使列表很长，但是渲染的 DOM 元素永远只有那么几个，当我们滚动页面的时候就会实时去更新 DOM，这个技术就能顺利解决这道经典面试题。如果你想了解更多的内容可以了解下这个 [react-virtualized](https://github.com/bvaughn/react-virtualized)。
 
-[一个利用虚拟滚动实现的 可编辑table](https://github.com/Picker666/blog-example/tree/main/src/component/CalcTable)
+[一个利用虚拟滚动实现的 可编辑table](https://github.com/Picker666/blog-example/tree/main/src/component/practice/CalcTable)
 
 ## 五、什么情况阻塞渲染
 

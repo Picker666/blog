@@ -15,3 +15,6 @@
 * 3、浏览器通过 ajax 请求获取 本次更新 的详细信息；
 * 4、浏览器通过 Jsonp 的方式获取到更新的模块；
 * 5、HotModulePlugin 对比新旧模块和新旧模块的依赖，并更新。
+
+[](https://zhuanlan.zhihu.com/p/30669007)
+[](https://blog.csdn.net/bigname22/article/details/127362168)
