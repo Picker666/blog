@@ -106,6 +106,7 @@ module.exports = {
         "serviceWorker",
         "workbox",
         "httpCode",
+        "HSTS",
         "UDP",
         "TCP",
         "https",
