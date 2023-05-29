@@ -223,6 +223,7 @@ module.exports = {
         "optimization",
         "loaderAndPlugin",
         "AST",
+        "HMR",
         "dynamicImport",
         "externals",
         "interview",
