@@ -91,3 +91,5 @@ useEffect(() => {
 |         `[]`         |  `componentDidMount` |      `componentWillUnmount`      |
 |   `[dependencies]`   | **`componentDidMount`** 和 `dependencies` 触发的 `componentDidUpdate`  | `dependencies` 触发的 `componentWillUpdate` 和 `componentWillUnmount`|
 |     `undefined`      | **`componentDidMount`** 和 所有更新触发的 `componentDidUpdate`  | 所有更新触发的 `componentWillUpdate` 和 `componentWillUnmount`|
+
+[useEffect 源码](https://jishuin.proginn.com/p/763bfbd5b44f)
