@@ -5799,6 +5799,11 @@
   dependencies:
     "find-up" "^4.0.0"
 
+"pnpm@^8.6.0":
+  "integrity" "sha512-uMaWGXlvG+m5NIJaR4JEEenChbg+1AP4zVpqs4PEcZg4uH+lXMTd/X/lirKZA+TC0w0d+++y3btINcwyKsuwAA=="
+  "resolved" "https://registry.npmjs.org/pnpm/-/pnpm-8.6.0.tgz"
+  "version" "8.6.0"
+
 "portfinder@^1.0.13", "portfinder@^1.0.26":
   "integrity" "sha512-Se+2isanIcEqf2XMHjyUKskczxbPH7dQnlMjXX6+dybayyHvAf/TCgyMRlzf/B6QDhAEFOGes0pzRo3by4AbMA=="
   "resolved" "https://registry.npmjs.org/portfinder/-/portfinder-1.0.28.tgz"

@@ -204,7 +204,8 @@ module.exports = {
         "lazy",
         "loadableComponent",
         "componentControlled",
-        "react18"
+        "react18",
+        "nextRenderWay"
       ],
       "/git/": [
         "",
