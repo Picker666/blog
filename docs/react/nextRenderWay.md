@@ -83,10 +83,8 @@ getStaticProps无法访问传入请求（如查询参数或HTTP标头），因�
 * 不能在**非page**文件下使用
 * 不能作为组件的属性
 
-::: waring
-
+:::tip
 按需生成，过多的生成将会降低build速度
-
 :::
 
 ## ISR(Incremental Static Regeneration)
