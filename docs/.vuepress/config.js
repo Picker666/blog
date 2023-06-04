@@ -205,7 +205,8 @@ module.exports = {
         "loadableComponent",
         "componentControlled",
         "react18",
-        "nextRenderWay"
+        "nextRenderWay",
+        "nextImages"
       ],
       "/git/": [
         "",
