@@ -225,6 +225,14 @@ m.has(o); // false
 * Map 的键值对个数可以从 `size` 属性获取，而 Object 的键值对个数只能手动计算。
 * Object 都有自己的原型，原型链上的键名有可能和你自己在对象上的设置的键名产生冲突，而map健不可重复，如果`键名冲突则会覆盖`对应的值。
 
+* 初始化与使用 
+* Key order
+* Map 可以 forEach 迭代，Object不行
+* 序列化和解析， Map JSON.stringify 之后的结果是 '{}'。
+* Map 对象在涉及频繁添加和删除键值对的场景中表现更好，而普通对象没有优化。
+
+[参考](https://blog.csdn.net/snsHL9db69ccu1aIKl9r/article/details/124010243)
+
 ```ts
 let map = new Map();
     let s = {
