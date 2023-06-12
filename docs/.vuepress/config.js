@@ -92,7 +92,8 @@ module.exports = {
         "eventModel",
         "onLoadReady",
         "ajax",
-        "imageLazyLoading"
+        "imageLazyLoading",
+        "webWorker"
       ],
       "/base/browser/": [
         "",
