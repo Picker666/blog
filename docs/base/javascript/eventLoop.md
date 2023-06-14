@@ -257,3 +257,52 @@ stack 的执行**不可打断**，所以如果执行耗时较长的同步代码�
 ## 延申
 
 React 16 之后引入了一个新的概念 concurrentMode，并通过引入 Filber 将之前的递归式遍历替换为可打断的链表遍历，它能利用宏任务（React 中使用的是 postMessage、requestAnimationFrame）来分解渲染任务，也使之前的递归式不可打断的渲染流程变成可打断，在必要的时候，阻塞 js 的执行，将渲染权利交给浏览器，是浏览器可以继续渲染，大幅度减少了卡顿的情况。
+
+## 题
+
+```js
+const first = () => (new Promise((resolve, reject) => {
+    console.log(3);
+    let p = new Promise((resolve, reject) => {
+        console.log(7);
+        setTimeout(() => {
+            console.log(1);
+        }, 0);
+        setTimeout(() => {
+            console.log(2);
+            resolve(3);
+        }, 0)
+        resolve(4);
+    });
+    resolve(2);
+    p.then((arg) => {
+        console.log(arg, 5); // 1 bb
+    });
+    setTimeout(() => {
+        console.log(6);
+    }, 0);
+}))
+first().then((arg) => {
+    console.log(arg, 7); // 2 aa
+    setTimeout(() => {
+        console.log(8);
+    }, 0);
+});
+setTimeout(() => {
+    console.log(9);
+}, 0);
+console.log(10);
+
+// 3
+// 4 7
+// 31 10
+// 16 4 5
+// 23 2 7
+// undefined
+// 6 1
+// 9 2
+// 19 6
+// 29 9
+// 25 8
+
+```
