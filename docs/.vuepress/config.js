@@ -70,6 +70,7 @@ module.exports = {
         "",
         "ECMAScript",
         "scope",
+        "var",
         "closure",
         "toString",
         "valueOf",
