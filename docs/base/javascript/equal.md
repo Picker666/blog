@@ -72,6 +72,12 @@ var a = {
 if(a==1 && a==2 && a==3) {
   console.log('true'); // 输出true
 }
+
+// 利用数组的特性：可以看到数组 toString 会调用本身的 join 方法，这里把自己的join方法该写为shift,每次返回第一个元素，而且原数组删除第一个值，正好可以使判断成立。
+var a = [1,2,3];
+// a.join = a.shift;
+a.toString = a.shift;
+console.log(a == 1 && a == 2 && a == 3); // true
 ```
 
 **代码分析**：
@@ -81,3 +87,18 @@ if(a==1 && a==2 && a==3) {
 3. 判断`a==2`时，第二次调用`valueOf()`方法，此时`value`等于2，判断`2==2`，继续向下走
 4. 判断`a==3`时，第三次调用`valueOf()`方法，此时`value`等于3，判断`3==3`，`if`判断结束
 5. `if`条件判断为`true && true && true`，执行`console.log('true')`，打印`true`
+
+## 拓展
+
+```js
+// a === 1 && a === 2 && a === 3
+
+var val = 0;
+Object.defineProperty(window, 'a', {
+  get: function() {
+    return ++val;
+  }
+});
+
+console.log(a === 1 && a === 2 && a === 3); // true
+```
