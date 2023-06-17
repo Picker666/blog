@@ -484,6 +484,22 @@ const obj2 = {}
 assert.equal(ClassWithPrivateSlot.hasPrivateSlot(obj2), false)
 ```
 
+判断某个属性在不在该对象中；
+
+```js
+const arr = [1, 2, 3, 4];
+0 in arr; // true;
+4 in arr; // false
+
+const obj = {name: 'Picker', age: 18};
+'name' in obj // true
+obj.name = undefined;
+'name' in obj // true
+
+delete obj.age
+'age' in obj; // false
+```
+
 ### 3、模块中的顶层 await
 
 ```js
