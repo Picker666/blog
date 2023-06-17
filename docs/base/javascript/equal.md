@@ -1,6 +1,6 @@
-# == 和 ===
+# == 、=== 和 Object.is
 
-如何你对上面的例子还一知半解，那么我们来详细介绍一下`==`和`===`的规则以及区别。
+来详细介绍一下`==`和`===`的规则以及区别。
 
 ## ===严格相等
 
@@ -29,6 +29,22 @@ console.log('1'===1); // 输出false
 1 == '[object Object]'
 ```
 
+## Object.is()
+
+和 === 基本一致，除了一下几个：
+
+```js
++0 === -0 // true;
+Object.is(+0, -0); // false
+
+NaN === NaN; //false
+Object.is(NaN, NaN);// true
+```
+
+总结：
+
+![总结：](/blog/images/base/equal1.png)
+
 ## 转boolean
 
 除了`undefined`、`null`、`false`、`0`、`-0`、`NaN`和空字符串转换成`false`以外，其他所有值都转换成`true`，包括所有对象。
@@ -36,6 +52,7 @@ console.log('1'===1); // 输出false
 ## 对象转原始类型
 
 对象转原始类型，会调用内置的[ToPrimitive]函数，对于该函数而言，其逻辑如下：
+
 1. 是否已经是原始类型，是则直接返回
 2. 调用`valueOf()`，如果转换为原始类型，则返回
 3. 调用`toString()`，如果转换为原始类型，则返回
@@ -58,7 +75,7 @@ var obj = {
 console.log(obj + 1); // 输出4
 ```
 
-## 对象转原始类型应用
+## a==1&&a==2&&a==3
 
 ```js
 // 问：如何使if(a==1&&a==2&&a==3) {console.log('true')};正确打印'true'
