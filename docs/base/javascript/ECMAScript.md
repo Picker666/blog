@@ -48,6 +48,8 @@ for...of语句在可迭代对象（包括 Array，Map，Set，String，TypedArra
 
 ### 10、Symbol
 
+[Symbol 详解](/base/javascript/symbol.html)
+
 ### 11、迭代器（Iterator）/ 生成器（Generator）
 
 ### 12、Set/WeakSet
