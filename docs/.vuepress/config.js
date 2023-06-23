@@ -39,6 +39,7 @@ module.exports = {
           { text: "Webpack", link: "/engineering/webpack/" },
           { text: "Vite", link: "/engineering/vite/" },
           { text: "Umi", link: "/engineering/umi/" },
+          { text: "qiankun", link: "/engineering/qiankun/" },
         ],
       },
       { text: "设计模式", link: "/designPatterns/" },
@@ -239,6 +240,7 @@ module.exports = {
       ],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", "principle"],
+      "/engineering/qiankun/": [""],
       "/designPatterns/": [
         "",
         "factoryPattern",
