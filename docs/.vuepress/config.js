@@ -240,7 +240,7 @@ module.exports = {
       ],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", "principle"],
-      "/engineering/qiankun/": [""],
+      "/engineering/qiankun/": ["", "buildProject"],
       "/designPatterns/": [
         "",
         "factoryPattern",
