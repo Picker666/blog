@@ -164,6 +164,8 @@ module.exports = {
         "useModal",
         "reselect",
         "useState",
+        "qiankun",
+        "qiankunPrefetch"
       ],
       "/newFunction/": [
         "",
