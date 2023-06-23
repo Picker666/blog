@@ -307,6 +307,7 @@ let sum = function(sum1,sum2) {
 console.log(sum instanceof Function); // true
 ```
 
+* [undefined 奇闻](/base/javascript/undefined.html)
 * **其他**
 
 ## 数据类型的4种判断方法
