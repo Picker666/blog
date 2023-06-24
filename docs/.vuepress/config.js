@@ -166,7 +166,8 @@ module.exports = {
         "useState",
         "qiankun",
         "qiankunPrefetch",
-        "qiankunLoadApp"
+        "qiankunLoadApp",
+        "qiankunSandbox"
       ],
       "/newFunction/": [
         "",

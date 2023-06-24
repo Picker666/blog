@@ -110,7 +110,7 @@ const autoDowngradeForLowVersionBrowser = (configuration: FrameworkConfiguration
           '[qiankun] Setting singular as false may cause unexpected behavior while your browser not support window.Proxy',
         );
       }
-    //  Proxy 不存在 将设置 loose：true - 使用传统沙箱， 但是传统沙箱也是基于 Proxy，为什么？
+    //  Proxy 不存在 将设置 loose：true - 使用SnapshotSandbox 快照沙箱
       return { ...configuration, sandbox: typeof sandbox === 'object' ? { ...sandbox, loose: true } : { loose: true } };
     }
 
