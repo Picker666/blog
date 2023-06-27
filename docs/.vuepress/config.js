@@ -186,6 +186,7 @@ module.exports = {
         "loading",
         "loginTimeout",
         "eventEmiter",
+        "compose"
       ],
       "/react/": [
         "",
