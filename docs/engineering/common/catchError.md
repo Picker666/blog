@@ -149,7 +149,7 @@ app.config.errorHandler = (error, instance, info) {
 errorhandler 会阻止错误走向 window.onerror。
 :::
 
-# 8、react - ErrorBoundary
+## 8、react - ErrorBoundary
 
 React 16+ 引入，可以监听所有下级组件的报错，同时降级展示UI。
 
