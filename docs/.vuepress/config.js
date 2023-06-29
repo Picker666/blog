@@ -228,7 +228,7 @@ module.exports = {
         "mergeOrRebase",
         "catchUp",
       ],
-      "/engineering/common/": ["", "standard", "modulesHistory", "packTool", "Helmet", "firstPageOp", "packageManage"],
+      "/engineering/common/": ["", "standard", "modulesHistory", "packTool", "Helmet", "firstPageOp", "packageManage", "catchError"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
       "/engineering/webpack/": [
         "",
