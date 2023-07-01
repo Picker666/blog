@@ -227,6 +227,7 @@ module.exports = {
         "rebase",
         "mergeOrRebase",
         "catchUp",
+        "reset"
       ],
       "/engineering/common/": ["", "standard", "modulesHistory", "packTool", "Helmet", "firstPageOp", "packageManage", "catchError"],
       "/engineering/pack/": ["", "modular", "AST", "runtime"],
