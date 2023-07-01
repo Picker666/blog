@@ -12,4 +12,4 @@ lighthouse www.bilibili.com
 
 最终生成报告：
 
-![图片](/images/performance/lighthouse1.png)
+![图片](/blog/images/performance/lighthouse1.png)

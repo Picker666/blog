@@ -26,7 +26,7 @@ npx eslint --init
 npm init @eslint/config
 ```
 
-![npx eslint --init](/images/engineering/standard1.png)
+![npx eslint --init](/blog/images/engineering/standard1.png)
 
 ### 3、并生成.eslintrc.js文件
 
@@ -67,8 +67,8 @@ module.exports = {
 "lint": "eslint --ext .js --ext .jsx --ext .tsx src/",
 ```
 
-![npm run init](/images/engineering/standard3.png)
-![npm run init](/images/engineering/standard2.png)
+![npm run init](/blog/images/engineering/standard3.png)
+![npm run init](/blog/images/engineering/standard2.png)
 
 直接执行  npm run lint 会对全部文件进行检测，所以，问题很多，如果老项目中添加eslint，这么搞是 要炸了。
 
@@ -181,8 +181,8 @@ npm install husky@4.3.8 --save-dev
 
 如果eslint验证通过了，则会进行commit 操作，否则会报eslint的错误提示。
 
-![npm run init](/images/engineering/standard4.png)
-![npm run init](/images/engineering/standard5.png)
+![npm run init](/blog/images/engineering/standard4.png)
+![npm run init](/blog/images/engineering/standard5.png)
 
 这个报的很多！
 

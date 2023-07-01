@@ -299,7 +299,7 @@ const handleClick = () => {
 Reflect.ownKeys()返回所有自有属性key，不管是否可枚举，但不包括继承自原型的属性;
 :::
 
-![三个问题](/images/newFunction/deepCopy1.png)
+![三个问题](/blog/images/newFunction/deepCopy1.png)
 
 ### 方案四
 
@@ -411,11 +411,11 @@ const deepCopy = (data, mp = new Map()) => {
 };
 ```
 
-![一个小瑕疵](/images/newFunction/deepCopy2.png)
+![一个小瑕疵](/blog/images/newFunction/deepCopy2.png)
 
 不可枚举属性变成可枚举的！
 
-![一个小瑕疵](/images/newFunction/deepCopy3.png)
+![一个小瑕疵](/blog/images/newFunction/deepCopy3.png)
 
 这个问题不大，如果有必要可以设置成不可枚举属性；
 
@@ -459,7 +459,7 @@ const deepCopy = (data, mp = new Map()) => {
 };
 ```
 
-![完美](/images/newFunction/deepCopy4.png)
+![完美](/blog/images/newFunction/deepCopy4.png)
 
 ### 方案五 优化一
 
@@ -469,7 +469,7 @@ const deepCopy = (data, mp = new Map()) => {
 obj.temp = '999';
 ```
 
-![bug](/images/newFunction/deepCopy5.png)
+![bug](/blog/images/newFunction/deepCopy5.png)
 
 ```js
 const deepCopy5 = (data, mp = new WeakMap()) => {
@@ -512,7 +512,7 @@ const deepCopy5 = (data, mp = new WeakMap()) => {
 
 关于正则的处理
 
-![bug](/images/newFunction/deepCopy6.png)
+![bug](/blog/images/newFunction/deepCopy6.png)
 
 ```js
 const deepCopy6 = (data, mp = new Map()) => {
@@ -553,6 +553,6 @@ const deepCopy6 = (data, mp = new Map()) => {
   };
   ```
 
-![bug](/images/newFunction/deepCopy7.png)
+![bug](/blog/images/newFunction/deepCopy7.png)
 
 [dom 地址](https://github.com/Picker666/blog-example/blob/main/src/component/newFunction/DeepCopy.tsx)

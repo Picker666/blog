@@ -100,7 +100,7 @@ DNS Prefetch 应该尽量的放在网页的前面，推荐放在 `<meta charset=
 :::
 
 dns缓存前：
-![dns缓存前](/images/base/dnsPrefetch1.png)
+![dns缓存前](/blog/images/base/dnsPrefetch1.png)
 
 dns缓存后：
-![dns缓存后](/images/base/dnsPrefetch2.png)
+![dns缓存后](/blog/images/base/dnsPrefetch2.png)

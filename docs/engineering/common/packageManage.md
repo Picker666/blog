@@ -151,7 +151,7 @@ node_modules
 
 其余的是符号链接，指向依赖的快捷方式
 
-![pnpm 官方图片](/images/engineering/pnpm1.jpg)
+![pnpm 官方图片](/blog/images/engineering/pnpm1.jpg)
 
 解决：
 

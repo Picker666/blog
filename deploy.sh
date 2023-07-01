@@ -4,7 +4,7 @@
 set -e
 
 # 移除dist
- rm -rf docs/.vuepress/dist
+rm -rf docs/.vuepress/dist
 
 # 生成静态文件
 npm run build

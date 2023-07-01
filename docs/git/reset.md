@@ -33,7 +33,7 @@ git reset [--soft | --mixed | --hard] [HEAD]
 在执行 `git status` 时候，红色的部分代表是：`git add` 之前的状态；绿色部分代表是：`git add` 之后 `git commit` 之前 的状态。
 :::
 
-![git reset](/images/git/gitreset1.png)
+![git reset](/blog/images/git/gitreset1.png)
 
 ## 3、--soft commitId
 
@@ -49,7 +49,7 @@ git reset [--soft | --mixed | --hard] [HEAD]
   * （1）、新增文件：文件仍然存在，只是变成 `git add` 之后的状态；
   * （2）、删除文件：目录仍然不存在，只是变成 `git add` 之后的状态；
 
-![git reset --soft](/images/git/gitreset2.png)
+![git reset --soft](/blog/images/git/gitreset2.png)
 
 :::tip
 如果 commitId 不是上一个commit，那么会将 commitId之前的所有操作撤回到 暂存区。
@@ -69,8 +69,8 @@ git reset --hard DEAD|commitId
 * 2、原有文件内容的变更：修改内容丢失（修改的代码不会变成未add的状态）；
 * 3、目录结构的变更（增加或者删除文件）：新增文件丢失、删除的文件相当于没删。
 
-![git reset --soft](/images/git/gitreset3.png)
-![git reset --soft](/images/git/gitreset4.png)
+![git reset --soft](/blog/images/git/gitreset3.png)
+![git reset --soft](/blog/images/git/gitreset4.png)
 
 :::tip
 如果 DEAD 或者 commitId 为上一条commit id，HEAD 指针不变；

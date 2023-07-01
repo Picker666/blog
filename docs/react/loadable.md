@@ -29,7 +29,7 @@ import((/* webpackChunkName: "bar" */ './bar.js').then(Module => {
 });
 ```
 
-![自定义名字的chunk](/images/react/react-loadable-1.webp)
+![自定义名字的chunk](/blog/images/react/react-loadable-1.webp)
 
 ## 一个简易版的动态加载方案
 
