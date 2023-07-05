@@ -6,13 +6,13 @@
 git reset [--soft | --mixed | --hard] [HEAD]
 ```
 
-## 1、工作区域
+## 一、工作区域
 
 * 1、工作区（Working Directory）：写代码的目录，项目代码存放目录 -- git add 之前的目录
 * 2、暂存区（index/stage）：工作区和代码仓库之前的缓存地带。用 git add 把文件代码添加进去。-- git add 之后的目录
 * 3、仓库区：git commit 之后，代码提交到的地方，也就是本地仓库。
 
-## 2、--mixed
+## 二、--mixed
 
 `--mixed` 为 `git reset` 的默认值。
 
@@ -35,7 +35,7 @@ git reset [--soft | --mixed | --hard] [HEAD]
 
 ![git reset](/blog/images/git/gitreset1.png)
 
-## 3、--soft commitId
+## 三、--soft commitId
 
 使用场景：
 
@@ -55,7 +55,7 @@ git reset [--soft | --mixed | --hard] [HEAD]
 如果 commitId 不是上一个commit，那么会将 commitId之前的所有操作撤回到 暂存区。
 :::
 
-## 3、–hard
+## 四、–-hard
 
 ```git
 git reset --hard DEAD|commitId
