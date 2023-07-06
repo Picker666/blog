@@ -155,7 +155,8 @@ module.exports = {
         "tsAdvanced2",
         "infer",
         "innerTool",
-        "practice"
+        "practice",
+        "typeInterface"
       ],
       "/threeJS/": [""],
       "/sourceAnalysis/": [
