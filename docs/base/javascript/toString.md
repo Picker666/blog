@@ -94,6 +94,8 @@ console.log(typeof a.toString());//string
 console.log(123.toString());//Uncaught SyntaxError
 console.log((123).toString());//"123"
 console.log(12.3.toString());//"12.3"
+console.log(1..toString()); // '1'
+console.log(1.0.toString()); // '1'
 ```
 
 :::
