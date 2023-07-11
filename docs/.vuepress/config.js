@@ -161,6 +161,7 @@ module.exports = {
       ],
       "/threeJS/": [""],
       "/sourceAnalysis/": [
+        "dynamicImportPrinciple",
         "",
         "reduxThunk",
         "useModal",
@@ -244,8 +245,7 @@ module.exports = {
         "HMR",
         "dynamicImport",
         "externals",
-        "interview",
-        "dynamicImportPrinciple"
+        "interview"
       ],
       "/engineering/umi/": ["", "route", "dynamicImport", "NoHistory"],
       "/engineering/vite/": ["", "principle"],
