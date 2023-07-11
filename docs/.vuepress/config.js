@@ -29,6 +29,7 @@ module.exports = {
       { text: "手写", link: "/newFunction/" },
       { text: "源码分析", link: "/sourceAnalysis/" },
       { text: "React", link: "/react/" },
+      { text: "Vue", link: "/vue/"},
       { text: "Git", link: "/git/" },
       {
         text: "前端工程化",
@@ -220,6 +221,7 @@ module.exports = {
 
         "importReact"
       ],
+      "/vue/": [""],
       "/git/": [
         "",
         "flow",
