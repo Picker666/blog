@@ -170,7 +170,8 @@ module.exports = {
         "qiankun",
         "qiankunPrefetch",
         "qiankunLoadApp",
-        "qiankunSandbox"
+        "qiankunSandbox",
+        "vue2Computed"
       ],
       "/newFunction/": [
         "",
@@ -222,7 +223,7 @@ module.exports = {
 
         "importReact"
       ],
-      "/vue/": ["","lifeCycle"],
+      "/vue/": ["","lifeCycle", "computedWatch"],
       "/git/": [
         "",
         "flow",
