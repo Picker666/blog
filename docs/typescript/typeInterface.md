@@ -72,6 +72,48 @@ type Info = Name & {age: number}
 
 区别是，**interface使用关键字extends扩展，type使用&符号连接**
 
+### 实现 implements
+
+类可以实现interface 以及 type(除联合类型外)
+
+```js
+interface ICat{
+    setName(name:string): void;
+}
+
+class Cat implements ICat{
+    setName(name:string):void{
+        // todo
+    }
+}
+
+// type 
+type ICat = {
+    setName(name:string): void;
+}
+
+class Cat implements ICat{
+    setName(name:string):void{
+        // todo
+    }
+}
+```
+
+上面提到了特殊情况，类无法实现联合类型, 是什么意思呢？
+
+```js
+type Person = { name: string; } | { setName(name:string): void };
+
+// 无法对联合类型Person进行实现
+// error: A class can only implement an object type or intersection of object types with statically known members.
+class Student implements Person {
+  name= "张三";
+  setName(name:string):void{
+        // todo
+    }
+}
+```
+
 ## 不同之处
 
 * 1、用法不一样
@@ -128,3 +170,5 @@ type Pair<T> = [T, T];
 type Coordinates = Pair<number>; 
 
 ```
+
+[](https://juejin.cn/post/7072945053936648200#heading-5)

@@ -2,11 +2,11 @@
 
 [demo](https://github.com/Picker666/blog-example/) (src/component/base/imageLazyLoading.tsx)
 
-## 1、clientHeight + scroolTop > offsetTop
+## 1、clientHeight + scrollTop > offsetTop
 
 clientHeight 当前视窗的高度；
 
-scroolTop 滚动条滚动距离
+scrollTop 滚动条滚动距离
 
 offsetTop 元素到达 offsetParent 的距离。
 
