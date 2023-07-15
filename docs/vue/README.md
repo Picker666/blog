@@ -23,3 +23,9 @@
 ## Vuex
 
 [vuex](https://github.com/Picker666/vuex)
+
+## 源码分析
+
+[vue2 - computed 源码解析](/sourceAnalysis/vue2Computed.html)
+
+[vue2 data 和 props](/sourceAnalysis/vue2DataProps.html)

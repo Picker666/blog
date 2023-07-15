@@ -171,7 +171,8 @@ module.exports = {
         "qiankunPrefetch",
         "qiankunLoadApp",
         "qiankunSandbox",
-        "vue2Computed"
+        "vue2Computed",
+        "vue2DataProps"
       ],
       "/newFunction/": [
         "",

@@ -24,7 +24,6 @@ callHook$1(vm, 'created');// 调用 created 生命周期
 
 ## 2、initState
 
-
 ```js
 function initState(vm) {
   var opts = vm.$options;
