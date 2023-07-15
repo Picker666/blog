@@ -222,7 +222,7 @@ module.exports = {
 
         "importReact"
       ],
-      "/vue/": [""],
+      "/vue/": ["","lifeCycle"],
       "/git/": [
         "",
         "flow",
