@@ -224,7 +224,7 @@ module.exports = {
 
         "importReact"
       ],
-      "/vue/": ["","lifeCycle", "computedWatch"],
+      "/vue/": ["","lifeCycle", "computedWatch", "twoWayDataBind"],
       "/git/": [
         "",
         "flow",
