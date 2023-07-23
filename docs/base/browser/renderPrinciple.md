@@ -96,6 +96,8 @@
 
 [一个利用虚拟滚动实现的 可编辑table](https://github.com/Picker666/blog-example/tree/main/src/component/practice/CalcTable)
 
+[从浏览器渲染原理谈动画性能优化](https://zhuanlan.zhihu.com/p/458424384)
+
 ## 五、什么情况阻塞渲染
 
 * 首先渲染的前提是生成渲染树，所以 HTML 和 CSS 肯定会阻塞渲染。

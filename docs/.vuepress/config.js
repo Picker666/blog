@@ -25,11 +25,11 @@ module.exports = {
         ],
       },
       { text: "Typescript", link: "/typescript/" },
-      { text: "ThreeJS", link: "/threeJS/"},
+      { text: "ThreeJS", link: "/threeJS/" },
       { text: "手写", link: "/newFunction/" },
       { text: "源码分析", link: "/sourceAnalysis/" },
       { text: "React", link: "/react/" },
-      { text: "Vue", link: "/vue/"},
+      { text: "Vue", link: "/vue/" },
       { text: "Git", link: "/git/" },
       {
         text: "前端工程化",
@@ -45,7 +45,8 @@ module.exports = {
       },
       { text: "设计模式", link: "/designPatterns/" },
       { text: "算法", link: "/algorithm/" },
-      { text: "前端之外", link: "/outside/", items: [
+      {
+        text: "前端之外", link: "/outside/", items: [
           { text: "JAVA", link: "https://github.com/Picker666/javaSummary" },
           { text: "PYTHON", link: "/outside/python/" },
         ]
@@ -96,7 +97,8 @@ module.exports = {
         "onLoadReady",
         "ajax",
         "imageLazyLoading",
-        "webWorker"
+        "webWorker",
+        "transcoding"
       ],
       "/base/browser/": [
         "",
@@ -142,7 +144,7 @@ module.exports = {
         "collections",
         "upload"
       ],
-      "/base/performance/":[
+      "/base/performance/": [
         "",
         "RAIL",
         "WebPageTest",
@@ -224,7 +226,7 @@ module.exports = {
 
         "importReact"
       ],
-      "/vue/": ["","lifeCycle", "computedWatch", "twoWayDataBind"],
+      "/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind"],
       "/git/": [
         "",
         "flow",

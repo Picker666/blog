@@ -14,7 +14,7 @@
     * a、通过 fs 文件系统获取到文件内容；
     * b、获取loader信息，逐个匹配找出对应的loader，并遍历调用loader来转换文件内容，并返回执行结果；
     * c、为模块创建module对象，并生成AST静态语法树，识别 require 语法，找到依赖项，并放入modules.dependences中，改写 require 语法为 `__webpack_require__`，并根据ast重新生成代码；
-    * d、根据modules.dependences 中的依赖递归执行 6- 8，并将最终的结果输出到 this.modules 中，至此编译完成；
+    * d、根据modules.dependences 中的依赖递归执行 a-d，并将最终的结果输出到 this.modules 中，至此编译完成；
 * 3、生成阶段。
   * （1）、根据 entry 创建对应 chunk 并从 this.modules 中查找被 entry 所依赖的 module 集合；
   * （2）、最后拼接 this.chunks 生成 assets 产物。

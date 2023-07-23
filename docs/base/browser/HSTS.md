@@ -12,7 +12,7 @@ SSL stripping 是一种攻击者强迫浏览器使用 HTTP 协议连接到站点
 
 ## 工作原理
 
-通常，当您在 Web 浏览器中输入 URL 时，您会跳过协议部分。 例如，你输入的是 http://www.baidu.com。 在这种情况下，浏览器 Web Server 会返回 **301 状态码**将请求重定向到 HTTPS 站点。 接下来浏览器使用 HTTPS 连接到 www.baidu.com。 这时 HSTS 安全策略保护开始使用 HTTP 响应头：
+通常，当您在 Web 浏览器中输入 URL 时，您会跳过协议部分。 例如，你输入的是 http://www.baidu.com。 在这种情况下，浏览器 Web Server 会返回 **301/302 状态码**将请求重定向到 HTTPS 站点。 接下来浏览器使用 HTTPS 连接到 www.baidu.com。 这时 HSTS 安全策略保护开始使用 HTTP 响应头：
 
 ```http
 Strict-Transport-Security: max-age=172800;
