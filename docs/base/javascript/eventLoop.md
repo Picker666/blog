@@ -306,3 +306,38 @@ console.log(10);
 // 25 8
 
 ```
+
+```js
+let a;
+
+const b = new Promise((resolve, reject) => {
+  console.log('Promise1');
+  resolve();
+}).then(() => {
+  console.log('Promise2');
+}).then(() => {
+  console.log('Promise3');
+}).then(() => {
+  console.log('Promise4');
+})
+
+a = new Promise(async (resolve, reject) =>{
+  console.log(a);
+  await b;
+  console.log(a);
+  console.log('after1');
+  await a;
+  resolve();
+  console.log('after2');
+})
+
+/**
+ * Promise1
+   undefined
+   Promise2
+   Promise3
+   Promise4
+   Promise {<pending>}
+   after1
+ */
+```

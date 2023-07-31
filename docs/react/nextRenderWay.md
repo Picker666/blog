@@ -35,7 +35,7 @@ res.setHeader(
 ### 特点
 
 * 可以是，返回 async getStaticProps/getStaticPaths 方法，也可以是纯React组件；
-* 构建时生成静态html，调用getStaticProps/getStaticPaths，并把其结果结果生成JSON文件；
+* 构建时生成静态html，调用getStaticProps/getStaticPaths，并把其结果生成JSON文件；
 * 请求该页面时，传递json数据作为 组件的props，进行与预渲染；
 
 ### 适用 getStaticProps 的场景
