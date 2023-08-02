@@ -1,6 +1,8 @@
-# vue2 面试题
+# vue2 总结
 
 ## 一、生命周期
+
+[生命周期](/vue/lifeCycle.html)
 
 ## 二、关于组件
 
@@ -277,10 +279,7 @@ Vue3: v-for < v-if
 
 ### 1、$nextTick
 
-```js
-
-```
-....
+[nextTicket](/sourceAnalysis/nextTicket.html)
 
 ### 2、MVVM
 

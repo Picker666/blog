@@ -174,7 +174,8 @@ module.exports = {
         "qiankunLoadApp",
         "qiankunSandbox",
         "vue2Computed",
-        "vue2DataProps"
+        "vue2DataProps",
+        "nextTicket"
       ],
       "/newFunction/": [
         "",
@@ -226,7 +227,7 @@ module.exports = {
 
         "importReact"
       ],
-      "/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind"],
+      "/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "interview"],
       "/git/": [
         "",
         "flow",

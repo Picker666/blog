@@ -1,6 +1,6 @@
 # 沙箱
 
-## 三种沙箱的区别
+## 三种JS沙箱的区别
 
 * 1、SnapshotSandbox - 快照沙箱
   * 不支持 window.Proxy 的环境；
@@ -61,3 +61,15 @@ bindedFn(window.proxy, window.proxy, window.proxy);
 那么此时，window.a 的 window 就不是全局 window 而是 fn 的入参 window 了。又因为我们把 window.proxy 作为入参传入，所以 window.a 实际上为 window.proxy.a = 1。这也正好解释了 qiankun 的 JS 隔离逻辑。
 
 [](https://www.jb51.net/article/264077.htm);
+
+## 样式沙箱
+
+* 1、strictStyleIsolation
+
+这种模式下 qiankun 会为每个微应用的容器包裹上一个 shadow dom 节点，从而确保微应用的样式不会对全局造成影响。
+
+但是react的时间绑定存在问题，但已解决。
+
+* 2、experimentalStyleIsolation
+
+qiankun 会改写子应用所添加的样式为所有样式规则增加一个特殊的选择器规则来限定其影响范围。
