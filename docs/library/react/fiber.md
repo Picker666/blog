@@ -101,7 +101,7 @@ Fiber 把一个渲染任务分解为多个渲染任务，而不是一次性完�
 
 实现的方式是`requestIdleCallback`这一 API，但 React 团队 polyfill 了这个 API，使其对比原生的浏览器兼容性更好且拓展了特性。
 
-[React 团队 polyfill 的 requestIdleCallback](/react/requestIdleCallback.html)
+[React 团队 polyfill 的 requestIdleCallback](/library/react/requestIdleCallback.html)
 
 ::: tip
 `window.requestIdleCallback()` 方法插入一个函数，这个函数将在浏览器**空闲**时期被调用。这使开发者能够在**主事件循环上执行后台和低优先级工作**，而不会影响延迟关键事件，如动画和输入响应。函数一般会按先进先调用的顺序执行，然而，如果回调函数指定了执行超时时间timeout，则有可能为了在超时前执行函数而打乱执行顺序。???
@@ -218,7 +218,7 @@ Renderer根据Reconciler为虚拟 DOM 打的标记，同步执行对应的 DOM �
 
 在 render 阶段，一个庞大的更新任务被分解为了一个个的工作单元，这些工作单元有着不同的优先级，React 可以根据优先级的高低去实现工作单元的打断和恢复。
 
-之前写过一篇文章关于为什么 React 一些旧生命周期函数打算废弃的原因：[谈谈对 React 新旧生命周期的理解](/react/lifeCycleChange.html)
+之前写过一篇文章关于为什么 React 一些旧生命周期函数打算废弃的原因：[谈谈对 React 新旧生命周期的理解](/library/react/lifeCycleChange.html)
 
 ```js
 componentWillMount

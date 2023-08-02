@@ -239,7 +239,7 @@ function App() {
 
 你以为代码中的 `Child = memo(Child);` 已经优化了吗，然而并没有，当你在更改了父组件的状态，子组件依然会重新渲染，因为这关系到了React是如何浅层比较的，在子组件中 `onButtonClick` 和 `data` 都是引用类型，所以他们是始终都不相等的，也就是 `[]===[]` 这样比较时始终返回 `false`，在基本数据类型比较时 `memo` 才会起作用。
 
-关于如何解决这个问题，我们就要使用两个新的API，[useMemo](/react/useMemo/) 和 [useCallback](/react/useCallback/) 的Hook。下面是经过优化之后的代码。
+关于如何解决这个问题，我们就要使用两个新的API，[useMemo](/library/react/useMemo/) 和 [useCallback](/library/react/useCallback/) 的Hook。下面是经过优化之后的代码。
 
 ```js
 function Child({ onButtonClick, data }) {

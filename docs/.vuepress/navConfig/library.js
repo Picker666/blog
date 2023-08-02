@@ -3,12 +3,14 @@ module.exports = {
     text: "库&框架",
     link: "/library/",
     items: [
+      { text: "transverse", link: "/library/transverse/" },
       { text: "React", link: "/library/react/" },
       { text: "Vue", link: "/library/vue/" },
       { text: "ThreeJS", link: "/library/threeJS/" },
     ],
   },
   librarySidebar: {
+    "/library/transverse/": ["", "reactVue"],
     "/library/react/": [
       "",
       "lifeCycleNew",
@@ -40,7 +42,7 @@ module.exports = {
 
       "importReact"
     ],
-    "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "interview"],
+    "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "diff", "interview"],
     "/library/threeJS/": [""],
   }
 }
