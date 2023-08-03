@@ -6,6 +6,7 @@ module.exports = {
       { text: "transverse", link: "/library/transverse/" },
       { text: "React", link: "/library/react/" },
       { text: "Vue", link: "/library/vue/" },
+      { text: "Redux", link: "/library/redux/" },
       { text: "ThreeJS", link: "/library/threeJS/" },
     ],
   },
@@ -43,6 +44,8 @@ module.exports = {
       "importReact"
     ],
     "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "diff", "interview"],
+    "/library/redux/": [""],
+
     "/library/threeJS/": [""],
   }
 }
