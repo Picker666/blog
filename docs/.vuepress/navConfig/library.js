@@ -44,7 +44,7 @@ module.exports = {
       "importReact"
     ],
     "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "diff", "interview"],
-    "/library/redux/": [""],
+    "/library/redux/": ["", "reduxTear"],
 
     "/library/threeJS/": [""],
   }
