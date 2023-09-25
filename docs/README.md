@@ -4,7 +4,7 @@ heroImage: /images/dog.png
 heroText: Picker - 前端技术博客
 tagline: 一个专注前端技术的程序猿👨🏻‍💻
 actionText: Go Going →
-actionLink: /typescript/
+actionLink: /base/typescript/
 features:
 - title: 启程
   details: 只要启程，在路上，就没有到达不了的明天

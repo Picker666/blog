@@ -43,7 +43,7 @@ module.exports = {
 
       "importReact"
     ],
-    "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "diff", "interview"],
+    "/library/vue/": ["", "lifeCycle", "computedWatch", "twoWayDataBind", "diff", "change2To3", "interview"],
     "/library/redux/": ["", "reduxTear"],
 
     "/library/threeJS/": [""],
