@@ -7,7 +7,7 @@ set -e
 rm -rf docs/.vuepress/dist
 
 # 生成静态文件
-npm run build
+yarn build
 
 # 进入生成的文件夹
 cd docs/.vuepress/dist
@@ -24,6 +24,6 @@ git commit -m 'deploy'
 # https://github.com/Picker666/blog.git
 # git@github.com:Picker666/blog.git
 # 如果发布到 https://<USERNAME>.github.io/<REPO>
-git push -f https://github.com/Picker666/blog.git master:deploy
+git push -f https://github.com/Picker666/blog.git main:deploy
 
 # cd -
