@@ -1,7 +1,10 @@
-const { baseNav, baseSidebar } = require('./base');
-const { libraryNav, librarySidebar } = require('./library');
-const { engineeringNar, engineeringSidebar } = require('./engineering');
-const { designPatternsNav, designPatternsSidebar } = require('./designPatterns');
+const { baseNav, baseSidebar } = require("./base");
+const { libraryNav, librarySidebar } = require("./library");
+const { engineeringNar, engineeringSidebar } = require("./engineering");
+const {
+  designPatternsNav,
+  designPatternsSidebar,
+} = require("./designPatterns");
 
 module.exports = {
   nav: [
@@ -14,10 +17,12 @@ module.exports = {
     designPatternsNav,
     // { text: "算法", link: "/algorithm/" },
     {
-      text: "前端之外", link: "/outside/", items: [
+      text: "前端之外",
+      link: "/outside/",
+      items: [
         { text: "JAVA", link: "https://github.com/Picker666/javaSummary" },
         { text: "PYTHON", link: "/outside/python/" },
-      ]
+      ],
     },
     { text: "Github", link: "https://github.com/Picker666/blog" },
   ],
@@ -26,6 +31,7 @@ module.exports = {
     ...librarySidebar,
     ...engineeringSidebar,
     ...designPatternsSidebar,
+
     "/sourceAnalysis/": [
       "dynamicImportPrinciple",
       "",
@@ -39,7 +45,7 @@ module.exports = {
       "qiankunSandbox",
       "vue2Computed",
       "vue2DataProps",
-      "nextTicket"
+      "nextTicket",
     ],
     "/codingTear/": [
       "",
@@ -58,7 +64,7 @@ module.exports = {
       "loading",
       "loginTimeout",
       "eventEmiter",
-      "compose"
+      "compose",
     ],
     "/git/": [
       "",
@@ -68,7 +74,7 @@ module.exports = {
       "rebase",
       "mergeOrRebase",
       "catchUp",
-      "reset"
+      "reset",
     ],
 
     "/algorithm/": [
@@ -94,7 +100,7 @@ module.exports = {
       "sum",
       "dynamicProgram1",
       "dynamicProgram2",
-      "dynamicProgram3"
+      "dynamicProgram3",
     ],
   },
-}
+};

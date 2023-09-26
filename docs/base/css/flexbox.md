@@ -28,7 +28,7 @@ Flexible Box 简称 flex，意为”弹性布局”，可以简便、完整、�
 * 2、flex-wrap
 * 3、flex-flow
 * 4、justify-content
-* 5、align-itemsf
+* 5、align-items
 * 6、align-content
 
 ### 1、flex-direction

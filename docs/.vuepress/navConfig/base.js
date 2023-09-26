@@ -17,7 +17,7 @@ module.exports = {
     "/base/html/": ["", "deferAsync"],
     "/base/css/": [
       "",
-      'selectorWeight',
+      "selectorWeight",
       "BFC",
       "flexBox",
       "flexItemSetting",
@@ -27,7 +27,7 @@ module.exports = {
       "hide",
       "clip",
       "pseudo",
-      "triangle"
+      "triangle",
     ],
     "/base/javascript/": [
       "",
@@ -58,7 +58,7 @@ module.exports = {
       "ajax",
       "imageLazyLoading",
       "webWorker",
-      "transcoding"
+      "transcoding",
     ],
     "/base/typescript/": [
       "",
@@ -68,7 +68,7 @@ module.exports = {
       "infer",
       "innerTool",
       "practice",
-      "typeInterface"
+      "typeInterface",
     ],
     "/base/browser/": [
       "",
@@ -103,7 +103,7 @@ module.exports = {
       "SQLInjection",
       "cookieHold",
       "clickJacking",
-      "logical"
+      "logical",
     ],
     "/base/interview/": [
       "",
@@ -112,16 +112,14 @@ module.exports = {
       "arrayObject",
       "FEOptimization",
       "collections",
-      "upload"
+      "upload",
     ],
     "/base/performance/": [
       "",
       "RAIL",
       "WebPageTest",
       "lighthouse",
-      "renderOptimizetion"
+      "renderOptimizetion",
     ],
-  }
-
-
-}
+  },
+};
