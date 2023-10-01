@@ -1,14 +1,8 @@
 # useRef 用法汇总
 
-::: tip
-本文例子代码：<https://github.com/Picker666/blog-example>
-
-路径： /src/component/react/ReactUseRef.tsx
-:::
-
 ## useRef 用法
 
-首先, 我们要实现一个需求 -- 点击 button 的时候 input 设置焦点. 
+首先, 我们要实现一个需求 -- 点击 button 的时候 input 设置焦点.
 
 ### createRef API
 
@@ -71,19 +65,47 @@ useRef returns a mutable ref object whose .current property is initialized to th
 
 ```ts
 
-仔细看上面的代码. 它会输出什么 ? 
+const Test = () => {
+  const [renderIndex, setRenderIndex] = useState(1);
+  const refFromUseRef = useRef();
+  const refFromCreateRef = createRef();
 
-就算组件重新渲染,  由于 refFromUseRef 的值一直存在(类似于 this ) , 无法重新赋值.  运行结果如下: 
+  if (!refFromUseRef.current) {
+    refFromUseRef.current = renderIndex;
+  }
 
-```ts
+  if (!refFromCreateRef.current) {
+    refFromCreateRef.current = renderIndex;
+  }
+
+  return (
+    <>
+      <p>Current render index: {renderIndex}</p>
+      <p>
+        <b>refFromUseRef</b> value: {refFromUseRef.current}
+      </p>
+      <p>
+        <b>refFromCreateRef</b> value: {refFromCreateRef.current}
+      </p>
+      <button onClick={() => setRenderIndex((prev) => prev + 1)}>
+        Cause re-render
+      </button>
+    </>
+  );
+};
+```
+
+仔细看上面的代码. 它会输出什么?
+
+```js
 Current render index: 1
 refFromUseRef value: 1
 refFromCreateRef value: 1
 ```
 
-如果点击一下按钮结果如下：
+如果点击一下按钮, 就算组件重新渲染,  由于 refFromUseRef 的值一直存在(类似于 this ) , 无法重新赋值.  运行结果如下：
 
-```ts
+```js
 Current render index: 2
 refFromUseRef value: 1
 refFromCreateRef value: 2
@@ -110,7 +132,7 @@ const App = () => {
 };
 ```
 
-如果先点击 `Show alert` 按钮，然后快速点击 `Click me` 按钮, alert出来的数据是几？
+如果先点击 `Show alert` 按钮，然后快速点击 `Click me` 按钮，alert出来的数据是几？
 
 0
 
@@ -144,9 +166,9 @@ const AppRef = () => {
 };
 ```
 
-因为 useRef 每次都会返回同一个引用, 所以在 useEffect 中修改的时候 ,在 alert 中也会同时被修改. 这样子, 点击的时候就可以弹出实时的 count 了。
+因为 useRef 每次都会返回同一个引用，所以在 useEffect 中修改的时候，在 alert 中也会同时被修改. 这样子，点击的时候就可以弹出实时的 count 了。
 
-* 上面的问题解决了, 我们继续, 我们希望在界面上显示出**上一个** count 的值。 上代码。
+* 上面的问题解决了，我们继续，我们希望在界面上显示出**上一个** count 的值。 上代码。
 
 ```ts
 const TwoCount = () => {
@@ -173,3 +195,5 @@ const TwoCount = () => {
 * useRef 不仅仅是用来管理 DOM ref 的，它还相当于 this , 可以存放任何变量。
 * useRef 可以很好的解决闭包带来的不方便性. 你可以在各种库中看到它的身影,   比如 react-use 中的 useInterval , usePrevious ……
 * 值得注意的是，当 useRef 的内容发生变化时,它不会通知您。更改.current属性不会导致重新呈现。 因为他一直是一个引用。
+
+示例代码：[传送门](https://github.com/Picker666/blog-example/blob/main/src/component/react/ReactUseRef.tsx)
