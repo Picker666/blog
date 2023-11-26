@@ -7,7 +7,7 @@
     "dev": "vuepress dev docs --temp .temp",
     "build": "vuepress build docs",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "bash deploy.sh"
+    "deploy": "yarn build && bash deploy.sh"
   },
   "author": "",
   "license": "ISC",
